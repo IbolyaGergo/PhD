@@ -1,0 +1,130 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{einstein}{article}{}
+      \name{author}{1}{}{%
+        {{hash=78a3993dfd91638e2d2170385f1caa38}{%
+           family={Eistein},
+           familyi={E\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{78a3993dfd91638e2d2170385f1caa38}
+      \strng{fullhash}{78a3993dfd91638e2d2170385f1caa38}
+      \strng{bibnamehash}{78a3993dfd91638e2d2170385f1caa38}
+      \strng{authorbibnamehash}{78a3993dfd91638e2d2170385f1caa38}
+      \strng{authornamehash}{78a3993dfd91638e2d2170385f1caa38}
+      \strng{authorfullhash}{78a3993dfd91638e2d2170385f1caa38}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annalen der}
+      \field{number}{10}
+      \field{title}{Zur.(G)}
+      \field{volume}{322}
+      \field{year}{1905}
+      \field{pages}{891\bibrangedash 921}
+      \range{pages}{31}
+      \verb{doi}
+      \verb http://dx.doi.org
+      \endverb
+    \endentry
+    \entry{2019_Hahn}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c152e9de4728d2a19ee1ca619aaa098d}{%
+           family={Hahn},
+           familyi={H\bibinitperiod},
+           given={Jooyoung},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+        {{hash=25ad8db6299250ab3d2638d6f6d34737}{%
+           family={Frolkovič},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a4d40503cda49c3d1cd4d4b83dc56649}{%
+           family={Medl’a},
+           familyi={M\bibinitperiod},
+           given={Matej},
+           giveni={M\bibinitperiod}}}%
+        {{hash=26d3cb4afb64535baa0722a9ef839935}{%
+           family={Basara},
+           familyi={B\bibinitperiod},
+           given={Branislav},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{fullhash}{aaa9b95a1cde2fe4d135e2dc135885a2}
+      \strng{bibnamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authorbibnamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authornamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authorfullhash}{aaa9b95a1cde2fe4d135e2dc135885a2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers \& Mathematics with Applications}
+      \field{number}{6}
+      \field{title}{Iterative inflow-implicit outflow-explicit finite volume scheme for level-set equations on polyhedron meshes}
+      \field{volume}{77}
+      \field{year}{2019}
+      \field{pages}{1639\bibrangedash 1654}
+      \range{pages}{16}
+    \endentry
+    \entry{knuthwebsite}{online}{}
+      \name{author}{1}{}{%
+        {{hash=1dd533466eb3313074d496394d319407}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={Donald},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{1dd533466eb3313074d496394d319407}
+      \strng{fullhash}{1dd533466eb3313074d496394d319407}
+      \strng{bibnamehash}{1dd533466eb3313074d496394d319407}
+      \strng{authorbibnamehash}{1dd533466eb3313074d496394d319407}
+      \strng{authornamehash}{1dd533466eb3313074d496394d319407}
+      \strng{authorfullhash}{1dd533466eb3313074d496394d319407}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Knuth: Comps}
+      \field{year}{1984}
+      \verb{urlraw}
+      \verb http://www-cs-f
+      \endverb
+      \verb{url}
+      \verb http://www-cs-f
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -1,0 +1,160 @@
+\documentclass[a4paper,12pt]{report}%pridat twoside, do [] pre obojstrannu tlac
+\pagestyle{headings}
+\linespread{1.5} % riadkovanie
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.75cm, right=2.75cm]{geometry} %odporucane okraje
+%    \usepackage[top=2.9cm, bottom=2.9cm, left=2.5cm, right=4cm]{geometry} %okraje
+%\evensidemargin=-0cm       %uprava okrajov
+%\oddsidemargin=+1.5cm        %uprava okrajov
+
+%nieco od Jakuba:
+\pdfpagewidth=\paperwidth                        % zabezpecuje, aby to v~pdf malo rovnaky rozmer ako v~dvi,
+\pdfpageheight=\paperheight                      % tie za beznych okolnosti nemusia moc dobre korelovat
+
+%English, slovak
+\usepackage[utf8x]{inputenc}
+\usepackage[slovak,english]{babel}%ked je opacne poradie, bude "Obsah" namiesto "Contents" a podobne
+%\usepackage{palatino,verbatim} %ine pismo
+
+%male popisy obrazkov a~grafika
+\usepackage[font=small,margin=0.5cm]{caption} % margin reguluje okraje popisu obrazka (v pripade, ze je na sirku strany a~ma viac ako 1 riadok)
+\usepackage[dvips]{graphicx}
+\usepackage{wrapfig}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{epstopdf}   %bez tohto pdflatex nezoberie eps obazky
+
+%grid obrazkov
+\usepackage{subfig}
+
+\newcounter{eqn}
+\renewcommand*{\theeqn}{\alph{eqn})}
+\newcommand{\num}{\refstepcounter{eqn}\text{\theeqn}\;}
+
+%farebne tabulky
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+%na otacanie tabuliek
+\usepackage{rotating}
+
+%odsadenie prveho odstavca
+\usepackage{indentfirst}
+
+%Matematicke vyrazy
+\usepackage{amsfonts}
+%\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsthm}
+
+\usepackage{verbatim}
+\usepackage{url}
+
+%definicie
+\newcommand{\p}{\partial}
+\def\epsilon{\varepsilon}
+\def\Bf#1{\mathbf{#1}}
+
+%ani neviem co je toto
+\makeatletter
+\newenvironment{tablehere}
+{\def\@captype{table}}
+{}
+
+\author{Gerg\H{o} Ibolya}
+\title{Numerical solution of the 1D viscous Burgers' and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method}
+
+%Hyperreferencia
+\usepackage{hyperref}
+
+%figure drawing
+%\usepackage{graphicx,subcaption}
+%\usepackage{tikz,tikz-3dplot}
+\usepackage{float}
+\usepackage{color}
+\usepackage{comment}
+
+\newtheorem{theorem}{Theorem}
+
+%====================================================================================================================================================
+%====================================================================================================================================================
+\usepackage{subfiles}
+
+\begin{document}
+	\setlength{\belowdisplayskip}{7pt} \setlength{\belowdisplayshortskip}{5pt} \setlength{\abovedisplayskip}{7pt}
+\setlength{\abovedisplayshortskip}{5pt}
+
+%***********************zaciatok prvej strany
+\thispagestyle{empty}
+{
+	\topmargin=0pt
+	\centerline {\large \bf{SLOVAK UNIVERSITY OF TECHNOLOGY IN BRATISLAVA}}
+	\vskip 0.2cm
+	\centerline{\large \bf{FACULTY OF CIVIL ENGINEERING}}
+	\vskip 5cm
+	\centerline{\Large \bf{Numerical solution of nonlinear advection equations by the}}
+	\vskip 0.2cm
+	\centerline{\Large \bf{inflow-implicit/outflow-explicit finite volume method}}
+	%\centerline{ \bf{(verzia z~\today) }}   %vypisovanie dnesneho datumu
+	\vskip 0.5cm
+	\centerline{\large \bf{Project of PhD thesis}}
+	\vskip 5cm          %\vskip 2cm             %zmena kvoli zobrazovaniu dnesneho datumu
+	\normalsize
+	\begin{tabular}[l]{p{0.27\textwidth}p{0.73\textwidth}}
+		Field of study: & Applied mathematics\\
+		Department: & Department of Mathematics and Descriptive Geometry\\
+		Supervisor: & prof. RNDr. Karol Mikula, DrSc. \\
+	\end{tabular}
+	\vskip 3cm
+	\centerline{\large \bf{BRATISLAVA 2021}}
+	\vskip 0.2cm
+	\selectlanguage{slovak}
+	\centerline{\large \bf{Ing. Gerg\H{o} Ibolya}}
+	\selectlanguage{english}
+}
+\pagebreak
+%**********************************koniec prvej strany
+%prazdna strana
+%\newpage
+%\thispagestyle{empty}
+%\mbox{}
+%\newpage
+%====================================================================================================================================================
+
+\mbox{}
+\vfill
+\thispagestyle{empty}
+\section*{Acknowledgement}
+I want to thank my thesis supervisor prof. RNDr. Karol Mikula, DrSc. for the help, dedicated time during consultations, expert guidance and valuable advices in the elaboration of this thesis. %This work was supported by the grants  APVV-19-0460, VEGA 1/0709/19 and VEGA 1/0436/20.
+\newpage
+
+
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+\section*{Abstract}
+\thispagestyle{empty}
+In the first part in this work we present a scheme for solving nonlinear advection-diffusion equations. We treat the advection term by the inflow-implicit/outflow-explicit (IIOE) and we apply the Crank-Nicolson scheme for the diffusion term. We tested the performance of the scheme on the viscous Burgers' equation and the traffic flow equation by comparing numerical solutions with exact ones. In numerical experiments we can observe second order convergence.
+
+In the second part of our work we deal with first order 1D scalar conservation laws. We show, that the IIOE scheme can be written in conservative form. It is shown by Taylor series analysis that the scheme is second order accurate for smooth solutions on a uniform grid in the 1D case. We test the scheme numerically for smooth solutions of conservation laws. For problems, where solutions can develop discontinuities, we present a possible flux limiting procedure, which yields the flux limited IIOE \\(FLIIOE) method. Numerical experiments are also presented for the flux limited method.
+\newline\newline
+
+\textbf{Keywords: viscous Burgers' equation,  traffic flow, nonlinear conservation laws, finite volume method, semi-implicit scheme, flux limiter}
+\newpage
+%====================================================================================================================================================
+{\pagestyle{headings}
+	\tableofcontents
+	\cleardoublepage}
+
+%\@input{Chapter1_Introduction/ch1_intro}
+%\@input{Chapter2_Numerical/numerical}
+%\@input{Bibliography/biblio}
+\chapter{Introduction}\label{introduction}%Preface?
+\chaptermark{Introduction}
+\subfile{Chapter1_Introduction/ch1_intro}
+\chapter{Inflow-implicit/outflow-explicit method}
+\chaptermark{Inflow-implicit/outflow-explicit method}
+\subfile{Chapter2_Numerical/numerical}
+%\subfile{Experiments/experiments}
+%\subfile{Experiments/limiter_experiments}
+\subfile{Bibliography/biblio}
+\end{document}

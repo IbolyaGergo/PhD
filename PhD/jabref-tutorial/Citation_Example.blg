@@ -1,0 +1,15 @@
+[0] Config.pm:306> INFO - This is Biber 2.18
+[0] Config.pm:309> INFO - Logfile is 'Citation_Example.blg'
+[99] biber:340> INFO - === Tue Sep  5, 2023, 14:06:17
+[118] Biber.pm:418> INFO - Reading 'Citation_Example.bcf'
+[196] Biber.pm:978> INFO - Found 6 citekeys in bib section 0
+[211] Biber.pm:4401> INFO - Processing section 0
+[222] Biber.pm:4592> INFO - Looking for bibtex file 'JTE_Bib.bib' for section 0
+[224] bibtex.pm:1713> INFO - LaTeX decoding ...
+[234] bibtex.pm:1518> INFO - Found BibTeX data source 'JTE_Bib.bib'
+[309] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[309] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[309] Biber.pm:4221> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[309] Biber.pm:4227> INFO - No sort tailoring available for locale 'en-US'
+[321] bbl.pm:654> INFO - Writing 'Citation_Example.bbl' with encoding 'UTF-8'
+[325] bbl.pm:757> INFO - Output to Citation_Example.bbl

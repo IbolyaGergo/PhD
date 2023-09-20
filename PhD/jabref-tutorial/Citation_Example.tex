@@ -1,0 +1,30 @@
+\documentclass[15pt, twoside]{report}
+% \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage{fancyhdr}
+%\pagestyle{}
+\pagestyle{fancy}
+
+\usepackage[
+	backend=biber]{biblatex}
+\addbibresource{JTE_Bib.bib}
+
+\title{
+	{Thesis Title}\\
+	{\large Institution Name}
+}
+\author{Gergo}
+\date{Febr 2021}
+
+\begin{document}
+
+First page~\cite{2010_Hargather_CONF}, second~\cite{2019_Hahn}
+
+hello ok pill dsfsdf~\cite{2020_Ibolya_CONF}, Fr~\cite{2007_Frolkovic}~\cite{2014_Mikula}
+
+also \cite{1985_Yee}
+\printbibliography[]
+
+\end{document}

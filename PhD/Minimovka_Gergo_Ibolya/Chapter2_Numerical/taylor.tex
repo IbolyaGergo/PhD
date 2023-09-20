@@ -1,0 +1,44 @@
+\documentclass[../include.tex]{subfiles}
+\begin{document}
+	Let us consider the scalar conservation law \eqref{} and the IIOE scheme on a uniform grid. For the case $ f'(u)\big|_{\substack{x_{i-1/2}}},\,f'(u)\big|_{\substack{x_{i+1/2}}} \geq 0 $ we show that the scheme is formally second order and the consistency error is of order $\mathcal{O}(h^2) + \mathcal{O}(\tau h) + \mathcal{O}(\tau^2)$. We will use notations $ u(t^n, x_i) := u^n_i $ and $ f(u(t^n, x_i)) := f^n_i $. In that case the IIOE scheme reads
+	\[
+	u_i^{n} - u_i^{n - 1} = - \frac{\tau}{2h}\left[(f_i^n + f_{i+1}^{n-1}) - (f_{i-1}^n + f_i^{n-1})\right]
+	\]
+	The Taylor expansion of $ u $ in time yields
+	\[
+	u_i^n = u_i^{n-1} + \tau \partial_t u_i^{n-1} + \frac{\tau^2}{2}\partial_t^2 u_i^{n-1} + \mathcal{O}(\tau^3),\quad
+	u_i^{n-1} = u_i^{n} - \tau \partial_t u_i^n + \frac{\tau^2}{2}\partial_t^2 u_i^n + \mathcal{O}(\tau^3).
+	\]
+	Subtracting these two we get
+	\begin{equation}
+		u_i^n - u_i^{n-1} = \frac{\tau}{2}\left(\partial_t u_i^{n-1} + \partial_t u_i^n\right) + 
+		\underbrace{\frac{\tau^2}{4}\left(\partial_t^2 u_i^{n-1} - \partial_t^2 u_i^n\right)}_{\mathcal{O}(\tau^3)}
+		 + \mathcal{O}(\tau^3).
+		 \label{u_i^n - u_i^{n-1}}
+	\end{equation}
+	The Taylor expansion of $ f $ in space yields
+	\begin{equation}
+	f_{i-1}^n = f_i^n - h\partial_x f_i^n + \frac{h^2}{2}\partial_x^2 f_i^n + \mathcal{O}(h^3) = f_i^n + h\partial_t u_i^n + \frac{h^2}{2}\partial_x^2 f_i^n + \mathcal{O}(h^3)
+	\label{f_{i-1}^n}
+	\end{equation}
+	\begin{equation}
+	f_{i+1}^{n-1} = f_i^{n-1} + h \partial_x f_i^{n-1} + \frac{h^2}{2} \partial_x^2 f_i^{n-1} + \mathcal{O}(h^3) = 
+	f_i^{n-1} - h \partial_t u_i^{n-1} + \frac{h^2}{2} \partial_x^2 f_i^{n-1} + \mathcal{O}(h^3)
+	\label{f_{i+1}^{n-1}}
+	\end{equation}
+	In both cases we used the relationship between partial derivatives, assuming that the differential equation holds.
+	Now we subtract \eqref{f_{i+1}^{n-1}} from \eqref{f_{i-1}^n} to get
+	\[
+	f_{i+1}^{n-1} - f_{i-1}^n = f_i^{n-1} - f_i^n - h\left(\partial_t u_i^{n-1} + \partial_t u_i^{n}\right)
+	+ \underbrace{\frac{h^2}{2} \left(\partial_x^2 f_i^{n-1} - \partial_x^2 f_i^{n}\right)}_{\mathcal{O}(h^2\tau)} + \mathcal{O}(h^3)
+	\]
+	Multiplying both sides by $ \tau/(2h) $ and by algebraic manipulation we get
+	\begin{equation}
+		\frac{\tau}{2}\left(\partial_t u_i^{n-1} + \partial_t u_i^{n}\right) = - \frac{\tau}{2h}\left[(f_i^n + f_{i+1}^{n-1}) - (f_{i-1}^n + f_i^{n-1})\right] + \mathcal{O}(h\tau^2) + \mathcal{O}(h^2\tau)
+		\label{tau2}
+	\end{equation}
+Substituting \eqref{tau2} to \eqref{u_i^n - u_i^{n-1}} we get
+	\begin{equation}
+		u_i^n - u_i^{n-1} = - \frac{\tau}{2h}\left[(f_i^n + f_{i+1}^{n-1}) - (f_{i-1}^n + f_i^{n-1})\right] + \mathcal{O}(h\tau^2) + \mathcal{O}(h^2\tau) + \mathcal{O}(\tau^3).
+	\end{equation}
+\end{document}

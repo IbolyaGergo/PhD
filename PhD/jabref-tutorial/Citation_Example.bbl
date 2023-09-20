@@ -1,0 +1,262 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{2007_Frolkovic}{article}{}
+      \name{author}{2}{}{%
+        {{hash=25ad8db6299250ab3d2638d6f6d34737}{%
+           family={Frolkovič},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \strng{fullhash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \strng{bibnamehash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \strng{authorbibnamehash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \strng{authornamehash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \strng{authorfullhash}{62819652bc1651eddc18fd5d5ac1e23e}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Applied numerical mathematics}
+      \field{number}{4}
+      \field{title}{Flux-based level set method: A finite volume method for evolving interfaces}
+      \field{volume}{57}
+      \field{year}{2007}
+      \field{pages}{436\bibrangedash 454}
+      \range{pages}{19}
+    \endentry
+    \entry{2019_Hahn}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c152e9de4728d2a19ee1ca619aaa098d}{%
+           family={Hahn},
+           familyi={H\bibinitperiod},
+           given={Jooyoung},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+        {{hash=25ad8db6299250ab3d2638d6f6d34737}{%
+           family={Frolkovič},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d761759e7a616249b8ae32dcaefd1c84}{%
+           family={Medla},
+           familyi={M\bibinitperiod},
+           given={Matej},
+           giveni={M\bibinitperiod}}}%
+        {{hash=26d3cb4afb64535baa0722a9ef839935}{%
+           family={Basara},
+           familyi={B\bibinitperiod},
+           given={Branislav},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{fullhash}{44f867d7639e72edd82e30225e1be0e4}
+      \strng{bibnamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authorbibnamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authornamehash}{885595f0d36702c304dace5ea4a9e140}
+      \strng{authorfullhash}{44f867d7639e72edd82e30225e1be0e4}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers \& Mathematics with Applications}
+      \field{number}{6}
+      \field{title}{Iterative inflow-implicit outflow-explicit finite volume scheme for level-set equations on polyhedron meshes}
+      \field{volume}{77}
+      \field{year}{2019}
+      \field{pages}{1639\bibrangedash 1654}
+      \range{pages}{16}
+    \endentry
+    \entry{2010_Hargather_CONF}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=e69096507fde5bb81a5228acb81bdfd6}{%
+           family={Hargather},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cfe280ddb1e1ce3ebfcd89f9616aa619}{%
+           family={Settles},
+           familyi={S\bibinitperiod},
+           given={Gary},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {American Institute of Aeronautics}%
+        {Astronautics}%
+      }
+      \strng{namehash}{f4b4f84898453a4f305b600cd5ba7847}
+      \strng{fullhash}{f4b4f84898453a4f305b600cd5ba7847}
+      \strng{bibnamehash}{f4b4f84898453a4f305b600cd5ba7847}
+      \strng{authorbibnamehash}{f4b4f84898453a4f305b600cd5ba7847}
+      \strng{authornamehash}{f4b4f84898453a4f305b600cd5ba7847}
+      \strng{authorfullhash}{f4b4f84898453a4f305b600cd5ba7847}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{27th AIAA Aerodynamic Measurement Technology and Ground Testing Conference}
+      \field{month}{6}
+      \field{number}{0}
+      \field{series}{Fluid Dynamics and Co-located Conferences}
+      \field{title}{Recent Developments in Schlieren and Shadowgraphy}
+      \field{year}{2010}
+      \verb{doi}
+      \verb 10.2514/6.2010-4206
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2514/6.2010-4206
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2514/6.2010-4206
+      \endverb
+    \endentry
+    \entry{2020_Ibolya_CONF}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=f47e67c3ee93e161b304610ab58f46c1}{%
+           family={Ibolya},
+           familyi={I\bibinitperiod},
+           given={Gergo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d7a446f3937a65627cd16b7255d2afe}
+      \strng{fullhash}{4d7a446f3937a65627cd16b7255d2afe}
+      \strng{bibnamehash}{4d7a446f3937a65627cd16b7255d2afe}
+      \strng{authorbibnamehash}{4d7a446f3937a65627cd16b7255d2afe}
+      \strng{authornamehash}{4d7a446f3937a65627cd16b7255d2afe}
+      \strng{authorfullhash}{4d7a446f3937a65627cd16b7255d2afe}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of ALGORITMY}
+      \field{title}{Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method}
+      \field{year}{2020}
+      \field{pages}{191\bibrangedash 200}
+      \range{pages}{10}
+    \endentry
+    \entry{2014_Mikula}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+        {{hash=2cf3b1566035f04edb90a7c0e5db7caf}{%
+           family={Ohlberger},
+           familyi={O\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=52996f75a95f7f7d461b075234781515}{%
+           family={Urbán},
+           familyi={U\bibinitperiod},
+           given={Jozef},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{fullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{bibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authorbibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authornamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authorfullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0168-9274}
+      \field{journaltitle}{Applied Numerical Mathematics}
+      \field{title}{Inflow-implicit/outflow-explicit finite volume methods for solving advection equations}
+      \field{volume}{85}
+      \field{year}{2014}
+      \field{pages}{16\bibrangedash 37}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1016/j.apnum.2014.06.002
+      \endverb
+      \keyw{65M08}
+    \endentry
+    \entry{1985_Yee}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9bf645073f0c77a41561d2497b9c2713}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={HC},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a5b3a949236f0acae22055d5f9aa5c5c}{%
+           family={Warming},
+           familyi={W\bibinitperiod},
+           given={RF},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f4c5bedc5d15b72c85e262d65e016a46}{%
+           family={Harten},
+           familyi={H\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{fullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{bibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorbibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authornamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorfullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{3}
+      \field{title}{Implicit total variation diminishing (TVD) schemes for steady-state calculations}
+      \field{volume}{57}
+      \field{year}{1985}
+      \field{pages}{327\bibrangedash 360}
+      \range{pages}{34}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

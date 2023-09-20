@@ -1,0 +1,314 @@
+\documentclass[../include.tex]{subfiles}
+\begin{document}
+Our work deals with problems of computational fluid dynamics, which share similarities with the general equations describing flow phenomena. For example, the 1D Burgers' equation can be obtained through simplifications of the incompressible Navier-Stokes equations. Our intention is not to present detailed derivation of these equations. We only would like to discuss some concepts of fluid mechanics relevant to our work. For a more exhaustive explanation, see e.g.\, \cite{batchelor, cengel, kundu, feist, frolk, white}.
+
+Fluid motion is one of the most fascinating phenomenon in nature. It is of great theoretical and practical interest to better understand it. Mathematics has been proved to be very helpful throughout the history to tackle such problems. A long path and hard work of great minds lead to our current level of understanding, which is, however, far from complete. For historical details, see e.g.\, \cite{cengel, white} and references therein.
+
+Although we know that fluids, liquids and gases, are made up of molecules, we can treat them as a continuum. This is a reasonable assumption assuming that the systems we want to analyze are large compared to the distance between molecules. This is the so called continuum hypothesis. This allows us to describe its properties as continuous scalar functions of space and time.
+There are two basic approaches to describe the motion of fluids: Lagrangian and Eulerian. 
+
+In the Lagrangian description we follow the particles as they move along trajectories. Every particle is somehow labeled, usually with its initial position. As one can imagine, it could be quiet cumbersome or even impossible to get a detailed information of the flow that way.
+
+In the Eulerian viewpoint the properties of the fluid are represented by scalar functions of a fixed position $ \mathbf{x} = (x_1, x_2, x_3) $ in 3D space and time $ t $. The scalar quantity usually means density, a velocity component, pressure, temperature, etc. Obviously we assume that at a given position there is only one particle at a given instant in time.
+
+Our goal is to predict how these quantities change in the Eulerian description as time evolves. Suppose we are interested in the dynamics of fluid particles in an enclosed region in space, denoted as $ \Omega(t) $. The region in general can be a function of time. The boundary of the region is denoted as $ \partial \Omega(t) $. In particular we can assume that this region moves with the particles then it is usually referred to as a material volume \cite{batchelor}. A convenient way to describe changes of quantities in such region over time is to rely on the transport theorem, in fluid mechanics texts often named after Lord Osborne Reynolds, or after Gottfried Wilhelm von Leibniz. The transport theorem says
+\begin{equation}
+	\label{transport_0}
+	\frac{\mathrm{d}}{\mathrm{d}t}  \int_{\Omega(t)} F (t, \mathbf{x}) \,\mathrm{d}\mathbf{x} = 
+\int_{\Omega(t)} \frac{\partial}{\partial t} F (t, \mathbf{x}) \mathrm{d}\mathbf{x} + \int_{\partial \Omega(t)} (F(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x})) \cdot \mathbf{n}(t, \mathbf{x})\,\mathrm{d}S,
+\end{equation}
+where $ F (t, \mathbf{x}) $ is the quantity of our interest per unit volume, $ \mathrm{d}\mathbf{x} $ denotes an infinitesimally small material volume, $ \mathbf{v}(t, \mathbf{x}) = (v_1(t, \mathbf{x}), v_2(t, \mathbf{x}), v_3(t, \mathbf{x})) $ denotes velocity, $ \mathbf{n} (t, \mathbf{x}) = (n_1(t, \mathbf{x}), n_2(t, \mathbf{x}), n_3(t, \mathbf{x})) $ is an outward unit normal vector, $ \mathrm{d}S $ is an infinitesimally small surface element of the boundary.
+Using Gauss's theorem we can equivalently write \eqref{transport_0} as
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}  \int_{\Omega(t)} F (t, \mathbf{x}) \,\mathrm{d}\mathbf{x} = 
+\int_{\Omega(t)} \frac{\partial}{\partial t}  F (t, \mathbf{x}) + \nabla \cdot (F(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x}))\,\mathrm{d}\mathbf{x}.
+\]
+One of the basic laws of classical physics is the conservation of mass. Without the presence of any sources or sinks, the mass of a system of particles doesn't change over time. To express this mathematically we choose the scalar quantity to be the density, denoted as $ \rho(t, \mathbf{x}) $, which is mass per unit volume. Thus the conservation of mass can be expressed as
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}  \int_{\Omega(t)} \rho (t, \mathbf{x})\,\mathrm{d}\mathbf{x} = \int_{\Omega(t)} \frac{\partial}{\partial t} \rho (t, \mathbf{x}) + \nabla \cdot (\rho(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x}))\,\mathrm{d}\mathbf{x} = 0.
+\]
+The region can be arbitrarily chosen, which means that the expression under the integral must vanish everywhere. We end up with the conservation of mass in differential form
+\[
+\frac{\partial}{\partial t} \rho (t, \mathbf{x}) + \nabla \cdot (\rho(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x})) = 0,
+\]
+which is often referred to as the continuity equation, since assuming that the continuum hypothesis holds(without any sinks there won't be any voids in the fluid). If we further assume that the fluid under consideration is incompressible, in other words the variation of the density is, for our purposes, negligible, the continuity equation reduces to
+\begin{equation}
+	\label{continuity}
+	\nabla \cdot \mathbf{v}(t, \mathbf{x}) = 0.
+\end{equation}
+In describing the motion of fluids in a non-relativistic classical sense, we apply Newton's laws of motion on the material region, which says that
+\[
+\text{change of linear momentum of the system/time = net force acting on the system}.
+\]
+First we deal with the left hand side. The linear momentum of a point mass is defined as mass times velocity. We can extend this concept for fluids by defining the linear momentum/unit mass as $ \rho(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x}) $, which is a vector with three components. Then according to the transport theorem we can express the time rate of change of the linear momentum as
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}  \int_{\Omega(t)} \rho(t, \mathbf{x})\,v_i (t, \mathbf{x}) \,\mathrm{d}\mathbf{x} = 
+\int_{\Omega(t)} \frac{\partial}{\partial t}  (\rho(t, \mathbf{x})\,v_i (t, \mathbf{x})) + \nabla \cdot (\rho(t, \mathbf{x})\,v_i(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x}))\,\mathrm{d}\mathbf{x}.
+\]
+\quad for $ i = 1, 2, 3 $. \\
+Now we focus our attention to forces. We can divide the forces to body forces(inertial forces, gravity, electromagnetic interactions, etc.), which are acting to every part of the material volume and surface forces, which are acting on the boundary of the region.
+Let $ \mathbf{f} (t, \mathbf{x})  = (f_1(t, \mathbf{x}), f_2(t, \mathbf{x}), f_3(t, \mathbf{x})) $ denote the body forces per unit mass. The net body force acting on the material volume can be expressed as
+\[
+\int_{\Omega(t)} \rho (t, \mathbf{x})\, \mathbf{f} (t, \mathbf{x})\,\mathrm{d}\mathbf{x}.
+\]
+We can further divide the surface forces to normal and tangential components. These forces can be described by a second order stress tensor, denoted by $ \mathbf{\tau}_{ij} $. The diagonal components are the normal stresses, which are composed of pressure and viscous stresses. Viscous stresses also act in the tangential direction, which are called shear stresses, making up the off-diagonal elements of the stress tensor.
+We can write the contribution of pressure acting in the direction of inward unit vector $ - \mathbf{n}(t, \mathbf{x}) $ as
+\begin{equation}
+	\label{pressure_integral}
+	-\int_{\partial \Omega(t)} p(t, \mathbf{x})\, \mathbf{n}(t, \mathbf{x})\,\mathrm{d}S.
+\end{equation}
+The contribution of the viscous stresses can be written as
+\begin{equation}
+	\label{viscous_integral}
+	\int_{\partial \Omega(t)} \mathbf{\tau}_{ij}(t, \mathbf{x}) \cdot \mathbf{n}(t, \mathbf{x})\,\mathrm{d}S.
+\end{equation}
+We limit our discussion to Newtonian fluids, in which case the viscous stresses are linearly proportional to the strain rate. In that case the viscous stress tensor can be written as
+\[
+\tau_{ij}(t, \mathbf{x}) = 2 \mu\, \epsilon_{ij}(t, \mathbf{x}),
+\]
+where $ \mu $ is the dynamic viscosity, which we assume is a constant in our case, $ \epsilon_{ij} $ is the strain rate tensor, which is defined as
+\[
+\epsilon_{ij}(t, \mathbf{x}) = \frac{1}{2}\left(\frac{\partial v_i}{\partial x_{j}} + \frac{\partial v_j}{\partial x_{i}} \right).
+\]
+Then using Gauss's theorem to rewrite the surface integrals \eqref{pressure_integral}, \eqref{viscous_integral} to volume integrals, considering that the material volume can be chosen arbitrarily, it can be shown that Newton's second law can be written in differential form considering an incompressible Newtonian fluid as
+\begin{equation}
+	\label{momentum}
+		\rho \frac{\partial}{\partial t} \,v_i (t, \mathbf{x}) + \rho \nabla \cdot (v_i(t, \mathbf{x})\,\mathbf{v}(t, \mathbf{x})) =\\
+		\rho\, f_i(t, \mathbf{x}) - \frac{\partial}{\partial x_i} p(t, \mathbf{x}) +  \mu\,\Delta\, v_i(t, \mathbf{x}),
+\end{equation}
+\quad for $ i = 1, 2, 3 $, \\
+where $ \rho(t, \mathbf{x}) = \rho = constant $ in case of an incompressible fluid, $ \Delta $ is the Laplace operator.\\
+From now on we will omit the independent variables in the notation. We can write the second term on the left hand side of the momentum equation \eqref{momentum} as
+\begin{equation}
+\begin{split}
+	\rho \nabla \cdot (v_i\,\mathbf{v}) &= \rho \left(\frac{\partial}{\partial x_1}(v_i\,v_1) + 
+	\frac{\partial}{\partial x_2}(v_i\,v_2) + \frac{\partial}{\partial x_3}(v_i\,v_3)\right)\\
+	&= \rho \left(v_1 \frac{\partial}{\partial x_1}v_i + v_i\frac{\partial}{\partial x_1}v_{1} +
+	 v_2\frac{\partial}{\partial x_2}v_{i} + v_i\frac{\partial}{\partial x_2}v_2 + 
+	 v_3\frac{\partial}{\partial x_3}v_{i} + v_i\frac{\partial}{\partial x_3}v_3\right)\\
+	&= \rho (v_i(\underbrace{\frac{\partial}{\partial x_1}v_{1} + \frac{\partial}{\partial x_2}v_{2} + \frac{\partial}{\partial x_3}v_{3}}_{\nabla \cdot \mathbf{v} = 0}) + \underbrace{v_1\frac{\partial}{\partial x_1}v_{i} + v_2\frac{\partial}{\partial x_2}v_i + v_3\frac{\partial}{\partial x_3}v_{i}}_{\mathbf{v} \cdot \nabla v_i}).
+\end{split}
+\end{equation}
+Using the continuity equation for incompressible fluid \eqref{continuity} and dividing by $ \rho $ we arrive at the famous Navier-Stokes equations for incompressible flow:
+\begin{equation}
+	\label{navier-stokes}
+	\frac{\partial}{\partial t} \,v_i  + \mathbf{v} \cdot \nabla v_i =\\
+	f_i - \frac{1}{\rho} \frac{\partial}{\partial x_i} p + \frac{\mu}{\rho}\,\Delta\, v_i, \quad \textrm{for } i = 1, 2, 3,
+\end{equation}
+named after Claude-Louis Marie Henri Navier, and Sir George Gabriel Stokes, who are credited for the derivation. However, according to \cite{mathshistory} and references therein, it is interesting to mention that Navier arrived at the correct equations despite making wrong assumptions about the underlying physics. He had no conception of shear stresses and only wanted to modify the inviscid equations, known as the Euler equations, to count with the molecular forces in the fluid. The first was Adhémar Jean Claude Barré de Saint-Venant who derived the equations correctly considering viscous stresses. Stokes also derived the equations correctly but two years after Saint-Venant. Interestingly, Saint-Venant's name has never become associated with these equations.
+\par The nonlinear system \eqref{navier-stokes} can be solved analytically only in a few simple cases. However, it is of great practical and theoretical interest to solve it in the general case. The trouble is mainly caused by the nonlinear advective term.
+%====================================================================================================================================================
+\section{Viscous Burgers' equation}
+
+Considering the 1D case, the unknowns are functions of the $ x_1 $ coordinate. We denote $ x_1 $ by $ x $, $ v_1$ by $ u $ and $ f_1 $ by $ f $. The equations \eqref{navier-stokes} reduce to
+\begin{equation}
+	\label{1Dnavier}
+	u_t  + u\,u_x =	f - \frac{1}{\rho}\, p_x + \frac{\mu}{\rho}\, u_{xx},
+\end{equation}
+where the subscripts denote partial derivatives.\\
+If we further neglect the pressure variations, in the absence of body forces, we get from \eqref{1Dnavier} the one dimensional viscous Burgers' equation 
+\begin{equation}
+	u_t + u\,u_x = \sigma\, u_{xx},
+	\label{burg}
+\end{equation}
+where $ \sigma = \mu/\rho $ is the diffusion coefficient(or kinematic viscosity in fluid mechanics context). The equation is named after a Dutch physicist Johannes Martinus Burgers, \cite{burgers}. It is interesting to note that the equation was first studied by a British (later American) applied mathematician Harry Bateman \cite{olv, bateman}.
+The equation captures some  key features of the equations of fluid dynamics: nonlinear advection, arising from the advective terms in the linear momentum equations \eqref{navier-stokes}, and viscosity effects \cite{olv, lev}. The equation can be solved analytically by transforming it to the linear heat equation, known as the Cole-Hopf transformation \cite{olv, whitham}. This fact allows us to compare numerical solutions with the exact ones. By studying the behaviour of its numerical solutions, it can help us to predict the performance of a particular numerical scheme on the more complicated equations of fluid dynamics.
+%====================================================================================================================================================
+\subsection{Cole-Hopf transformation}
+The nonlinear viscous Burgers' equation \eqref{burg} can be converted to the linear heat equation, for which there exist different methods to solve explicitly. Interestingly, the transformation first appeared as an exercise in a 19th century textbook \cite{olv, forsyth}. Later the mathematicians Eberhard Hopf \cite{hopf} and Julian Cole \cite{cole} rediscovered the method and now it is named in their honor \cite{olv}. Below we would like to present the key steps of the method.\\
+We start with the function
+\begin{equation}
+	v(t, x) = e^{\alpha\, \varphi(t, x)},
+	\label{expheat}
+\end{equation}
+where $ \alpha $ is a nonzero constant. Then
+\[
+\varphi(t, x) = \frac{1}{\alpha} \ln v(t, x),
+\]
+which is a real function if $ v(t, x) > 0 $. We assume that $ v(t, x) $ solves the linear heat equation
+\begin{equation}
+	v_t = \sigma\, v_{xx}.
+	\label{heat}
+\end{equation}
+We calculate the partial derivatives
+\[
+v_t = \alpha\, \varphi_t\, e^{\alpha\, \varphi}, \quad 
+v_x = \alpha\, \varphi_x\, e^{\alpha\, \varphi}, \quad
+v_{xx} = \alpha\, (\varphi_{xx}\, e^{\alpha\, \varphi} + \alpha\, \varphi_x^2\, e^{\alpha\, \varphi}).
+\]
+Substituting to the heat equation \eqref{heat} we get
+\[
+\alpha\, \varphi_t\, e^{\alpha\, \varphi} = \sigma\, \alpha\, (\varphi_{xx}\, e^{\alpha\, \varphi} + \alpha\, \varphi_x^2\, e^{\alpha\, \varphi})
+\]
+Cancelling the common term $ \alpha\, e^{\alpha\,\varphi} $ the result is
+\begin{equation}
+	\varphi_t = \sigma\,\varphi_{xx} + \sigma\, \alpha\, \varphi_x^2.
+	\label{potential_Burgers}
+\end{equation}
+We differentiate with respect to $ x $ to end up with
+\[
+\varphi_{tx} = \sigma\,\varphi_{xxx} + 2\, \sigma\, \alpha\, \varphi_x \,\varphi_{xx}.
+\]
+Notice that $ \varphi_x $ solves \eqref{burg} for $ \alpha = -1/(2\,\sigma) $.
+
+We conclude that if $ v(t, x) > 0 $ is a positive solution to the heat equation then
+\begin{equation}
+	u(t, x) = \frac{\partial}{\partial x}\left[-2\,\sigma\,\ln v(t, x)\right] = -2\,\sigma \frac{v_x(t, x)}{v(t, x)}
+\label{vtou}
+\end{equation}
+solves the viscous Burgers' equation \eqref{burg}.\\
+Suppose we want to solve \eqref{burg} with given initial conditions
+\[
+u(0, x) = u^0(x),\quad \forall x \in \mathbb{R}.
+\]
+First we choose a function $ \varphi(t, x) $ that satisfies $ \varphi_x(t,x) = u(t,x) $, e.g.\,
+\[
+\varphi(t,x) =\int_{0}^{x} u(t, y)\,\mathrm{d}y, \quad \text{so} \quad \varphi(0,x) = \int_{0}^{x} u^0(y)\,\mathrm{d}y.
+\]
+According to \eqref{expheat} the corresponding initial condition for the heat equation
+\[
+v(0, x) = e^{-\varphi(0, x)/(2\,\sigma)} = \exp \left(-\frac{1}{2\,\sigma} \int_{0}^{x} u^0(y)\,\mathrm{d}y \right).
+\]
+The lower limit of integration doesn't have to be zero, it can be arbitrarily chosen if it's needed. For example, in case of a delta function initial condition centered at the origin, which is one of our chosen examples, it would be problematic having 0 as a lower limit of integration. See, e.g.\ \cite{olv}, where in case of the triangular wave solution, the lower limit was chosen to be $ -\infty $. Notice that, in general, changing the lower limit has an effect of multiplying $ v $ by a constant so it doesn't change the solution $ u $ in \eqref{vtou}.
+
+The solution to the heat equation for $ t > 0 $ can be obtained as a convolution of the initial condition with the fundamental solution, see e.g.\ \cite{olv},
+\begin{equation}
+	\begin{split}
+v(t,x) &= \frac{1}{2\sqrt{\pi\,\sigma\,t}} \int_{-\infty}^{\infty} e^{-(x-s)^2/(4\,\sigma\,t)}\,v(0,s)\,\mathrm{d}s\\
+	   &= \frac{1}{2\sqrt{\pi\,\sigma\,t}} \int_{-\infty}^{\infty} 
+\exp\ \left(-\frac{(x-s)^2}{4\,\sigma\,t} - \frac{1}{2\,\sigma} \int_{0}^{s} u^0(r)\,\mathrm{d}r\right)\,\mathrm{d}s.
+\end{split}
+\end{equation}
+The solution $ u(t, x) $ is then obtained by \eqref{vtou}.
+%====================================================================================================================================================
+\subsection{Examples}
+
+Below we present some exact solutions to the viscous Burgers' equation \eqref{burg}, which can be obtained by the Cole-Hopf transformation. The examples are taken from \cite{olv}.
+
+\textbf{Rarefaction wave}. First we look for a solution of the Burgers' equation with an initial condition in the form of a step function
+\begin{equation}
+	u^0(x)=
+	\begin{cases}
+		u_l, &x \leq 0,\nonumber\\
+		u_r, &x > 0,\nonumber
+	\end{cases}
+	\label{rareInit}
+\end{equation}
+$ u_l < u_r $ corresponds to a rarefaction wave.\\
+Performing the steps of the Cole-Hopf transformation described previously one obtains for $ t > 0 $
+\begin{equation}
+	u(t,x) = u_{l} + \frac{u_{r}-u_{l}}
+	{1 + \exp\left(\dfrac{u_r - u_l}{2 \sigma}(x - st)\right)
+		\textrm{erfc} \left(\dfrac{x-u_{l}t}{2\sqrt{\sigma t}} \right) 
+		\Big/
+		\textrm{erfc} \left(\dfrac{u_{r}t-x}{2\sqrt{\sigma t}} \right)},
+	\label{rare}
+\end{equation}
+with $ s = (u_l + u_r)/2 $, and $ \textrm{erfc}(x)  = 1 - \textrm{erf}(x) $ denoting the complementary error function, where
+\[
+\mathrm{erf}(x) = \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-s^2}\,\mathrm{d}s.
+\]
+The solution can be seen in Figure ~\ref{fig:rare} on page \pageref{fig:rare}.
+
+\textbf{Triangular wave.}
+Another interesting example is the triangular-wave solution, which is a solution to \eqref{burg}, when the initial condition is the delta function $ \delta(x) $ centered at the origin.\\
+For $ t>0 $ we get
+\begin{equation}
+	u(t,x)=2 \sqrt{\frac{\sigma}{\pi t}} \frac{\exp\left(-x^{2}/4\sigma t\right)}{\coth \left(1/4\sigma\right)-\mathrm{erf} \left(x/2\sqrt{\sigma t}\right)},
+	\label{triang}
+\end{equation}
+where
+\[
+\coth (x) = \frac{\cosh(x)}{\sinh(x)} = \frac{e^x + e^{-x}}{e^x - e^{-x}}
+\]
+is the hyperbolic cotangent function. The solution can be seen in Figure ~\ref{fig:triang} on page \pageref{fig:triang}.
+
+\textbf{Trigonometric solution.}
+Our last example is the trigonometric solution, which can be obtained transforming a separable solution to the linear heat equation \eqref{heat}
+\[
+v(t,x) = a + b\, e^{-\sigma\,\lambda t} \cos(\sqrt{\lambda}\,x),
+\]
+where $ a > b $ must hold to ensure that it is a positive everywhere and $ \lambda > 0 $ is a positive constant. As discussed previously, any positive solution to the linear heat equation can be transformed to a solution of the viscous Burgers' equation \eqref{burg} using the relationship \eqref{vtou}. After performing the necessary calculations we obtain
+\begin{equation}
+	u(t,x) = \frac{2\,\sigma\, b\, \sqrt{\lambda} \,\sin{\sqrt{\lambda} x}}{a\,e^{\sigma \,\lambda t}+b\cos \sqrt{\lambda} x }.
+	\label{trig}
+\end{equation}
+The solution can be seen in Figure ~\ref{ftrig} on page \pageref{ftrig}.
+
+\section{Traffic flow}
+Similar equation describes the change of the density of cars in continuum traffic-flow models. Let us give a brief derivation of one of the simplest such model, known as the LWR model after Lighthill, Whitham \cite{lighthillwitham}, and Richards  \cite{richards}.\\
+We start with the conservation of cars which states that on a given section of a one-lane highway the number of cars changes only due to cars leaving or coming at the ends of the interval.\\
+In the derivation we assume that the number of cars is large enough on the interval of our interest so that it a reasonable assumption  that the cars are smoothly distributed and define the density of cars $ \rho (t,x) $ in units cars per car length. For simplicity we assume that every car has the same length. Then we have $ \rho = 0 $ and $ \rho = 1 $ for empty road and bumper to bumper traffic, respectively. Doing this way the number of cars on a given interval $ \left[x_1, x_2\right] $ of the road in a given time $ t $ can be expressed as
+\[
+\int_{x_1}^{x_2} \rho (t,x)\,\mathrm{d}x.
+\]
+Let us denote the velocity of cars as $ v(t,x) $ in the Eulerian description of the traffic. We can express the cars that flow through a given point $ x $ over a time interval $ [t_1, t_2] $ as
+\[
+\int_{t_1}^{t_2} \rho(t,x) v(t,x)\,\mathrm{d}t.
+\]
+Assuming that the velocity is positive in the direction of the $ x $ axis we can express the conservation of cars as
+\[
+\underbrace{\int_{x_1}^{x_2} \rho (t_2,x)\,\mathrm{d}x - \int_{x_1}^{x_2} \rho (t_1,x)\,\mathrm{d}x}_{\text{change of the number of cars from $ t_1 $ to $ t_2 $}} = 
+\underbrace{\int_{t_1}^{t_2} \rho(t,x_1) v(t,x_1)\,\mathrm{d}t}_{\text{inflow at }x_1} - 
+\underbrace{\int_{t_1}^{t_2} \rho(t,x_2) v(t,x_2)\,\mathrm{d}t}_{\text{outflow at }x_2}.
+\]
+Assuming that the functions are smooth, using the Newton-Leibniz theorem we can rewrite the law as
+\[
+\int_{x_1}^{x_2} \int_{t_1}^{t_2} \frac{\partial}{\partial t}\rho(t,x) \,\mathrm{d}t\, \mathrm{d}x = -\int_{t_1}^{t_2} \int_{x_1}^{x_2} \frac{\partial}{\partial x} \left(\rho(t,x_1) v(t,x_1)\right)\, \mathrm{d}x\, \mathrm{d}t.
+\]
+If the intervals can be arbitrarily chosen, we can write the conservation of cars in differential form:
+\begin{equation}
+	\label{conservation_cars_0}
+	\rho_t + (\rho\,v)_x = 0,
+\end{equation}
+knowing that $ \rho $ and $ v $ are functions of time and space, the subscripts denote partial derivatives.\\
+It is reasonable to expect that a car is moving slower in a denser traffic. In other words, the speed of a car decreases as the density increases. This suggests to express the velocity as a function of the density $ v = v(\rho) $. Then we can define the flux of cars as $ f(\rho) = \rho\,v(\rho) $ and write the conservation law \eqref{conservation_cars_0} as
+\begin{equation}
+	\rho_t + f(\rho)_x = 0.
+	\label{conservation_cars}
+\end{equation}
+%\begin{equation}
+%	\begin{cases}
+%		\rho_t + f(\rho)_x=0 & x\in \mathbb{R},\, t > 0\\
+%		\rho (0,x) = \rho_0(x) & x\in \mathbb{R}
+%	\end{cases}
+%\end{equation}
+It is not a trivial task to define the relationship between the velocity and density. There are several to choose from \cite{kachroo-sastry, trafficmono}.  Greenshields \cite{greenshields} proposed a linear relationship between the density and velocity, where he relied on experiments performed in equilibrium traffic, in which case the density and velocity are constants. In the Greenshields model the velocity is defined as
+\begin{equation}
+	\label{greenshields}
+	v(\rho) = v_{max}(1-\rho),
+\end{equation}
+where the constant $ v_{max} $ denotes the maximal velocity.\\
+This assumption leads to a concave quadratic flux function
+\[
+f(\rho) = \rho\, v_{max} \left(1 - \rho \right) 
+\]
+A way to extend this model \cite{whitham}, is to assume that the flux also depends on the density gradient. If the traffic is getting denser more rapidly the flux of cars reduces more. Applying this yields a modified flux function
+\begin{equation}
+	f(\rho, \rho_x) = \rho\,v_{max} \left(1 - \rho\right) - D \rho_x,
+	\label{flux_diff}
+\end{equation}
+where $ D $ is a diffusion coefficient \cite{whitham, kachroo-sastry, trafficmono}. Substituting \eqref{flux_diff} to \eqref{conservation_cars} and putting the diffusion term to the right-hand side we get
+\begin{equation}
+	\rho_t + u(\rho)\rho_x = D \rho_{xx},
+	\label{traffic}
+\end{equation}
+where we denoted
+\begin{equation}
+	u(\rho) = v_{max}(1 - 2\rho).
+	\label{u-ro}
+\end{equation}
+Multiplying both sides by $ u'(\rho) $ we obtain
+\[ u'(\rho)\rho_t + u(\rho)u'(\rho)\rho_x = D u'(\rho)\rho_{xx},\]
+which can be rewritten as
+\[ u_t + uu_x = D u_{xx} - D u''(\rho) \rho_x^2. \]
+Since $ u''(\rho) = 0 $ we end up with the viscous Burgers' equation (\ref{burg}), where $ \sigma $ corresponds to the diffusion coefficient $ D $. By solving (\ref{burg}) and using the relationship (\ref{u-ro}) we easily obtain a relation for the density
+\begin{equation}
+	\rho(u) = \frac{1}{2}\left(1 - \frac{u}{v_{max}}\right).
+	\label{ro-u}
+\end{equation}
+The relationship \eqref{ro-u} is used to obtain exact solutions for \eqref{traffic}, which is then compared to our numerical solution, where we solve \eqref{traffic} directly.
+
+The ideas discussed above were further extended to so called higher order models. First such model is known as the Payne-Whitham(PW) model \cite{kachroo-sastry, trafficmono, whitham}. In addition to the conservation of cars they added a second equation that mimics the momentum equation \eqref{1Dnavier} expressing the acceleration of cars in the Eulerian description.
+There exist other models presented, e.g.\ in \cite{trafficmono, awrascle, zhang}.
+\end{document}

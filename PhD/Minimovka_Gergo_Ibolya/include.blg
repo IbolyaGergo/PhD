@@ -1,0 +1,5 @@
+[0] Config.pm:306> INFO - This is Biber 2.18
+[0] Config.pm:309> INFO - Logfile is 'include.blg'
+[86] biber:340> INFO - === Fri Aug 25, 2023, 10:17:13
+[234] Utils.pm:410> ERROR - Cannot find 'include.bcf'!
+[234] Biber.pm:135> INFO - ERRORS: 1

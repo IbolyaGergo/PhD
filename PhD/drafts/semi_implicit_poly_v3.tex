@@ -1,0 +1,261 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.75cm, right=2.75cm]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage[slovak,english]{babel}
+\usepackage{comment}
+\usepackage[dvips]{graphicx}
+\usepackage{wrapfig}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{epstopdf}
+\usepackage[font=small,margin=0.5cm]{caption}
+\usepackage{float}
+
+\begin{document}
+Let us consider the conservation law
+\begin{equation}
+	\label{conservation law}
+	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t)
+	+ \nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] = 0.
+\end{equation}
+We integrate in space and time
+\[
+	\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
+	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t)
+	+\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
+	\nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] = 0.
+\]
+In the first term we change the order of integration 
+and apply the Newton-Leibniz theorem for the time integration
+\[
+	\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
+	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t) = 
+	\int_{\Omega_p} \int_{t^{n-1}}^{t^n}
+	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t) = 
+	\int_{\Omega_p}
+	\left(\phi(\boldsymbol{x},t^n) - \phi(\boldsymbol{x},t^{n-1})\right)
+	\approx |\Omega_p|(\phi_p^{n} - \phi_p^{n-1}),
+\]
+where we approximate the cell average at time $ t^n $ 
+by the cell center values 
+$ \int_{\Omega_p} \phi(\boldsymbol{x},t^{n})
+\approx |\Omega_p|\phi^{n}_p. $ \\
+In the second term of \eqref{conservation law} we apply the divergence theorem for the volume integral and discretize in space
+\[
+	\int_{\Omega_p}
+	\nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] =
+	\int_{\partial\Omega_p}
+	\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}(\boldsymbol{x}) =
+	\sum_{f \in \mathcal{F}_p} \int_{e_f}
+	\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}
+	\approx
+	\sum_{f \in \mathcal{F}_p}
+	\phi(\boldsymbol{x}_{pf},t) \int_{e_f} \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}
+\]
+where $ \boldsymbol{n}_{pf} $ is an outward facing normal vector, $ \boldsymbol{x}_{pf} $ is the center of the face and we denote 
+\[
+	a_{pf} \equiv \boldsymbol{u}(\boldsymbol{x}_{pf}) \cdot \boldsymbol{n}_{pf}
+	\approx
+	\int_{e_f} \boldsymbol{u} \cdot \boldsymbol{n}_{pf}.
+\]
+Next we integrate this term in time
+\[
+	\int_{t^{n-1}}^{t^n} \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t) a_{pf} =
+	\sum_{f \in \mathcal{F}_p} \int_{t^{n-1}}^{t^n} \phi(\boldsymbol{x}_{pf},t) a_{pf}
+	\approx 
+	\Delta t \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf},
+\]
+where we approximate the time integral of $ \phi $ using the midpoint rule. \\
+The discretization of \eqref{conservation law} thus reads as
+\begin{equation}
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^n - \phi_p^{n-1})
+	+ \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf} = 0.
+\end{equation}
+Next we approximate the value at the face center at half time step
+\[
+	\phi(\boldsymbol{x}_{pf},t^{n-1/2})
+	\approx
+	\frac{1}{2}(\phi(\boldsymbol{x}_{pf},t^n) + \phi(\boldsymbol{x}_{pf},t^{n-1}))
+	\equiv
+	\phi_{f}^{n-1/2}.
+\]
+For the outflow case $ a_{pf} \geq 0 $
+\[
+	\phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^n + \phi_{qf}^{n-1}),
+\]
+where 
+\[
+	\phi_{pf}^{n} = \phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf},
+	\quad \text{and} \quad
+	\phi_{qf}^{n-1} = \phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}.
+\]
+We take the average of reconstructed face values from neighboring cells, 
+the upwind value is treated implicitly, and the downwind explicitly. 
+This mimics the approximation of the face value of the IIOE method in 1D:
+\[
+	\phi_{i+1/2}^{n-1/2} = \frac{1}{2}(\phi_i^{n} + \phi_{i+1}^{n-1}).
+\]
+For the outflow case $ a_{pf} < 0 $
+\[
+	\phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^{n-1} + \phi_{qf}^{n}),
+\]
+where 
+\[
+	\phi_{pf}^{n-1} = \phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf},
+	\quad \text{and} \quad
+	\phi_{qf}^{n} = \phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}.
+\]
+We divide the set of faces to inflow and outflow parts
+\begin{align*}
+	\mathcal{B}_p^- = \left\{b \in \mathcal{B}_p\, |\, a_{pb} < 0\right\}\
+	\quad &\text{and} \quad
+	\mathcal{B}_p^+ = \mathcal{B}_p \setminus \mathcal{B}_p^- \\
+	\mathcal{F}_p^- = \left\{f \in (\mathcal{F}_p \setminus \mathcal{B}_p) \, |\, a_{pf} < 0\right\}
+	\quad &\text{and} \quad 
+	\mathcal{F}_p^+ = (\mathcal{F}_p \setminus \mathcal{B}_p) \setminus \mathcal{F}_p^- 
+\end{align*}
+The discretization of \eqref{conservation law} takes the form
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1})
+	&+ \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	+ \sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} \phi_{pb}^{n-1/2} a_{pb}
+	+ \sum_{f \in \mathcal{B}_p^+} \phi_{pb}^{n-1/2} a_{pb} = 0,
+\end{align}
+and the face values depend on the sign of flux $ a_{pf} $
+\[
+	\phi_{pf}^{n-1/2} =
+	\begin{cases}
+		\frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}),
+		\quad &\text{ if } a_{pf} \geq 0 \\
+		\frac{1}{2}(\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf} + 
+		\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf})
+		\quad &\text{ if } a_{pf} < 0
+	\end{cases}
+\]
+\[
+	\phi_{pb}^{n-1/2} =
+	\begin{cases}
+		\frac{1}{2}\left(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+		\phi_e(\boldsymbol{x}_{pb}, t^{n-1})\right),
+		\quad &\text{ if } a_{pf} \geq 0 \\
+		\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}),
+		\quad &\text{ if } a_{pf} < 0.
+	\end{cases}
+\]
+Next we describe a strategy to prevent oscillations.\\
+\subsection{Outflow case}
+For the case $ a_{pf} \geq 0 $ we can rewrite the approximation of the face values as
+\begin{equation}
+	\label{faceval}
+	\begin{split}
+		\phi_{pf}^{n-1/2}
+		&= \frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}) \\
+		&= \phi_p^n + \frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}).
+	\end{split}
+\end{equation}
+which is now written as the upwind cell center value plus a correction term. 
+To simplify the notation, we denote the correction term as
+\[
+	\mathcal{D}^+_p\phi(\boldsymbol{x}_f)
+	\equiv 
+	\frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}),
+\]
+the plus sign indicating that $ a_{pf} \geq 0 $ is non-negative. 
+To ensure boundedness, we apply a limiter $ \Psi_{f} $ to the correction term
+\begin{equation} \label{rec_face}
+	\phi_{pf}^{n-1/2} = \phi_p^n + \Psi_{f} \mathcal{D}^+_p\phi(\boldsymbol{x}_f)
+\end{equation}
+%\begin{equation}
+%	\begin{split}
+%		\phi_{pf}^{n-1/2} &= \phi_p^n + \frac{\Psi_f}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+%\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf})\\
+% &= \left(1 - \frac{\Psi_f}{2}\right)\phi_p^n +
+%\frac{\Psi_f}{2}\nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+%\frac{\Psi_f}{2}(\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}).
+%	\end{split}
+%\end{equation}
+To compute the limiter $ \Psi_{f} $, we use similar ideas as in [ ]. 
+We want to ensure that the min-max principle is satisfied.\\ 
+We want to ensure the min-max principle is satisfied
+\[
+	\phi_{v, neighbor}^{min} \leq \phi_{pf}^{n-1/2} \leq \phi_{v, neighbor}^{max},
+\]
+where $ \phi_{pv, neighbor}^{min} $ and $ \phi_{pv, neighbor}^{max} $ 
+are the minimum and maximum values (from both time $ t^n $ and $ t^n $) 
+of the cell averages among all neighboring cells sharing the vertex.
+\[
+	\phi_{v, neighbor}^{min} 
+	\leq 
+	\phi_p^n + \Psi_{f}\mathcal{D}^+_p\phi (\boldsymbol{x}_{f}) 
+	\leq 
+	\phi_{v, neighbor}^{max},
+\]
+\[
+	\phi_{v, neighbor}^{min} -\phi_p^n 
+	\leq  
+	\Psi_{f}\mathcal{D}^+_p\phi (\boldsymbol{x}_{f}) 
+	\leq 
+	\phi_{v, neighbor}^{max} -\phi_p^n. 
+\]
+So, if $ \mathcal{D}^+_p\phi (\boldsymbol{x}_{f}) > 0 $ is positive
+\[
+	\frac{\phi_{v, neighbor}^{min} - \phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})} 
+	\leq  
+	\Psi_{f}
+	\leq
+	\frac{\phi_{v, neighbor}^{max} - \phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})},
+\]
+if $ \mathcal{D}^+_p\phi (\boldsymbol{x}_{f}) < 0 $ is negative
+\[
+	\frac{\phi_{v, neighbor}^{max} - \phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})} 
+	\leq  
+	\Psi_{f}
+	\leq 
+	\frac{\phi_{v, neighbor}^{min} - \phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})}.
+\]
+If $ \mathcal{D}^+_p\phi (\boldsymbol{x}_{v}) = 0 $ we choose $ \Psi_{f} = 1 $.
+Thus, we bound the limiter from above
+\[ 
+	\Psi_{f}
+	\leq
+	\max \left(
+		\frac{\phi_{v, neighbor}^{min} -\phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})},
+		\frac{\phi_{v, neighbor}^{max} -\phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{f})}
+		\right).
+\]
+We also want the limiter to be bounded by $ 0 $ from below, 
+in which case the approximation of the face value in \eqref{rec_face} 
+is the first order implicit upwind scheme, and by $ 1 $ from above, 
+which is the case of unlimited second order scheme.
+We do the computation at each vertex. For a given cell, 
+we choose the minimum of these calculated $ \Psi $ values
+\begin{equation}
+	\Psi_{f} = 
+	\min_{v \in \mathcal{V}_{f}}
+	\begin{cases}
+		\Phi(r_{v}^+) \quad 
+		&\text{if} \ \mathcal{D}^+_p\phi (\boldsymbol{x}_{v}) \neq 0\\
+		1 \quad &\text{otherwise}.
+	\end{cases}
+\end{equation}
+\[
+	r_{v}^+ = 
+	\max \left(
+		\frac{\phi_{v, neighbor}^{min} -\phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{v})},
+		 \frac{\phi_{v, neighbor}^{max} -\phi_p^n}{\mathcal{D}^+_p\phi (\boldsymbol{x}_{v})}
+		 \right). 
+\]
+We require
+\[ 
+	0 \leq \Phi(r_{v}^+) \leq \min(1, r_{v}^+).
+\]
+The inflow case $ a_{pf} < 0 $ is treated analogously. 
+We always treat the upwind values implicitly and downwind values explicitly.
+\newpage
+\end{document}

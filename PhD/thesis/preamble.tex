@@ -1,0 +1,49 @@
+\pagestyle{headings}
+\linespread{1.5}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.75cm, right=2.75cm]{geometry}
+\usepackage[slovak,english]{babel}
+% small caption of figures
+\usepackage[font=small,margin=0.5cm]{caption}
+
+% ??????????
+\usepackage[dvips]{graphicx}
+\usepackage{wrapfig}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{epstopdf}
+
+% figure grid
+\usepackage{subfig}
+
+% ??????????
+% \newcounter{eqn}
+% \renewcommand*{\theeqn}{\alph{eqn})}
+% \newcommand{\num}{\refstepcounter{eqn}\text{\theeqn}\;}
+
+% ??????????
+% indent the first paragraph after a section heading
+% \usepackage{indentfirst}
+
+% Mathematical expressions
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[intlimits]{amsmath}
+\usepackage{amsthm}
+
+% ?
+% \usepackage{verbatim}
+% \usepackage{url}
+
+\usepackage{float}
+
+\usepackage{babel,csquotes,xpatch}
+\usepackage[
+	backend=biber,
+	maxbibnames=99]{biblatex}
+\addbibresource{thesis.bib}
+
+% Hyperlinks
+% Overleaf: "...usually, it has to be the last package to be imported."
+\usepackage{hyperref}
+
+% Overleaf: Best loaded last in the preamble
+\usepackage{subfiles}

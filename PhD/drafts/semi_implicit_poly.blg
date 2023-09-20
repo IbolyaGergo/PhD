@@ -1,0 +1,4 @@
+[0] Config.pm:306> INFO - This is Biber 2.18
+[0] Config.pm:309> INFO - Logfile is 'semi_implicit_poly.blg'
+[88] biber:340> INFO - === Tue Sep  5, 2023, 14:07:31
+[105] Biber.pm:418> INFO - Reading 'semi_implicit_poly.bcf'

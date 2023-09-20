@@ -1,0 +1,51 @@
+\documentclass[12pt, twoside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=6mm]{geometry}
+\usepackage{fancyhdr}
+%\pagestyle{}
+\pagestyle{fancy}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
+\title{
+	{Thesis Title}\\
+	{\large Institution Name}
+}
+\author{Gergo}
+\date{Febr 2021}
+
+\begin{document}
+
+\maketitle
+
+
+\chapter*{Abstract}
+addsfsdfsdf
+
+\chapter*{Dedic}
+sfsfsd
+
+\chapter*{Declar}
+sfsdfds
+
+\chapter*{Ackn}
+sdsdfdsf
+
+\tableofcontents
+
+\chapter{Intro}
+\input{chapters/introduction}
+
+\chapter{two}
+\input{chapters/chapter02}
+
+\chapter{three}
+\input{chapters/chapter03}
+
+
+\printbibliography
+
+\end{document}

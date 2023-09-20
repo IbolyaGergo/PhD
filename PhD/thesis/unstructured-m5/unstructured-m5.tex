@@ -1,0 +1,530 @@
+\documentclass[../thesis.tex]{subfiles}
+\begin{document}
+\begin{equation*}
+	\phi_{p, vnbd}^{min}
+	\leq
+	\phi_p^{n-1}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}
+	\leq
+	\phi_{p, vnbd}^{max}
+\end{equation*}
+For \( a_{ph} \geq 0 \)
+\begin{equation*}
+	\phi_{p,vnbd}^{min}
+	\leq
+	\phi_p^{n-1}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	- \lambda_p\sum_{
+		\substack{
+			f \in \mathcal{F}_p^+, \\
+			f \neq h}
+			} \phi_{pf}^{n-1/2} a_{pf}
+	- \lambda_p \phi_{ph}^{n-1/2} a_{ph}
+	\leq
+	\phi_{p,vnbd}^{max}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\phi_{p,vnbd}^{min} - \phi_p^{n-1}
+		+ \lambda_p\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		+ \lambda_p\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		&\leq
+		- \lambda_p \phi_{ph}^{n-1/2} a_{ph}
+		\\
+		\phi_{p,vnbd}^{max} - \phi_p^{n-1}
+		+ \lambda_p\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		+ \lambda_p\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		&\geq
+		- \lambda_p \phi_{ph}^{n-1/2} a_{ph}
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		&\geq
+		\phi_{ph}^{n-1/2} a_{ph}
+		\\
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		&\leq
+		\phi_{ph}^{n-1/2} a_{ph}
+	\end{split}
+\end{equation*}
+% The face value is bounded by cell min max
+\section{Version 1}
+Assume
+\[0 \leq \phi_{p,vnbd}^{min} \leq  \phi_{pf}^{n-1/2} \leq \phi_{p,vnbd}^{max} \leq 1.\]
+Then
+\[
+	\phi_{p,vnbd}^{min} \sum_{f \in \mathcal{F}_p^+} a_{pf}
+	\leq
+	\sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}
+	\leq
+	\phi_{p,vnbd}^{max} \sum_{f \in \mathcal{F}_p^+} a_{pf},
+\]
+\[
+	\phi_{p,vnbd}^{min} \sum_{\substack{
+			f \in \mathcal{F}_p^+, \\
+			f \neq h}
+			} a_{pf}
+	\leq
+	\sum_{\substack{
+			f \in \mathcal{F}_p^+, \\
+			f \neq h}
+			} \phi_{pf}^{n-1/2} a_{pf}
+	\leq
+	\phi_{p,vnbd}^{max} \sum_{\substack{
+			f \in \mathcal{F}_p^+, \\
+			f \neq h}
+			} a_{pf}
+\]
+and \[
+	\phi_{p,vnbd}^{min} \sum_{f \in \mathcal{F}_p^-} a_{pf}
+	\geq
+	\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	\geq
+	\phi_{p,vnbd}^{max} \sum_{f \in \mathcal{F}_p^-} a_{pf}.
+	\]
+Thus,
+\begin{equation*}
+	\begin{split}
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		\geq\\
+		\geq
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \phi_{p,vnbd}^{min}\sum_{f \in \mathcal{F}_p^-} a_{pf}
+		- \phi_{p,vnbd}^{max}\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} a_{pf}
+		\geq
+		\phi_{ph}^{n-1/2} a_{ph}.
+	\end{split}
+\end{equation*}
+Similarly,
+\begin{equation*}
+	\begin{split}
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		\leq\\
+		\leq
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \phi_{p,vnbd}^{max}\sum_{f \in \mathcal{F}_p^-} a_{pf}
+		- \phi_{p,vnbd}^{min}\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} a_{pf}
+		\leq
+		\phi_{ph}^{n-1/2} a_{ph}.
+	\end{split}
+\end{equation*}
+\[
+	\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \phi_{p,vnbd}^{min}\sum_{f \in \mathcal{F}_p^-} a_{pf}
+		- \phi_{p,vnbd}^{max}\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} a_{pf}
+	\geq
+	\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \phi_{p,vnbd}^{max}\sum_{f \in \mathcal{F}_p^-} a_{pf}
+		- \phi_{p,vnbd}^{min}\sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} a_{pf}
+\]
+\[
+	0 \leq
+	\frac{\phi_{p,vnbd}^{max} - \phi_{p,vnbd}^{min}}{\lambda_p}
+	+ \left(
+		\phi_{p,vnbd}^{max} - \phi_{p,vnbd}^{max}
+	\right)\sum_{f \in \mathcal{F}_p^-} a_{pf}
+	- \left(
+		\phi_{p,vnbd}^{max} - \phi_{p,vnbd}^{max}
+	\right)\sum_{
+		\substack{
+			f \in \mathcal{F}_p^+, \\
+			f \neq h}
+			} a_{pf}
+\]
+\section{Version 2}
+Let \( \min(\phi_p^{n-1}, \phi_q^{n-1}) = min_{pq}^{n-1} \) and \( \max(\phi_p^{n-1}, \phi_q^{n-1}) = max_{pq}^{n-1} \).
+Assume
+\[ 0 \leq min_{pq}^{n-1} \leq  \phi_{pf}^{n-1/2} \leq max_{pq}^{n-1} \leq 1.\]
+Then
+\[
+	\sum_{f \in \mathcal{F}_p^+}min_{pq}^{n-1} a_{pf}
+	\leq
+	\sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}
+	\leq
+	\sum_{f \in \mathcal{F}_p^+}max_{pq}^{n-1} a_{pf},
+\]
+and
+\[
+	\sum_{f \in \mathcal{F}_p^-}max_{pq}^{n-1} a_{pf}
+	\leq
+	\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	\leq
+	\sum_{f \in \mathcal{F}_p^-}min_{pq}^{n-1} a_{pf}.
+\]
+\begin{equation*}
+	\begin{split}
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		\geq\\
+		\geq
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} min_{pq}^{n-1} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} max_{pq}^{n-1} a_{pf}
+		\geq
+		\phi_{ph}^{n-1/2} a_{ph}.
+	\end{split}
+\end{equation*}
+Similarly,
+\begin{equation*}
+	\begin{split}
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \phi_{pf}^{n-1/2} a_{pf}
+		\leq\\
+		\leq
+		&\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-}max_{pq}^{n-1} a_{pf}
+		- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				}min_{pq}^{n-1} a_{pf}
+		\leq
+		\phi_{ph}^{n-1/2} a_{ph}.
+	\end{split}
+\end{equation*}
+\section{Version 3}
+\begin{equation*}
+	\begin{split}
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		&- \sum_{f \in \mathcal{F}_p^-}
+		\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}\\
+		&- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+		\geq
+		\left( \phi_p^{n,k-1} + \Psi_{h}^{k} \mathcal{D}^{+,k-1}_{ph}\phi \right) a_{ph},\\
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{max}}{\lambda_p}
+		&- \sum_{f \in \mathcal{F}_p^-}
+		\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}\\
+		&- \sum_{
+			\substack{
+				f \in \mathcal{F}_p^+, \\
+				f \neq h}
+				} \left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+		\leq
+		\left( \phi_p^{n,k-1} + \Psi_{h}^{k} \mathcal{D}^{+,k-1}_{ph}\phi \right) a_{ph}.
+	\end{split}
+\end{equation*}
+We want to maximize \( \Psi \) at each face.
+\[
+	\sum_{\substack{
+		f \in \mathcal{F}_p^+, \\
+		f \neq h}
+		} \left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+	=
+	\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf} - \left( \phi_p^{n,k-1} + \Psi_{h}^{k-1} \mathcal{D}^{+,k-1}_{ph}\phi \right) a_{ph}.
+\]
+Substituting we get
+\begin{equation*}
+	\begin{split}
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		&- \sum_{f \in \mathcal{F}_p^-}
+		\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}\\
+		&- \sum_{f \in \mathcal{F}_p^+}
+		\left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}\\
+		&+ \left( \phi_p^{n,k-1} + \Psi_{h}^{k-1} \mathcal{D}^{+,k-1}_{ph}\phi \right) a_{ph}
+		\geq
+		\left( \phi_p^{n,k-1} + \Psi_{h}^{k} \mathcal{D}^{+,k-1}_{ph}\phi \right) a_{ph},
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}{\lambda_p}
+		&- \sum_{f \in \mathcal{F}_p^-}
+		\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}\\
+		&- \sum_{f \in \mathcal{F}_p^+}
+		\left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}\\
+		&+ \Psi_{h}^{k-1} \mathcal{D}^{+,k-1}_{ph}\phi\ a_{ph}
+		\geq
+		\Psi_{h}^{k} \mathcal{D}^{+,k-1}_{ph}\phi\ a_{ph},
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\Psi_h^k = \max\Bigg(
+			\frac{\phi_p^{n-1} - \phi_{p,vnbd}^{min}}
+			{\lambda_p\mathcal{D}^{+,k-1}_{ph}\phi\ a_{ph}}
+			&- \frac{\sum_{f \in \mathcal{F}_p^-}
+			\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}}
+			{\mathcal{D}^{+,k-1}_{ph}\phi\ a_{ph}}\\
+			&- \frac{\sum_{f \in \mathcal{F}_p^+}
+			\left( \phi_p^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}}
+			{\mathcal{D}^{+,k-1}_{ph}\phi\ a_{ph}} + \Psi_{h}^{k-1},
+		\Bigg)
+	\end{split}
+\end{equation*}
+\section{Version 4}
+First we make an estimate for the new cell value, using the maximal possible value for the limiter at outflow faces.
+\begin{equation*}
+	\phi_{est}^n = \phi_p^{n-1}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^-}
+	\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{max} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+\end{equation*}
+Then we compute a bounded value
+\begin{equation}
+	\phi_{bounded}^n = \min\left( \phi_{p, vnbd}^{max}, \max\left( \phi_{p, vnbd}^{min}, \phi_{est}^n \right) \right)
+\end{equation}
+By assuming
+\begin{equation}
+	\phi_{bounded}^n = \phi_p^{n-1}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^-}
+	\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+\end{equation}
+we can compute the sum
+\begin{equation}
+	\begin{split}
+		S_p &=
+		\sum_{f \in \mathcal{F}_p^+}
+		\Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}\\
+		&=
+		\frac{\phi_p^{n-1} - \phi_{bounded}^n}{\lambda_p}
+		- \sum_{f \in \mathcal{F}_p^-}
+		\left( \phi_q^{n,k-1} + \Psi_{f}^{k-1} \mathcal{D}^{-,k-1}_{pf}\phi	\right) a_{pf}
+		- \sum_{f \in \mathcal{F}_p^+}
+		\phi_p^{n,k-1}a_{pf}.
+	\end{split}
+\end{equation}
+We want to be as close to the second order scheme as possible.
+Thus, we want to minimize
+\begin{equation*}
+	\begin{split}
+		\left( \sum_{f \in \mathcal{F}_p^+}
+		\Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		-
+		\Psi_{max} \sum_{f \in \mathcal{F}_p^+}
+		\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+		=\\
+		\left( \sum_{f \in \mathcal{F}_p^+}
+		\left( \Psi_{f}^{k} - \Psi_{max} \right) \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2.
+	\end{split}
+\end{equation*}
+This, however, is not good, because we already fixed the sum to \( S_p \)!!!
+
+Be careful, that
+\begin{equation*}
+	\left( \sum_{f \in \mathcal{F}_p^+}
+	\left( \Psi_{f}^{k} - \Psi_{max} \right) \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+	\neq
+	\sum_{f \in \mathcal{F}_p^+}
+	\left( \Psi_{f}^{k} - \Psi_{max} \right)^2\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+\end{equation*}
+!!!!!!
+
+Minimizing
+\begin{equation}
+	\sum_{f \in \mathcal{F}_p^+}
+	\left( \Psi_{f}^{k} - \Psi_{max} \right)^2\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+\end{equation}
+seems reasonable.
+\begin{equation}
+	\begin{split}
+		\mathcal{L}(...,\Psi_{f}^{k},...,\lambda) =
+		&\sum_{f \in \mathcal{F}_p^+}
+		\left( \Psi_{f}^{k} - \Psi_{max} \right)^2\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+		\\
+		-\lambda&\left( \sum_{f \in \mathcal{F}_p^+}
+		\Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} - S_p \right)
+	\end{split}
+\end{equation}
+\begin{equation*}
+	\begin{split}
+		\frac{\partial \mathcal{L}}{\partial \Psi_f^k}
+		&= 0
+		\\
+		2\left( \Psi_{f}^{k} - \Psi_{max} \right)\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2
+		-
+		\lambda \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		&= 0
+		\\
+		\Psi_{f}^{k}
+		&= \Psi_{max} + \frac{\lambda}{2 \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}}
+	\end{split}
+\end{equation*}
+We know that
+\begin{equation}
+	\begin{split}
+		S_p &=
+		\sum_{f \in \mathcal{F}_p^+}
+		\Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		\\
+		&= \sum_{f \in \mathcal{F}_p^+}
+		\left( \Psi_{max} + \frac{\lambda}{2 \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}} \right) \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		\\
+		&= \sum_{f \in \mathcal{F}_p^+}
+		\Psi_{max} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		+ \frac{\lambda}{2}n_{pos},
+	\end{split}
+\end{equation}
+where \( n_{pos} = |\mathcal{F}_p^+| \). We can compute \( \lambda \)
+\begin{equation}
+	\lambda = \frac{2}{n_{pos}}\left( S_p - \Psi_{max} \sum_{f \in \mathcal{F}_p^+}
+	\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)
+\end{equation}
+\begin{equation}
+	\Psi_{f}^{k} =
+	\max
+	\left( \min
+	\left( \Psi_{max} + \frac{\lambda}{2 \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}}, \Psi_{max} \right), 0 \right)
+\end{equation}
+Another choice would be to minimize
+\begin{equation*}
+	\sum_{f \in \mathcal{F}_p^+}
+	\left( \Psi_{f}^{k} - \Psi_{max} \right)^2
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\frac{\partial \mathcal{L}}{\partial \Psi_f^k}
+		&= 0
+		\\
+		2\left( \Psi_{f}^{k} - \Psi_{max} \right)
+		-
+		\lambda \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		&= 0
+		\\
+		\Psi_{f}^{k}
+		&= \Psi_{max} + \frac{\lambda}{2}\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+	\end{split}
+\end{equation*}
+We know that
+\begin{equation}
+	\begin{split}
+		S_p &=
+		\sum_{f \in \mathcal{F}_p^+}
+		\Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		\\
+		&= \sum_{f \in \mathcal{F}_p^+}
+		\left( \Psi_{max} + \frac{\lambda}{2}\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}\right) \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		\\
+		&= \sum_{f \in \mathcal{F}_p^+}
+		\Psi_{max} \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}
+		+ \frac{\lambda}{2}
+		\sum_{f \in \mathcal{F}_p^+}
+		\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2,
+	\end{split}
+\end{equation}
+\begin{equation}
+	\lambda = \frac{2}{\sum_{f \in \mathcal{F}_p^+}
+	\left( \mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)^2}\left( S_p - \Psi_{max} \sum_{f \in \mathcal{F}_p^+}
+	\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf} \right)
+\end{equation}
+\begin{equation}
+	\Psi_{f}^{k} =
+	\max
+	\left( \min
+	\left( \Psi_{max} + \frac{\lambda}{2}\mathcal{D}^{+,k-1}_{pf}\phi\ a_{pf}, \Psi_{max} \right), 0 \right)
+\end{equation}
+\section{Version 5}
+\[
+	\phi_{p,vnbd}^{min} \sum_{f \in \mathcal{F}_p^-} a_{pf}
+	\geq
+	\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	\geq
+	\phi_{p,vnbd}^{max} \sum_{f \in \mathcal{F}_p^-} a_{pf}.
+\]
+\begin{equation*}
+	\phi_{p, vnbd}^{min}
+	\leq
+	\phi_p^{n-1}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{f}^{} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+	\leq
+	\phi_{p, vnbd}^{max}
+\end{equation*}
+\begin{equation*}
+	\phi_{p, vnbd}^{min}
+	\leq
+	\phi_p^{n-1}
+	- \lambda_p \phi_{p, vnbd}^{min} \sum_{f \in \mathcal{F}_p^-} a_{pf}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{f}^{} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+\end{equation*}
+\begin{equation*}
+	\phi_{p, vnbd}^{min}
+	\left( 1 + \lambda_p \sum_{f \in \mathcal{F}_p^-} a_{pf} \right)
+	\leq
+	\phi_p^{n-1}
+	- \lambda_p\sum_{f \in \mathcal{F}_p^+}
+	\left( \phi_p^{n,k-1} + \Psi_{f}^{k} \mathcal{D}^{+,k-1}_{pf}\phi \right) a_{pf}
+\end{equation*}
+\begin{equation*}
+	\phi_{p, vnbd}^{min}
+	\left( 1 + \lambda_p \sum_{f \in \mathcal{F}_p^-} a_{pf} \right)
+	\leq
+	\phi_{p, vnbd}^{max}
+	\left( 1 + \lambda_p \sum_{f \in \mathcal{F}_p^-} a_{pf} \right)
+\end{equation*}
+Only holds if \[ 1 + \lambda_p \sum_{f \in \mathcal{F}_p^-} a_{pf} > 0. \]
+\end{document}

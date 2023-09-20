@@ -1,0 +1,27 @@
+\babel@toc {english}{}\relax 
+\babel@toc {slovak}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {slovak}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Viscous Burgers' equation}{10}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Cole-Hopf transformation}{11}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Examples}{12}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Traffic flow}{14}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Inflow-implicit/outflow-explicit method}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Advection with variable velocity}{20}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Nonlinear advection with diffusion}{21}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Numerical experiments - viscous Burgers' equation}{22}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Numerical experiments - traffic flow}{27}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Scalar conservation laws}{31}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Formal second order consistency}{33}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Numerical experiments}{37}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Flux Limited IIOE method}{40}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Advection with constant speed}{41}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Inviscid Burgers' equation}{42}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Numerical experiments - Advection with constant speed}{44}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}Numerical experiments - Inviscid Burgers' equation}{47}{subsection.2.5.4}%
+\contentsline {chapter}{\numberline {3}Conclusions}{55}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Thesis objectives and prospective contribution}{56}{chapter.4}%
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }References}{57}{chapter*.38}%

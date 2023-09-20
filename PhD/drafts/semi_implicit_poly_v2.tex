@@ -1,0 +1,327 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.75cm, right=2.75cm]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage[slovak,english]{babel}
+\usepackage{comment}
+\usepackage[dvips]{graphicx}
+\usepackage{wrapfig}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{epstopdf}
+\usepackage[font=small,margin=0.5cm]{caption}
+\usepackage{float}
+
+\begin{document}
+Let us consider the conservation law
+\begin{equation}
+	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t) + \nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] = 0.
+	\label{conservation law}
+\end{equation}
+We integrate in space and time
+\[ \int_{t^{n-1}}^{t^n} \int_{\Omega_p} \frac{\partial}{\partial t} \phi(\boldsymbol{x},t) +
+\int_{t^{n-1}}^{t^n} \int_{\Omega_p} \nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] = 0. \]
+In the first term we change the order of integration and apply the Newton-Leibniz theorem for the time integration
+\[ \int_{t^{n-1}}^{t^n} \int_{\Omega_p} \frac{\partial}{\partial t} \phi(\boldsymbol{x},t) = 
+\int_{\Omega_p} \int_{t^{n-1}}^{t^n} \frac{\partial}{\partial t} \phi(\boldsymbol{x},t) = 
+\int_{\Omega_p} \left(\phi(\boldsymbol{x},t^n) - \phi(\boldsymbol{x},t^{n-1})\right) \approx |\Omega_p|(\phi_p^{n} - \phi_p^{n-1}), \]
+where we approximate the cell average at time $ t^n $ by the cell center values $ \int_{\Omega_p} \phi(\boldsymbol{x},t^{n}) \approx |\Omega_p|\phi^{n}_p. $ \\
+In the second term of \eqref{conservation law} we apply the divergence theorem for the volume integral and discretize in space
+\[ \int_{\Omega_p} \nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] =
+\int_{\partial\Omega_p} \phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}(\boldsymbol{x}) =
+\sum_{f \in \mathcal{F}_p} \int_{e_f} \phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}
+\approx
+\sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t) \int_{e_f} \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}\]
+where $ \boldsymbol{n}_{pf} $ is an outward facing normal vector, $ \boldsymbol{x}_{pf} $ is the center of the face and we denote 
+\[ a_{pf} \equiv \boldsymbol{u}(\boldsymbol{x}_{pf}) \cdot \boldsymbol{n}_{pf} \approx \int_{e_f} \boldsymbol{u} \cdot \boldsymbol{n}_{pf} .\]
+Next we integrate this term in time
+\[ \int_{t^{n-1}}^{t^n} \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t) a_{pf} =
+\sum_{f \in \mathcal{F}_p} \int_{t^{n-1}}^{t^n} \phi(\boldsymbol{x}_{pf},t) a_{pf}
+\approx 
+\Delta t \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf}, \]
+where we approximate the time integral of $ \phi $ using the midpoint rule. \\
+The discretization of \eqref{conservation law} thus reads as
+\begin{equation}
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^n - \phi_p^{n-1}) + \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf} = 0.
+\end{equation}
+Next we approximate the value at the face center at half time step \[ \phi(\boldsymbol{x}_{pf},t^{n-1/2})
+\approx
+\frac{1}{2}(\phi(\boldsymbol{x}_{pf},t^n) + \phi(\boldsymbol{x}_{pf},t^{n-1}))
+\equiv
+\phi_{f}^{n-1/2}. \]
+For the outflow case $ a_{pf} \geq 0 $
+\[ \phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^n + \phi_{qf}^{n-1}), \]
+where 
+\[ \phi_{pf}^{n} = \phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf},
+\quad \text{and} \quad
+\phi_{qf}^{n-1} = \phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}. \]
+We take the average of reconstructed face values from neighboring cells,  the upwind value is treated implicitly, and the downwind explicitly. This mimics the approximation of the face value of the IIOE method in 1D:
+\[ \phi_{i+1/2}^{n-1/2} = \frac{1}{2}(\phi_i^{n} + \phi_{i+1}^{n-1}). \]
+For the outflow case $ a_{pf} < 0 $
+\[ \phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^{n-1} + \phi_{qf}^{n}), \]
+where 
+\[ \phi_{pf}^{n-1} = \phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf},
+\quad \text{and} \quad
+\phi_{qf}^{n} = \phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}. \]
+We divide the set of faces to inflow and outflow parts
+\begin{align*}
+	\mathcal{B}_p^- = \left\{b \in \mathcal{B}_p\, |\, a_{pb} < 0\right\}\ \quad &\text{and} \quad
+	\mathcal{B}_p^+ = \mathcal{B}_p \setminus \mathcal{B}_p^- \\
+	\mathcal{F}_p^- = \left\{f \in (\mathcal{F}_p \setminus \mathcal{B}_p) \, |\, a_{pf} < 0\right\} \quad &\text{and} \quad 
+	\mathcal{F}_p^+ = (\mathcal{F}_p \setminus \mathcal{B}_p) \setminus \mathcal{F}_p^- 
+\end{align*}
+The discretization of \eqref{conservation law} takes the form
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1}) &+ \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf} + \sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} \phi_{pb}^{n-1/2} a_{pb} + \sum_{f \in \mathcal{B}_p^+} \phi_{pb}^{n-1/2} a_{pb} = 0,
+\end{align}
+and the face values depend on the sign of flux $ a_{pf} $
+\[ \phi_{pf}^{n-1/2} =
+\begin{cases}
+	\frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}), \quad &\text{ if } a_{pf} \geq 0 \\
+	\frac{1}{2}(\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf} + 
+	\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\[ \phi_{pb}^{n-1/2} =
+\begin{cases}
+	\frac{1}{2}\left(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + 
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1})\right), \quad &\text{ if } a_{pf} \geq 0 \\
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}),\quad &\text{ if } a_{pf} < 0.
+\end{cases} \]
+Next we describe a strategy to prevent oscillations.\\
+\section{Limiter}
+For the outflow case $ a_{pf} \geq 0 $ we compute the face value
+\[ \phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^n + \phi_{qf}^{n-1}), \]
+where 
+\[ \phi_{pf}^{n} = \phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf},
+\quad \text{and} \quad
+\phi_{qf}^{n-1} = \phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}. \]
+To prevent oscillations, we limit the gradients in both time steps
+\[ \phi_{pf}^{n} = \phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf},
+\quad \text{and} \quad
+\phi_{qf}^{n-1} = \phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}. \]
+The idea is to choose the limiters in a way that the reconstructed cell values satisfy the maximum principle at any given time step. For this purpose, we compare the reconstructed vertex values to cell center values in neighboring cells sharing the vertex.\\
+We employ the ideas of the multi-dimensional limiting process(MLP):
+\begin{itemize}
+	\item The reconstructed solution should not create new local extrema
+	\item For a second order scheme, the solution is linearly reconstructed in cells using gradients - the local extrema could occur at vertices
+	\item The limiter $ \Psi_p^n $ must ensure that no new local extrema occur at vertices
+\end{itemize}
+Analogously to face values, we can compute the reconstructed vertex values by
+\begin{equation} \label{face_vals}
+	%\phi(\boldsymbol{x}_v, t^{n+1}) 
+	%\approx
+	\phi_{pv}^{n} = \phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv},
+	\quad \text{and} \quad
+	\phi_{qv}^{n-1} = \phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qv}
+\end{equation}
+where $ \boldsymbol{x}_v $ is the vertex coordinate, $ \boldsymbol{d}_{pv} = \boldsymbol{x}_v - \boldsymbol{x}_p $ and $ \boldsymbol{d}_{qv} = \boldsymbol{x}_v - \boldsymbol{x}_q $ are the distances of vertices from cell centers.\\
+The reconstructed vertex values should satisfy the maximum principle at any given time step
+\[ \phi_{v, neighbor}^{min,\,n} \leq \phi_{pv}^{n} \leq \phi_{v, neighbor}^{max,\,n},\]
+\[ \phi_{v, neighbor}^{min,\,n} \leq \phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv} \leq \phi_{v, neighbor}^{max,\,n}, \]
+\[ \phi_{v, neighbor}^{min,\,n} - \phi_p^{n} \leq  \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv} \leq \phi_{v, neighbor}^{max,\,n} - \phi_p^{n}, \]
+so, if $ \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv} > 0 $ is positive
+\[ \frac{\phi_{v, neighbor}^{min,\,n} - \phi_p^{n}}{\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}} \leq  \Psi_p^{n} \leq \frac{\phi_{v, neighbor}^{max,\,n} - \phi_p^{n}}{\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}}, \]
+if $ \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv} < 0 $ is negative
+\[ \frac{\phi_{v, neighbor}^{max,\,n} - \phi_p^{n}}{\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}} \leq  \Psi_p^{n} \leq \frac{\phi_{v, neighbor}^{min,\,n} - \phi_p^{n}}{\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}}. \]
+Thus, the upper bound for the limiter should be
+\[ \Psi_p^{n} \leq \max \left(\frac{\phi_{v, neighbor}^{min,\,n} -\phi_p^{n}}{\nabla\phi_p^n \cdot \boldsymbol{d}_{pv}}, \frac{\phi_{v, neighbor}^{max,\,n} -\phi_p^{n}}{\nabla\phi_p^n \cdot \boldsymbol{d}_{pv}}\right). \]
+We bound the limiter $ \Psi $ from above by 1, which is the unlimited second order scheme. From below, we bound the limiter by 0.\\
+We repeat the procedure at each vertex $ v\in\mathcal{V} $ and choose the smallest limiter:
+\begin{equation}
+	\Psi_p^n = \min_{v \in \mathcal{V}_p}
+	\begin{cases}
+		\Phi(r_{pv}^n) \quad &\text{if} \ \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv} \neq 0\\
+		1 \quad &\text{otherwise},
+	\end{cases}
+\end{equation}
+where
+\[ r_{pv}^n = \max \left(\frac{\phi_{v, neighbor}^{min,\,n} -\phi_p^{n}}{\nabla\phi_p^n \cdot \boldsymbol{d}_{pv}}, \frac{\phi_{v, neighbor}^{max,\,n} -\phi_p^{n}}{\nabla\phi_p^n \cdot \boldsymbol{d}_{pv}}\right) \quad\text{and}\quad
+0 \leq \Phi(r_{pv}) \leq \min(1, r_{pv}^n). \]
+\newpage
+\begin{comment}
+\[ \phi_p^{n+1} + \frac{\Psi_p}{2}(-\phi_p^{n+1} + \nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf} + 
+\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) = 
+\frac{1}{2}(\phi_p^{n+1} + \Psi_p^{n+1}\nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pv}
++
+\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv}) \]
+\[ \frac{1}{2}\phi_p^{n+1} + \frac{\Psi_p}{2}(-\phi_p^{n+1} + \nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf} + 
+\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) = 
+\frac{1}{2}(\Psi_p^{n+1}\nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pv}
++
+\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv}) \]
+\[ \phi_p^{n+1} + \Psi_p(-\phi_p^{n+1} + \nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf} + 
+\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) = 
+\Psi_p^{n+1}\nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pv}
++
+\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv} \]
+\[ \Psi_p(-\phi_p^{n+1} + \nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf} + 
+\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) = -\phi_p^{n+1} + 
+\Psi_p^{n+1}\nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pv}
++
+\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv} \]
+\[ \Psi_p = \frac{-\phi_p^{n+1} + 
+\Psi_p^{n+1}\nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf}
++
+\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}}{-\phi_p^{n+1} + \nabla\phi_p^{n+1}\cdot\boldsymbol{d}_{pf} + 
+\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}} \]
+\end{comment}
+
+\subsection{system}
+The discretization of \eqref{conservation law} leads to the system
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1}) &+ \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf} + \sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} \phi_{pb}^{n-1/2} a_{pb} + \sum_{f \in \mathcal{B}_p^+} \phi_{pb}^{n-1/2} a_{pb} = 0,
+\end{align}
+where the face values depend on the sign of $ a_{pf} $
+\[ \phi_{pf}^{n-1/2} =
+\begin{cases}
+	\frac{1}{2}(\phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qv}), \quad &\text{ if } a_{pf} \geq 0 \\
+	\frac{1}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv}) \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\[ \phi_{pb}^{n-1/2} =
+\begin{cases}
+	\frac{1}{2}(\phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1})), \quad &\text{ if } a_{pf} \geq 0 \\
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}),\quad &\text{ if } a_{pf} < 0.
+\end{cases} \]
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n,k} - \phi_p^{n-1}) 
+	&+ \sum_{f \in \mathcal{F}_p^-}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n,k} + \Psi_q^{n,k-1}\nabla\phi_q^{n,k-1}\cdot\boldsymbol{d}_{qv}) \frac{a_{pf}}{2} \nonumber\\ 
+	&+ \sum_{f \in \mathcal{F}_p^+} (\phi_p^{n,k} + \Psi_p^{n,k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qv})\frac{a_{pf}}{2}\nonumber\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} \phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) a_{pb}\nonumber \\
+	&+ \sum_{f \in \mathcal{B}_p^+} (\phi_p^{n,k} + \Psi_p^{n,k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1})) \frac{a_{pb}}{2} = 0,
+\end{align}
+where $ k = 1,\dots, K $, $ \phi_p^{n, 0} = \phi_p^{n-1}. $
+
+\section{iter0 = impl upwind}
+\[ \phi_{pf}^{n-1/2, k} =
+\begin{cases}
+	\frac{1}{2}(\phi_p^{n, k} + \Psi_p^{n, k-1}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qv}), \quad &\text{ if } a_{pf} \geq 0 \\
+	\frac{1}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qv}) \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n,k} - \phi_p^{n-1}) 
+	&+ \sum_{f \in \mathcal{F}_p^-}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n,k} + \Psi_q^{n,k-1}\nabla\phi_q^{n,k-1}\cdot\boldsymbol{d}_{qv}) \frac{a_{pf}}{2} \nonumber\\ 
+	&+ \sum_{f \in \mathcal{F}_p^+} (\phi_p^{n,k} + \Psi_p^{n,k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qv})\frac{a_{pf}}{2}\nonumber\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} \phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) a_{pb}\nonumber \\
+	&+ \sum_{f \in \mathcal{B}_p^+} (\phi_p^{n,k} + \Psi_p^{n,k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pv}
+	+
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1})) \frac{a_{pb}}{2} = 0,
+\end{align}
+where $ k = 1,\dots, K $, and $ \phi_p^{n, 0} $ is the solution of the system
+\begin{equation}
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n,0} - \phi_p^{n-1}) 
+	+ \sum_{f \in \mathcal{F}_p^-} \phi_q^{n,0} a_{pf}
+	+ \sum_{f \in \mathcal{F}_p^+} \phi_p^{n,0} a_{pf} 
+	+ \sum_{f \in \mathcal{B}_p^-} \phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) a_{pb}
+	+ \sum_{f \in \mathcal{B}_p^+} \phi_p^{n,0}a_{pb} = 0,
+\end{equation}
+and the gradient $ \nabla\phi_q^{n,0} $ is obtained using these values. 
+Then we compute the limiter 
+\begin{equation}
+	\Psi_p^{n,0} = \min_{v \in \mathcal{V}_p}
+	\begin{cases}
+		\Phi(r_{pv}^{n,0}) \quad &\text{if} \ \nabla\phi_p^{n,0}\cdot\boldsymbol{d}_{pv} \neq 0\\
+		1 \quad &\text{otherwise},
+	\end{cases}
+\end{equation}
+where
+\[ r_{pv}^{n, 0} = \max 
+\left(\frac{\phi_{v, neighbor}^{min,\,n, 0}
+-\phi_p^{n, 0}}{\nabla\phi_p^{n, 0} \cdot \boldsymbol{d}_{pv}}, 
+\frac{\phi_{v, neighbor}^{max,\,n, 0} 
+-\phi_p^{n, 0}}{\nabla\phi_p^{n, 0} \cdot \boldsymbol{d}_{pv}}\right) 
+\quad\text{and}\quad
+0 \leq \Phi(r_{pv}^{n, 0}) \leq \min(1, r_{pv}^{n,0}). \]
+\section{Deferred correction(2)}
+\[ \phi_{pf}^{n-1/2} =
+\begin{cases}
+	\frac{1}{2}(\phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}), \quad &\text{ if } a_{pf} \geq 0 \\
+	\frac{1}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\[ \phi_{pf}^{n-1/2} =
+\begin{cases}
+	\phi_p^{n} + 
+	[\frac{1}{2}(\phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}) - \phi_p^{n}], \quad &\text{ if } a_{pf} \geq 0 \\
+	\phi_q^{n} + 
+	[\frac{1}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+	+ \phi_q^{n} + \Psi_q^{n}\nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}) - \phi_q^{n}] \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\[ \phi_{pf}^{n-1/2, k} =
+\begin{cases}
+	\phi_p^{n, k} + 
+	\frac{\theta_{pf}^{n,k}}{2}(-\phi_p^{n, k-1} + \Psi_p^{n, k-1}\nabla\phi_p^{n, k-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}), \quad &\text{ if } a_{pf} \geq 0 \\
+	\phi_q^{n, k} + 
+	\frac{\theta_{pf}^{n,k}}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+	- \phi_q^{n, k-1} + \Psi_q^{n, k-1}\nabla\phi_q^{n, k-1}\cdot\boldsymbol{d}_{qf}) \quad &\text{ if } a_{pf} < 0
+\end{cases} \]
+\[ \phi_{pb}^{n-1/2} =
+\begin{cases}
+	\phi_p^{n,k} + \frac{\theta_{pb}^{n,k-1}}{2}(-\phi_p^{n} + \Psi_p^{n}\nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_e(\boldsymbol{x}_{pb}, t^{n-1})), \quad &\text{ if } a_{pf} \geq 0 \\
+	\phi_e(\boldsymbol{x}_{pb}, t^{n}) + \theta_{pb}^{n,k-1}(\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) - \phi_e(\boldsymbol{x}_{pb}, t^{n})),\quad &\text{ if } a_{pf} < 0.
+\end{cases} \]
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n,k} - \phi_p^{n-1}) 
+	&+ \sum_{f \in \mathcal{F}_p^-}(\phi_q^{n, k} + 
+	\frac{\theta_{pf}^{n,k-1}}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+	- \phi_q^{n, k-1} + \Psi_q^{n, k-1}\nabla\phi_q^{n, k-1}\cdot\boldsymbol{d}_{qf})) a_{pf} \nonumber\\ 
+	&+ \sum_{f \in \mathcal{F}_p^+} (\phi_p^{n, k} + 
+	\frac{\theta_{pf}^{n,k-1}}{2}(-\phi_p^{n, k-1} + \Psi_p^{n, k-1}\nabla\phi_p^{n, k-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}))a_{pf}\nonumber\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} (\phi_e(\boldsymbol{x}_{pb}, t^{n}) + \theta_{pb}^{n,k-1}(\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) - \phi_e[\boldsymbol{x}_{pb}, t^{n}])) a_{pb}\nonumber \\
+	&+ \sum_{f \in \mathcal{B}_p^+} (\phi_p^{n,k} + \frac{\theta_{pb}^{n,k-1}}{2}(-\phi_p^{n, k-1} + \Psi_p^{n, k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_e[\boldsymbol{x}_{pb}, t^{n-1}])) a_{pb} = 0,
+\end{align}
+\begin{align}
+	\nonumber
+	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n,k} - \phi_p^{n-1}) 
+	&+ \sum_{f \in \mathcal{F}_p^-}(\phi_q^{n, k} + 
+	\frac{1}{2}(\phi_p^{n-1} + \Psi_p^{n-1}\nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+	- \phi_q^{n, k-1} + \Psi_q^{n, k-1}\nabla\phi_q^{n, k-1}\cdot\boldsymbol{d}_{qf})) a_{pf} \nonumber\\ 
+	&+ \sum_{f \in \mathcal{F}_p^+} (\phi_p^{n, k} + 
+	\frac{1}{2}(-\phi_p^{n, k-1} + \Psi_p^{n, k-1}\nabla\phi_p^{n, k-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_q^{n-1} + \Psi_q^{n-1}\nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}))a_{pf}\nonumber\\ 
+	&+ \sum_{f \in \mathcal{B}_p^-} (\phi_e(\boldsymbol{x}_{pb}, t^{n}) + (\phi_e(\boldsymbol{x}_{pb}, t^{n-1/2}) - \phi_e[\boldsymbol{x}_{pb}, t^{n}])) a_{pb}\nonumber \\
+	&+ \sum_{f \in \mathcal{B}_p^+} (\phi_p^{n,k} + \frac{1}{2}(-\phi_p^{n, k-1} + \Psi_p^{n, k-1}\nabla\phi_p^{n,k-1}\cdot\boldsymbol{d}_{pf}
+	+
+	\phi_e[\boldsymbol{x}_{pb}, t^{n-1}])) a_{pb} = 0,
+\end{align}
+\end{document}

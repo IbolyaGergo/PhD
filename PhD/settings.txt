@@ -1,0 +1,68 @@
+{
+    "fortran-ls.executablePath": "/usr/local/bin/fortls",
+    "fortran.fortls.path": "/usr/local/bin/fortls",
+    "window.zoomLevel": 2,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex -> biber -> xelatex*2",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex"
+            ]
+        }
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.minimap.showSlider": "always",
+    "workbench.editor.enablePreview": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/*.aux": true,
+        "**/*.bbl": true,
+        "**/*.bcf": true,
+        "**/*.blg": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.glg": true,
+        "**/*.glo": true,
+        "**/*.gls": true,
+        "**/*.glsdefs": true,
+        "**/*.idx": true,
+        "**/*.ilg": true,
+        "**/*.ind": true,
+        "**/*.lof": true,
+        "**/*.log": true,
+        "**/*.lot": true,
+        "**/*.mw": true,
+        "**/*.nlo": true,
+        "**/*.nls": true,
+        "**/*.out": true,
+        "**/*.run.xml": true,
+        "**/*.synctex.gz": true,
+        "**/*.thm": true,
+        "**/*.toc": true,
+        "**/*.xdy": true
+    },
+    "latex-workshop.chktex.enabled": true,
+    "workbench.colorTheme": "Quiet Light",
+}

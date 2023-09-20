@@ -1,0 +1,89 @@
+@Book{2016_Moukalled_BOOK,
+  author    = {Moukalled, Fadl and Mangani, Luca and Darwish, Marwan and Moukalled, F and Mangani, L and Darwish, M},
+  title     = {The finite volume method},
+  publisher = {Springer},
+  year      = {2016},
+}
+
+@Article{2019_Hahn,
+  author    = {Hahn, Jooyoung and Mikula, Karol and Frolkovi{\v{c}}, Peter and Medl’a, Matej and Basara, Branislav},
+  title     = {Iterative inflow-implicit outflow-explicit finite volume scheme for level-set equations on polyhedron meshes},
+  number    = {6},
+  pages     = {1639--1654},
+  volume    = {77},
+  file      = {:/home/gibolya/Downloads/iterative_iioe.pdf:PDF},
+  journal   = {Computers \& Mathematics with Applications},
+  publisher = {Elsevier},
+  year      = {2019},
+}
+
+@Book{2007_Hirsch_BOOK,
+  author    = {Hirsch, Charles},
+  date      = {2007},
+  title     = {Numerical computation of internal and external flows: The fundamentals of computational fluid dynamics},
+  publisher = {Elsevier},
+}
+
+@Book{1990_Hirsch_BOOK,
+  author    = {Hirsch, Charles},
+  date      = {1990},
+  title     = {Numerical computation of internal and external flows, vol. 2: Computational methods for inviscid and viscous flows},
+  publisher = {J. Wiley \& sons},
+}
+
+@InProceedings{2020_Ibolya_CONF,
+  author    = {Ibolya, Gergo and Mikula, Karol},
+  booktitle = {Proceedings of ALGORITMY},
+  date      = {2020},
+  title     = {Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method},
+  pages     = {191--200},
+}
+
+@Article{2014_Mikula,
+  author       = {Mikula, Karol and Ohlberger, Mario and Urb{\'a}n, Jozef},
+  date         = {2014},
+  journaltitle = {Applied Numerical Mathematics},
+  title        = {Inflow-implicit/outflow-explicit finite volume methods for solving advection equations},
+  doi          = {10.1016/j.apnum.2014.06.002},
+  issn         = {0168-9274},
+  language     = {English},
+  pages        = {16--37},
+  volume       = {85},
+  keywords     = {65M08},
+  zbl          = {1310.65103},
+  zbmath       = {6323318},
+}
+
+@Article{1985_Yee,
+  author       = {Yee, HC and Warming, RF and Harten, A},
+  date         = {1985},
+  journaltitle = {Journal of Computational Physics},
+  title        = {Implicit total variation diminishing (TVD) schemes for steady-state calculations},
+  number       = {3},
+  pages        = {327--360},
+  volume       = {57},
+  publisher    = {Elsevier},
+}
+
+@Book{toro2009riemann,
+  author    = {Toro, Eleuterio F},
+  title     = {Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction},
+  publisher = {Springer Science \& Business Media},
+  year      = {2009},
+}
+
+@Article{2000_Hoffmann,
+  author  = {Hoffmann, Klaus A and Chiang, Steve T},
+  title   = {Computational fluid dynamics Volume I},
+  journal = {Engineering education system},
+  year    = {2000},
+}
+
+@Book{laney1998computational,
+  author    = {Laney, Culbert B},
+  title     = {Computational gasdynamics},
+  publisher = {Cambridge university press},
+  year      = {1998},
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}
