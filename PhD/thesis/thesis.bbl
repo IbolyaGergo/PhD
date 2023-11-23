@@ -70,6 +70,122 @@
       \verb{file}
       \verb :/home/gibolya/Downloads/iterative_iioe.pdf:PDF
       \endverb
+      \verb{urlraw}
+      \verb https://www.math.sk/mikula/hmfmb_cma_2018.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.math.sk/mikula/hmfmb_cma_2018.pdf
+      \endverb
+    \endentry
+    \entry{2020_Ibolya_CONF}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=e499920d5f7824029c52330e6eb18169}{%
+           family={Ibolya},
+           familyi={I\bibinitperiod},
+           given={Gergő},
+           giveni={G\bibinitperiod}}}%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \strng{fullhash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \strng{bibnamehash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \strng{authorbibnamehash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \strng{authornamehash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \strng{authorfullhash}{52ff2d927190ee24d7be763f1ec2a09b}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of ALGORITMY}
+      \field{title}{Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{pages}{191\bibrangedash 200}
+      \range{pages}{10}
+      \verb{urlraw}
+      \verb https://www.math.sk/mikula/ibolya_alg2020.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.math.sk/mikula/ibolya_alg2020.pdf
+      \endverb
+    \endentry
+    \entry{1996_Jasak}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d62bc09e89bff10783d2d7091a4a6aa6}{%
+           family={Jasak},
+           familyi={J\bibinitperiod},
+           given={Hrvoje},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Imperial College London (University of London)}%
+      }
+      \strng{namehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{fullhash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{bibnamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authorbibnamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authornamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authorfullhash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Error analysis and estimation for the finite volume method with applications to fluid flows.}
+      \field{year}{1996}
+      \verb{file}
+      \verb :/home/gibolya/Downloads/Jasak-thesis.pdf:PDF
+      \endverb
+    \endentry
+    \entry{2014_Mikula}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
+           family={Mikula},
+           familyi={M\bibinitperiod},
+           given={Karol},
+           giveni={K\bibinitperiod}}}%
+        {{hash=2cf3b1566035f04edb90a7c0e5db7caf}{%
+           family={Ohlberger},
+           familyi={O\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod}}}%
+        {{hash=52996f75a95f7f7d461b075234781515}{%
+           family={Urbán},
+           familyi={U\bibinitperiod},
+           given={Jozef},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \strng{namehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{fullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{bibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authorbibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authornamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \strng{authorfullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0168-9274}
+      \field{journaltitle}{Applied Numerical Mathematics}
+      \field{title}{Inflow-implicit/outflow-explicit finite volume methods for solving advection equations}
+      \field{volume}{85}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{pages}{16\bibrangedash 37}
+      \range{pages}{22}
+      \verb{urlraw}
+      \verb https://www.math.sk/mikula/mou_apnum.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.math.sk/mikula/mou_apnum.pdf
+      \endverb
+      \keyw{65M08}
     \endentry
     \entry{2016_Moukalled_BOOK}{book}{}
       \name{author}{6}{}{%
@@ -119,6 +235,12 @@
       \field{labeltitlesource}{title}
       \field{title}{The finite volume method}
       \field{year}{2016}
+      \verb{urlraw}
+      \verb http://www.gidropraktikum.narod.ru/Moukalled-et-al-FVM-OpenFOAM-Matlab.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.gidropraktikum.narod.ru/Moukalled-et-al-FVM-OpenFOAM-Matlab.pdf
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

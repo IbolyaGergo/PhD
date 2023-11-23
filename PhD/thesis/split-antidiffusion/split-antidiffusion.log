@@ -1,12 +1,17 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  23 NOV 2023 11:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  11 OCT 2023 13:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/gibolya/IGergo/school/PhD/thesis/thesis.tex
-(/home/gibolya/IGergo/school/PhD/thesis/thesis.tex
+**/home/gibolya/IGergo/school/PhD/thesis/split-antidiffusion/split-antidiffusion.tex
+(/home/gibolya/IGergo/school/PhD/thesis/split-antidiffusion/split-antidiffusion.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-02-07> (/usr/local/texlive/2022/texmf-dist/tex/latex/base/report.cls
+L3 programming layer <2023-02-07> (/usr/local/texlive/2022/texmf-dist/tex/latex/subfiles/subfiles.cls
+Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
+Preamble taken from file `../thesis.tex'
+(/usr/local/texlive/2022/texmf-dist/tex/latex/import/import.sty
+Package: import 2020/04/01  v 6.2
+) (split-antidiffusion/../thesis.tex (/usr/local/texlive/2022/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
 (/usr/local/texlive/2022/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
@@ -597,34 +602,32 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip83
 )) (/usr/local/texlive/2022/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
- (/usr/local/texlive/2022/texmf-dist/tex/latex/import/import.sty
-Package: import 2020/04/01  v 6.2
-))
+)))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (./thesis.aux)
-\openout1 = `thesis.aux'.
+ (split-antidiffusion/split-antidiffusion.aux)
+\openout1 = `split-antidiffusion.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -693,19 +696,18 @@ File: slovak.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `thesis.bcf'.
+\openout3 = `split-antidiffusion.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' found.
- (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 3.
-Package biblatex Info: Reference segment=0 on input line 3.
-Package hyperref Info: Link coloring OFF on input line 3.
- (./thesis.out) (./thesis.out)
+Package biblatex Info: ... file 'split-antidiffusion.bbl' found.
+ (split-antidiffusion/split-antidiffusion.bbl)
+Package biblatex Info: Reference section=0 on input line 2.
+Package biblatex Info: Reference segment=0 on input line 2.
+Package hyperref Info: Link coloring OFF on input line 2.
+ (split-antidiffusion/split-antidiffusion.out) (split-antidiffusion/split-antidiffusion.out)
 \@outlinefile=\write4
-\openout4 = `thesis.out'.
+\openout4 = `split-antidiffusion.out'.
 
- (./unstructured/unstructured.tex
 LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -718,73 +720,31 @@ Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5] [6] [7]) (./unstructured-m5/unstructured-m5.tex [8] [9]
-Overfull \hbox (62.66652pt too wide) detected at line 170
-[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^^[] [] a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^^[] [] a[] \OMS/cmsy/m/n/12 ^^U [] ^^@ \OML/cmm/m/it/12 ^^^[] [] a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^^[] [] a[]
- []
-
-[10]
-Overfull \hbox (72.43942pt too wide) detected at line 284
-[] [] \OML/cmm/m/it/12 a[] \OT1/cmr/m/n/12 = [] [] \OML/cmm/m/it/12 a[] \OMS/cmsy/m/n/12 ^^@ [] \OML/cmm/m/it/12 a[]:
- []
-
-
-Overfull \hbox (2.9893pt too wide) detected at line 332
-\OML/cmm/m/it/12 ^^^[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 ^^^[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] [] a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] [] a[]
- []
-
-[11]
-Overfull \hbox (10.70697pt too wide) detected at line 344
-[][][]\OML/cmm/m/it/12 ^^^[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 ^^^[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] [] a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] [] a[]
- []
-
-[12] [13]) (./Chapter2_Numerical/numerical.tex
-<Chapter2_Numerical/./figures//travel100.pdf, id=162, 602.25pt x 194.7275pt>
-File: Chapter2_Numerical/./figures//travel100.pdf Graphic file (type pdf)
-<use Chapter2_Numerical/./figures//travel100.pdf>
-Package pdftex.def Info: Chapter2_Numerical/./figures//travel100.pdf  used on input line 6.
-(pdftex.def)             Requested size: 441.01773pt x 142.60152pt.
- [14]
-<Chapter2_Numerical/./figures//traveliter.pdf, id=170, 602.25pt x 194.7275pt>
-File: Chapter2_Numerical/./figures//traveliter.pdf Graphic file (type pdf)
-<use Chapter2_Numerical/./figures//traveliter.pdf>
-Package pdftex.def Info: Chapter2_Numerical/./figures//traveliter.pdf  used on input line 13.
-(pdftex.def)             Requested size: 441.01773pt x 142.60152pt.
-) (./split-antidiffusion/split-antidiffusion.tex [15 <./Chapter2_Numerical/./figures//travel100.pdf> <./Chapter2_Numerical/./figures//traveliter.pdf
-
-pdfTeX warning: pdflatex (file ./Chapter2_Numerical/./figures//traveliter.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [16]
+]
 Overfull \hbox (28.90831pt too wide) detected at line 181
 \OML/cmm/m/it/12 ^^^[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] ^^^[]a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] ^^^[]a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[]N[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 max \OMS/cmsy/m/n/12 ^^T \OML/cmm/m/it/12 ^^^[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] ^^^[]a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^U[] [] ^^^[]a[] \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 min
  []
 
-[17]) [18]
-Overfull \hbox (29.65387pt too wide) in paragraph at lines 8--8
-\OT1/cmr/m/n/12 Dar-wish. \OT1/cmr/m/it/12 The fi-nite vol-ume method\OT1/cmr/m/n/12 . Springer, 2016. \OT1/cmr/m/sc/12 url\OT1/cmr/m/n/12 : []$\OT1/cmtt/m/n/12 http : / / www . gidropraktikum .
- []
-
-[19
-
-] (./thesis.aux)
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 48900F602E3CEB99BF23BAF706BE4583;797.
-Package logreq Info: Writing requests to 'thesis.run.xml'.
-\openout1 = `thesis.run.xml'.
+[2] [3] (split-antidiffusion/split-antidiffusion.aux)
+Package rerunfilecheck Info: File `split-antidiffusion.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+Package logreq Info: Writing requests to 'split-antidiffusion.run.xml'.
+\openout1 = `split-antidiffusion.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21443 strings out of 476029
- 378736 string characters out of 5790172
- 1872346 words of memory out of 5000000
- 41506 multiletter control sequences out of 15000+600000
- 522987 words of font info for 70 fonts, out of 8000000 for 9000
+ 21069 strings out of 476029
+ 371504 string characters out of 5790172
+ 1880346 words of memory out of 5000000
+ 41221 multiletter control sequences out of 15000+600000
+ 520053 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,21n,70p,718b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (19 pages, 362086 bytes).
+ 88i,20n,95p,751b,1759s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on split-antidiffusion/split-antidiffusion.pdf (3 pages, 112207 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
- 267 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
- 67 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 PDF objects out of 1000 (max. 8388607)
+ 58 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

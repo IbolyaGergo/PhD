@@ -1,95 +1,265 @@
 \documentclass[../thesis.tex]{subfiles}
 \begin{document}
-Let us consider the conservation law
+Let \(\Omega \subset \mathbb{R}^3 \) be a bounded Lipschitz
+domain of our interest, and \(\partial \Omega\) its boundary. In this work,
+our aim is to describe a numerical approximation of the scalar conservation
+law, also known as the continuity equation
 \begin{equation}\label{eqn:scalar-conservation-law-3d}
-	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t)
-	+ \nabla \cdot \left( \phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \right) = 0.
+	\phi_t
+	+ \nabla \cdot \left( \phi \mathbf{u} \right) = 0,
 \end{equation}
-We integrate in space and time
+where \(\phi = \phi(\mathbf{x},t)\) is the conserved scalar quantity,
+\(\left( \mathbf{x}, t \right) \in \Omega \times \left[ 0,T \right]\).
+For simplicity, we consider velocity fields
+\(\mathbf{u} = \mathbf{u}(\mathbf{x})\) that are functions of~the
+position only.
+Initial and Dirichlet boundary conditions are given
+\begin{align}
+	\phi(\mathbf{x},0) &= \phi^0(\mathbf{x}), \quad \mathbf{x} \in \Omega\\
+	\phi(\mathbf{x}_b,t) &= \phi_b(t), \quad (\mathbf{x}, t) \in \Omega \times
+	\left[ 0,T \right].
+\end{align}
+\subsection{Discretization of the domain}
+In case of a complex computational domain, it is often
+necessary to use unstructured polyhedral mesh.
+The finite volume method (FVM) is well suited for space-discretization of
+arbitrary shape. In FVM, the unknowns are the cell averages.
+A particular finite volume scheme is defined by its approximation of
+the fluxes at cell faces.
+% \subsection{Distorted cell and subface tessellation}
+Let p be a finite volume cell. We discretize the domain \(\Omega\)
+by open non-overlapping polyhedral sets \(\Omega_p \subset \Omega\).
+Let \(\bar{\Omega} =
+\bigcup_{p \in \mathcal{I}} \bar{\Omega}_p \subset \mathbb{R}^3\)
+be a computational domain, where an open set \(\Omega_p\) with the non-zero volume
+\(|\Omega_p|\) is a cell in discretized domain and \(\mathcal{I}\) is the set
+of cell indices, \(p \in \mathcal{I}\).
+
+A distorted cell means that the cell has a nonplanar face,
+which usually exists when there is a complex computation boundary. It is an
+unrealistic assumption that all faces of \(|\Omega_p|\) for all
+\(p \in \mathcal{I}\) are of a planar shape in a case of industrial problems.
+
+Whenever a face is not triangle, the face is tessellated into triangles;
+from a given center of the face, two consecutive vertices of the face
+are selected to construct one triangle. A center \(\mathbf{x}^*\)
+of face whose vertices are \(\mathbf{x}_i, i = 1 , \dots, r\) is
+usually given by the area average. To make it simple, using a cyclic
+notation \(\mathbf{x}_{r + 1} = \mathbf{x}_1 \), the area
+average face center is computed by
+\begin{equation}
+	\mathbf{x}^* =
+	\frac{\sum_{i=1}^r |\Delta_i| \bar{\mathbf{x}}_i}{\sum_{i=1}^{r} |\Delta_i|}
+\end{equation}
+where \(|\Delta_i|\) is the area of \(\Delta_i\), \(\bar{\mathbf{x}}_i\)
+is the center of mass on \(\Delta_i\), and \(\Delta_i\) is a triangle of
+\(\mathbf{x}_i,\, \mathbf{x}_{i+1}\), and
+\(\mathbf{x}_0 = \frac{1}{r}\sum_{j=1}^r \mathbf{x}_j\)
+for \(i = 1,\dots,r\). Then, the \(i\)-th tessellated triangle at
+the face is defined by three points:
+\(\mathbf{x}_i, \mathbf{x}_{i+1},\text{ and } \mathbf{x}^*\).
+The index set \(\mathcal{F}\) denotes all
+triangles \(e_f\), \(f \in \mathcal{F}\) tessellated from a face or a triangle
+face of \(\Omega_p\) for all \(p \in \mathcal{I} \). We denote \(\mathbf{x}_f\)
+as the center of triangle \(e_f\).
+
+To indicate the neighbor cells of \(\Omega_p\) we consider only the cells
+whose face is shared:
 \[
-	\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
-	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t)
-	+\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
-	\nabla \cdot \left( \phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \right) = 0.
+	\mathcal{N}_p = \left\{
+		q \in \mathcal{I}:\text{ there exists a face }
+		e_f \subset \partial\Omega_q \cap \partial\Omega_p, f \in \mathcal{F}
+	\right\}.
 \]
+The faces of \(\Omega_p\) are indicated by two sets:
+\[
+	\mathcal{F}_p = \left\{
+		f \in \mathcal{F}: e_f \subset \partial \Omega_p
+	\right\}\quad
+	\text{and}\quad
+	\mathcal{B}_p = \left\{
+		f \in \mathcal{F}: e_f \subset \partial \Omega_p \cap \partial \Omega
+	\right\}.
+\]
+If \(\Omega_p\) is a cell who's all faces are not overlapped to \(\partial \Omega\),
+then we call the cell as an internal cell and \(\mathcal{B}_p = \emptyset\).
+Otherwise, we call the cell as a boundary cell. Similarly, an internal face \(e_f\),
+\(f \in \mathcal{F}\), means that the face is not overlapped to \(\partial\Omega\)
+and a boundary face \(e_b\), \(b \in \mathcal{F}\), is a part of \(\partial \Omega\).
+Throughout the rest of paper, the subscript \(b\) indicates the face index whose face
+is a boundary face. When a quantity is defined on a face \(e_f\), and it depends on
+a cell sharing the face, the cell index should be explicitly indicated at the first
+subscript and the face index at the second subscript. For instance, for a face \(e_f \)
+\(f \in \mathcal{F}_p\), the outward normal vector to the face is indicated by
+\(\mathbf{n}_{pf}\). Note that we also use the length of the normal vector as the area of
+the face, that is, \(|\mathbf{n}_{pf}| = |e_f|\). If a face \(e_f\) is an internal face
+for \(f \in \mathcal{F}_p\), there exists a cell \(\Omega_p,\, q\in \mathcal{I}\),
+such that \(e_f \subset \partial\Omega_p \cap \Omega_q\).
+Then, clearly, \(\mathbf{n}_{pf} = -\mathbf{n}_{qf}\).
+Whenever a directional vector is denoted, we use a notation \(\mathbf{d}\)
+with relevant indices:
+\[
+	\mathbf{d}_{pq} = \mathbf{x}_q - \mathbf{x}_p,\quad
+	p,q \in \mathcal{I}.
+\]
+\subsection{Numerical scheme}
+We integrate \eqref{eqn:scalar-conservation-law-3d} in space and time
+\begin{equation}\label{eqn:integral-conservation-law-3d}
+	\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
+	\phi_t
+	+\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
+	\nabla \cdot \left( \phi \mathbf{u}\right) = 0.
+\end{equation}
 In the first term we change the order of integration
 and apply the Newton-Leibniz theorem for the time integration
 \[
 	\int_{t^{n-1}}^{t^n} \int_{\Omega_p}
-	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t) =
+	\phi_t =
 	\int_{\Omega_p} \int_{t^{n-1}}^{t^n}
-	\frac{\partial}{\partial t} \phi(\boldsymbol{x},t) =
+	\phi_t =
 	\int_{\Omega_p}
-	\left(\phi(\boldsymbol{x},t^n) - \phi(\boldsymbol{x},t^{n-1})\right)
-	\approx |\Omega_p|(\phi_p^{n} - \phi_p^{n-1}),
+	\left(\phi^n(\mathbf{x}) - \phi^{n-1}(\mathbf{x})\right)
+	= |\Omega_p|(\overline{\phi}^{n}_p - \overline{\phi}_p^{n-1}),
 \]
-where we approximate the cell average at time $ t^n $
-by the cell center values
-\(\int_{\Omega_p} \phi(\boldsymbol{x},t^{n})~\approx~|\Omega_p|\phi^{n}_p.\) \\
-In the second term of \eqref{eqn:scalar-conservation-law-3d} we apply the divergence theorem for the volume integral and discretize in space
-\[
-	\int_{\Omega_p}
-	\nabla \cdot [\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x})] =
-	\int_{\partial\Omega_p}
-	\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}(\boldsymbol{x}) =
-	\sum_{f \in \mathcal{F}_p} \int_{e_f}
-	\phi(\boldsymbol{x},t) \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}
-	\approx
-	\sum_{f \in \mathcal{F}_p}
-	\phi(\boldsymbol{x}_{pf},t) \int_{e_f} \boldsymbol{u}(\boldsymbol{x}) \cdot \boldsymbol{n}_{pf}
-\]
-where $ \boldsymbol{n}_{pf} $ is an outward facing normal vector, $ \boldsymbol{x}_{pf} $ is the center of the face, and we denote
-\[
-	a_{pf} \equiv \boldsymbol{u}(\boldsymbol{x}_{pf}) \cdot \boldsymbol{n}_{pf}
-	\approx
-	\int_{e_f} \boldsymbol{u} \cdot \boldsymbol{n}_{pf}.
-\]
-Next we integrate this term in time
-\[
-	\int_{t^{n-1}}^{t^n} \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t) a_{pf} =
-	\sum_{f \in \mathcal{F}_p} \int_{t^{n-1}}^{t^n} \phi(\boldsymbol{x}_{pf},t) a_{pf}
-	\approx
-	\Delta t \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf},
-\]
-where we approximate the time integral of $ \phi $ using the midpoint rule. \\
-The discretization of \eqref{eqn:scalar-conservation-law-3d} thus reads as
-\begin{equation}
-	\frac{|\Omega_p|}{\Delta t}(\phi_p^n - \phi_p^{n-1})
-	+ \sum_{f \in \mathcal{F}_p} \phi(\boldsymbol{x}_{pf},t^{n-1/2}) a_{pf} = 0.
+where we denote \(\phi(\mathbf{x}, t^n) = \phi^n(\mathbf{x})\),
+and, \(\overline{\phi}_p^{n}\) is the cell average at time \(t^n\) such that
+\begin{equation}\label{eqn:cell-avg-integral}
+	\overline{\phi}^{n}_p
+	= \frac{1}{|\Omega_p|}\int_{\Omega_p} \phi^{n}(\mathbf{x}).
 \end{equation}
-Next we approximate the value at the face center at half-time step
+Next we apply
+the divergence theorem to the volume integral
 \[
-	\phi(\boldsymbol{x}_{pf},t^{n-1/2})
-	\approx
-	\frac{1}{2}(\phi(\boldsymbol{x}_{pf},t^n) + \phi(\boldsymbol{x}_{pf},t^{n-1}))
-	\equiv
-	\phi_{f}^{n-1/2}.
+	\int_{\Omega_p}
+	\nabla \cdot \left(\phi\mathbf{u}\right) =
+	\int_{\partial\Omega_p}
+	\left( \phi\mathbf{u} \right) \cdot
+	\frac{\mathbf{n}_p}{|\mathbf{n}_p|} =
+	\sum_{f \in \mathcal{F}_p} \int_{e_f}
+	\left( \phi\mathbf{u} \right)\cdot
+	\frac{\mathbf{n}_{pf}}{|\mathbf{n}_{pf}|},
 \]
-For the outflow case $ a_{pf} \geq 0 $
+where \(\mathbf{n}_{pf}\) is an outward facing normal vector of
+the face \(e_f\).
+Thus, we can rewrite the integral form of the conservation law
+\eqref{eqn:integral-conservation-law-3d} as
+\begin{equation}\label{eqn:integral-conservation-law-cell-3d}
+	|\Omega_p|(\overline{\phi}_p^{n} - \overline{\phi}_p^{n-1})
+	+ \int_{t^{n-1}}^{t^n} \sum_{f \in \mathcal{F}_p} \int_{e_f}
+	\left( \phi\mathbf{u} \right)\cdot
+	\frac{\mathbf{n}_{pf}}{|\mathbf{n}_{pf}|} = 0,
+\end{equation}
+which is still exact for a finite volume cell \(p\).
+
+Throughout this text, we will approximate the cell average with the cell
+center value
 \[
-	\phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^n + \phi_{qf}^{n-1}),
+	\overline{\phi}_p^{n} \approx \phi_p^{n}.
+\]
+In order to show that this is a second order approximation,
+we describe the spatial variation of \(\phi\) within an element
+via Taylor series expansion around the cell center \(\mathbf{x}_p\) as
+\begin{equation}\label{eqn:taylor-3d}
+	\phi^n(\mathbf{x}) = \phi_p^{n}
+	+ \nabla \phi_p^{n} \cdot \left( \mathbf{x} - \mathbf{x}_p \right)
+	+ \mathcal{O}\left( |\mathbf{x} - \mathbf{x}_p|^2 \right).
+\end{equation}
+We substitute
+\eqref{eqn:taylor-3d} to \eqref{eqn:cell-avg-integral}
+\begin{equation}\label{eqn:cell-avg-proof}
+	\begin{split}
+		\overline{\phi}^{n}_p
+		&= \frac{1}{|\Omega_p|}\int_{\Omega_p} \phi^{n}(\mathbf{x})\\
+		&= \frac{1}{|\Omega_p|}\int_{\Omega_p} \left[ \phi_p^{n}
+		+ \nabla \phi_p^{n} \cdot \left( \mathbf{x} - \mathbf{x}_p \right)
+		+ \mathcal{O}\left( |\mathbf{x} - \mathbf{x}_p|^2 \right) \right]\\
+		&= \frac{1}{|\Omega_p|}\int_{\Omega_p} \phi_p^{n}
+		+ \frac{1}{|\Omega_p|}\int_{\Omega_p} \nabla \phi_p^{n} \cdot
+		\left( \mathbf{x} - \mathbf{x}_p \right)
+		+ \frac{1}{|\Omega_p|}\int_{\Omega_p} \mathcal{O}\left( |\mathbf{x} - \mathbf{x}_p|^2 \right)\\
+		&= \phi_p^{n} + \frac{1}{|\Omega_p|}\int_{\Omega_p} \mathcal{O}\left( |\mathbf{x} - \mathbf{x}_p|^2 \right).
+	\end{split}
+\end{equation}
+The second integral equals to~0, since \(\mathbf{x}_p\) is the cell center.
+For more details, see, e.g.,~\cite{2016_Moukalled_BOOK,1996_Jasak}.
+
+We approximate the expression under the integral
+with the face center values
+\[
+	\int_{e_f}
+	\left( \phi\mathbf{u} \right)\cdot
+	\frac{\mathbf{n}_{pf}}{|\mathbf{n}_{pf}|}
+	\approx
+	\int_{e_f} \phi(\mathbf{x}_{pf},t) \mathbf{u}(\mathbf{x}_{pf}) \cdot
+	\frac{\mathbf{n}_{pf}}{|\mathbf{n}_{pf}|}
+	= \phi(\mathbf{x}_{pf},t) \mathbf{u}(\mathbf{x}_{pf}) \cdot \mathbf{n}_{pf},
+\]
+since we defined the normal vector such that \(|\mathbf{n}_{pf}| = |e_f|\).
+Similarly to~\eqref{eqn:cell-avg-proof}, it can be shown
+that this is a second order approximation of the face integral.
+See, e.g.,~\cite{2016_Moukalled_BOOK,1996_Jasak}.
+
+We denote the volumetric flux as
+\[
+	a_{pf} \equiv \mathbf{u}(\mathbf{x}_{pf}) \cdot \mathbf{n}_{pf}.
+\]
+Thus, we end up with the approximation
+of the divergence term
+\[
+	\int_{\Omega_p}
+	\nabla \cdot \left(\phi\mathbf{u}\right)
+	\approx
+	\sum_{f \in \mathcal{F}_p} \phi(\mathbf{x}_{pf},t) a_{pf}.
+\]
+In order to achieve second order in time, we approximate
+the time integral of the fluxes using the midpoint rule
+\[
+	\int_{t^{n-1}}^{t^n} \sum_{f \in \mathcal{F}_p} \phi(\mathbf{x}_{pf},t) a_{pf}
+	\approx
+	\Delta t \sum_{f \in \mathcal{F}_p}
+	\phi(\mathbf{x}_{pf},t^{n-1/2}) a_{pf}
+	=\Delta t \sum_{f \in \mathcal{F}_p}
+	\phi_{pf}^{n-1/2} a_{pf},
+\]
+where \(\Delta t = t^n - t^{n-1}\), is the uniform time step,
+\(t^{n-1/2} = \frac{t^n+t^{n-1}}{2}\), and we use the notation
+\(\phi(\mathbf{x}_{pf},t^{n}) = \phi_{pf}^{n}\).
+
+Thus, the second order in space and time discretization
+of~\eqref{eqn:integral-conservation-law-cell-3d} reads as
+\begin{equation}\label{eqn:integral-claw-2ndO-approx-3d}
+	|\Omega_p|(\phi_p^n - \phi_p^{n-1})
+	+ \Delta t \sum_{f \in \mathcal{F}_p}
+	\phi_{pf}^{n-1/2} a_{pf} = 0.
+\end{equation}
+Next we express the value at the face center at half-time step
+as the average value of old and new values. We take the average
+of reconstructed face values from neighboring cells,
+the upwind value is treated implicitly, and the downwind explicitly.
+In particular, for the outflow case \(a_{pf} \geq 0\)
+\[
+	\phi_{pf}^{n-1/2} = \frac{1}{2}(\phi_{pf}^n + \phi_{qf}^{n-1}),
 \]
 where
 \[
-	\phi_{pf}^{n} = \phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pf},
+	\phi_{pf}^{n} = \phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pf},
 	\quad \text{and} \quad
-	\phi_{qf}^{n-1} = \phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}.
+	\phi_{qf}^{n-1} = \phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}.
 \]
-We take the average of reconstructed face values from neighboring cells,
-the upwind value is treated implicitly, and the downwind explicitly.
-This mimics the approximation of the face value of the IIOE method in 1D:
+This mimics the approximation of the face value of the IIOE method
+\cite{2014_Mikula,2019_Hahn,2020_Ibolya_CONF} in 1D:
 \[
 	\phi_{i+1/2}^{n-1/2} = \frac{1}{2}(\phi_i^{n} + \phi_{i+1}^{n-1}).
 \]
-For the outflow case $ a_{pf} < 0 $
+For the inflow case \(a_{pf} < 0\)
 \[
 	\phi_{f}^{n-1/2} = \frac{1}{2}(\phi_{pf}^{n-1} + \phi_{qf}^{n}),
 \]
 where
 \begin{equation}
-	\phi_{pf}^{n-1} = \phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf},
+	\phi_{pf}^{n-1} = \phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf},
 	\quad \text{and} \quad
-	\phi_{qf}^{n} = \phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf}.
+	\phi_{qf}^{n} = \phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf}.
 \end{equation}
 We divide the set of faces to inflow and outflow parts
 \begin{align*}
@@ -100,50 +270,97 @@ We divide the set of faces to inflow and outflow parts
 	& &\text{and} &
 	\mathcal{F}_p^+ &= (\mathcal{F}_p \setminus \mathcal{B}_p) \setminus \mathcal{F}_p^-.
 \end{align*}
-The discretization of \eqref{eqn:scalar-conservation-law-3d} takes the form
+Thus, we can rewrite \eqref{eqn:integral-claw-2ndO-approx-3d}
 \begin{equation}\label{eqn:fvm-discretization-3d}
 	\begin{split}
 	\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1})
 	&+ \sum_{f \in \mathcal{F}_p^-} \phi_{pf}^{n-1/2} a_{pf}
 	+ \sum_{f \in \mathcal{F}_p^+} \phi_{pf}^{n-1/2} a_{pf}\\
-	&+ \sum_{f \in \mathcal{B}_p^-} \phi_{pb}^{n-1/2} a_{pb}
-	+ \sum_{f \in \mathcal{B}_p^+} \phi_{pb}^{n-1/2} a_{pb} = 0,
+	&+ \sum_{b \in \mathcal{B}_p^-} \phi_{pb}^{n-1/2} a_{pb}
+	+ \sum_{b \in \mathcal{B}_p^+} \phi_{pb}^{n-1/2} a_{pb} = 0,
 	\end{split}
 \end{equation}
-and the face values depend on the sign of flux $ a_{pf} $
-\[
+where the face values depend on the sign of flux \(a_{pf}\)
+\begin{equation}\label{eqn:faceval-no-limiter}
 	\phi_{pf}^{n-1/2} =
 	\begin{cases}
-		\frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf})
+		\frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf})
 		& \text{if}\ a_{pf} \geq 0 \\
-		\frac{1}{2}(\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf} +
-		\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf})
+		\frac{1}{2}(\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf} +
+		\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf})
 		& \text{if}\ a_{pf} < 0,
 	\end{cases}
-\]
-\[
+\end{equation}
+\begin{equation}\label{eqn:faceval-bdry-no-limiter}
 	\phi_{pb}^{n-1/2} =
 	\begin{cases}
-		\frac{1}{2}\left(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-		\phi_e(\boldsymbol{x}_{pb}, t^{n-1})\right)
-		& \text{if}\ a_{pf} \geq 0 \\
+		\frac{1}{2}\left(\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+		\phi_e(\mathbf{x}_{pb}, t^{n-1})\right)
+		& \text{if}\ a_{pb} \geq 0 \\
 		\frac{1}{2}
 		\left(
-			\phi_e(\boldsymbol{x}_{pb}, t^{n-1})
-			+ \phi_e(\boldsymbol{x}_{pb}, t^{n})
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}
+			+ \phi_e(\mathbf{x}_{pb}, t^{n})
 		\right)
-		& \text{if}\ a_{pf} < 0.
+		& \text{if}\ a_{pb} < 0.
 	\end{cases}
-\]
+\end{equation}
+Substituting \eqref{eqn:faceval-no-limiter}, \eqref{eqn:faceval-bdry-no-limiter}
+to \eqref{eqn:integral-claw-2ndO-approx-3d} yields a linear system of equations
+\begin{equation}
+	\begin{split}
+		\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1})
+	&+ \sum_{f \in \mathcal{F}_p^-}
+	\frac{1}{2}\left(
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf} +
+			\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf}
+		\right) a_{pf}\\
+	&+ \sum_{f \in \mathcal{F}_p^+}
+	\frac{1}{2}\left(
+			\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+			\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}
+		\right) a_{pf}\\
+	&+ \sum_{b \in \mathcal{B}_p^-}
+	\frac{1}{2}\left(
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}
+			+ \phi_e(\mathbf{x}_{pb}, t^{n})
+		\right) a_{pb}\\
+	&+ \sum_{b \in \mathcal{B}_p^+}
+	\frac{1}{2}\left(
+		\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+		\phi_e(\mathbf{x}_{pb}, t^{n-1})
+		\right) a_{pb} = 0.
+	\end{split}
+\end{equation}
+As described in \cite{2019_Hahn}, because of practical considerations,
+the simplest overlapping domain decomposition is required under the 1-ring face
+neighborhood structure in order to simplify the parallel computations. From a
+cell it is possible to access the values from neighboring cells. However,
+because of the unknown gradient terms of the neighbors \(\nabla\phi_q^{n}\),
+we would need values from a 2-ring neighborhood. Another complication is that
+for the gradient term \(\nabla\phi_p^n\) it is quite cumbersome to extract
+the coefficients needed for the neighbors. So, because of the above practical
+considerations, we employ a deferred correction procedure
+\cite{1974_Khosla,2016_Moukalled_BOOK,2019_Hahn} to solve the system.
+The method we use is based on writing a high-order flux terms
+\eqref{eqn:faceval-no-limiter}, \eqref{eqn:faceval-bdry-no-limiter} - second order
+in our case - as a low-order scheme plus a high-order correction term as
+\begin{equation}
+	\phi_{pf}^{HO} = \phi_{pf}^{LO} + (\phi_{pf}^{HO} - \phi_{pf}^{LO}).
+\end{equation}
+In our case of an implicit scheme, the first term appears in our calculations
+implicitly, while the second term is evaluated using the latest available values.
+By choosing an appropriate low-order flux, the linear-system will have an
+M-matrix, which has favorable stability properties (\textcolor{red}{reference here}).
 For the case $ a_{pf} \geq 0 $ we can rewrite the approximation of the face values as
 \begin{equation}
 	\begin{split}
 		\phi_{pf}^{n-1/2}
-		&= \frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}) \\
-		&= \phi_p^n + \frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}),
+		&= \frac{1}{2}(\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}) \\
+		&= \phi_p^n + \frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
 	\end{split}
 \end{equation}
 which is now written as the upwind cell center value plus a correction term.
@@ -151,8 +368,8 @@ To simplify the notation, we denote the correction term as
 \[
 	\mathcal{D}^+_{pf}\phi
 	\equiv
-	\frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}),
+	\frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
 \]
 the plus sign indicating that $ a_{pf} \geq 0 $ is non-negative.
 To ensure boundedness, we apply a limiter $ \Psi_{f} $ to the correction term
@@ -163,10 +380,10 @@ For the case $ a_{pf} < 0 $ we can rewrite the approximation of the face values 
 \begin{equation}
 	\begin{split}
 		\phi_{pf}^{n-1/2}
-		&= \frac{1}{2}(\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf} +
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}) \\
-		&= \phi_q^{n} + \frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf} +
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}),
+		&= \frac{1}{2}(\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
+		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}) \\
+		&= \phi_q^{n} + \frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
+		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}),
 	\end{split}
 \end{equation}
 which is now written, as in the outflow case,
@@ -175,8 +392,8 @@ To simplify the notation, we denote the correction term as
 \[
 	\mathcal{D}_{pf}^-\phi
 	\equiv
-	\frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\boldsymbol{d}_{qf} +
-	\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}),
+	\frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
+	\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}),
 \]
 the minus sign indicating that $ a_{pf} < 0 $ is negative.
 
@@ -185,18 +402,18 @@ We do similarly at boundary faces. For \(a_{pb} \geq 0\) we have
 	\phi_{pb}^{n-1/2}
 	&= \frac{1}{2}
 	\left(
-		\phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pb} + \phi_e(\boldsymbol{x}_{pb}, t^{n-1})
+		\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
 	\right)\\
 	&= \phi_p^{n} + \frac{1}{2}
 	\left(
-		-\phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pb} + \phi_e(\boldsymbol{x}_{pb}, t^{n-1})
+		-\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
 	\right)\\
 	&= \phi_p^{n} + \mathcal{D}^+_{pb}\phi,
 \end{align*}
 where \[
 	\mathcal{D}^+_{pb}\phi =
 	\frac{1}{2}\left(
-		-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} + \phi_e(\boldsymbol{x}_{pb}, t^{n-1})
+		-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
 		\right).
 	\]
 For \(a_{pb} < 0\) we have
@@ -204,13 +421,13 @@ For \(a_{pb} < 0\) we have
 	\phi_{pb}^{n-1/2}
 	&= \frac{1}{2}
 	\left(
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pb} + \phi_e(\boldsymbol{x}_{pb}, t^{n})
+		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n})
 	\right)\\
-	&= \phi_e(\boldsymbol{x}_{pb}, t^{n}) + \frac{1}{2}
+	&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \frac{1}{2}
 	\left(
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pb} - \phi_e(\boldsymbol{x}_{pb}, t^{n})
+		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} - \phi_e(\mathbf{x}_{pb}, t^{n})
 	\right)\\
-	&= \phi_e(\boldsymbol{x}_{pb}, t^{n}) + \mathcal{D}^-_{pb}\phi,
+	&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \mathcal{D}^-_{pb}\phi,
 \end{align*}
 We end up with a linear system of equations
 \begin{equation}
@@ -220,32 +437,32 @@ We end up with a linear system of equations
 	\left(
 		\phi_q^n + \frac{\Psi_f}{2}
 		\left(
-			-\phi_q^n + \nabla\phi_q^n\cdot\boldsymbol{d}_{qf} +
-			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pf}
+			-\phi_q^n + \nabla\phi_q^n\cdot\mathbf{d}_{qf} +
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}
 		\right)
 	\right) a_{pf}\\
 	&+ \sum_{f \in \mathcal{F}_p^+}
 	\left(
 		\phi_p^n + \frac{\Psi_f}{2}
 		\left(
-			-\phi_p^n + \nabla\phi_p^n\cdot\boldsymbol{d}_{pf} +
-			\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\boldsymbol{d}_{qf}
+			-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
+			\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}
 		\right)
 	\right) a_{pf}\\
-	&+ \sum_{f \in \mathcal{B}_p^-}
+	&+ \sum_{b \in \mathcal{B}_p^-}
 	\left(
-		\phi_e(\boldsymbol{x}_{pb}, t^{n}) + \frac{\Psi_b}{2}
+		\phi_e(\mathbf{x}_{pb}, t^{n}) + \frac{\Psi_b}{2}
 		\left(
-			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\boldsymbol{d}_{pb}
-			- \phi_e(\boldsymbol{x}_{pb}, t^{n})
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb}
+			- \phi_e(\mathbf{x}_{pb}, t^{n})
 		\right)
 	\right) a_{pb}\\
-	&+ \sum_{f \in \mathcal{B}_p^+}
+	&+ \sum_{b \in \mathcal{B}_p^+}
 	\left(
 		\phi_p^{n} + \frac{\Psi_b}{2}
 		\left(
-			-\phi_p^{n} + \nabla\phi_p^{n}\cdot\boldsymbol{d}_{pb}
-			+ \phi_e(\boldsymbol{x}_{pb}, t^{n-1})
+			-\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb}
+			+ \phi_e(\mathbf{x}_{pb}, t^{n-1})
 		\right)
 	\right) a_{pb} = 0.
 	\end{split}
@@ -253,7 +470,7 @@ We end up with a linear system of equations
 We solve the system iteratively by applying the deferred correction procedure~\cite{2016_Moukalled_BOOK} for similar reasons as in~\cite{2019_Hahn}.
 In order to keep the parallel computations simple, in each cell a 1-ring neighborhood structure should be considered only.
 However, to compute the gradient of a neighbor cell \(q\), we would need access to cells outside the 1-ring neighborhood. Thus, the gradients of neighbors \( q \) should be computed using the latest available values from the previous iteration.
-<for the case \(a_{pf} \geq 0\), the face value in the \(k\)-th iteration becomes
+For the case \(a_{pf} \geq 0\), the face value in the \(k\)-th iteration becomes
 \begin{equation}
 	\phi_{pf}^{n-1/2,k} = \phi_p^{n,k} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi
 \end{equation}
@@ -270,7 +487,7 @@ However, to compute the gradient of a neighbor cell \(q\), we would need access 
 		\right) a_{pf}\\
 		&+ \sum_{b \in \mathcal{B}_p^-}
 		\left(
-			\phi_e(\boldsymbol{x}_{pb}, t^{n})
+			\phi_e(\mathbf{x}_{pb}, t^{n})
 			+ \Psi_{pb}^-\mathcal{D}^-_{pb}\phi
 		\right) a_{pb}\\
 		&+ \sum_{b \in \mathcal{B}_p^+}
@@ -299,7 +516,7 @@ We rearrange the terms
 		\\
 		&-\sum_{b \in \mathcal{B}_p^-}
 		\left(
-			\phi_e(\boldsymbol{x}_{pb}, t^{n})
+			\phi_e(\mathbf{x}_{pb}, t^{n})
 			+ \Psi_{pb}^-\mathcal{D}^-_{pb}\phi
 		\right) a_{pb}
 		- \sum_{b \in \mathcal{B}_p^+}
@@ -311,13 +528,70 @@ For internal cells, we require for the right-hand side
 	\begin{split}
 		\phi_{p, vnbd}^{min}
 		\leq
-		\frac{|\Omega_p|}{\Delta t}\phi_p^{n-1}
-		- \sum_{f \in \mathcal{F}_p^-}
+		\phi_p^{n-1}
+		- \lambda_p \sum_{f \in \mathcal{F}_p^-}
 		\Psi_{pf}^{-,k-1}\mathcal{D}^-_{pf}\phi^{k-1} a_{pf}
-		- \sum_{f \in \mathcal{F}_p^+}
+		- \lambda_p \sum_{f \in \mathcal{F}_p^+}
 		\Psi_{pf}^{+,k-1}\mathcal{D}^+_{pf}\phi^{k-1} a_{pf}
 		\leq
-		\phi_{p, vnbd}^{max},
+		\phi_{p, vnbd}^{max}.
 	\end{split}
 \end{equation*}
+Let us define
+\begin{equation}
+	\phi_{est,p} = \phi_p^{n-1}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^-}
+	\mathcal{D}^-_{pf}\phi^{k-1} a_{pf}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^+}
+	\mathcal{D}^+_{pf}\phi^{k-1} a_{pf}.
+\end{equation}
+First we check in each cell if \(\phi_{est,p} > \phi_{p, vnbd}^{max}\), then we define
+\[
+	\phi_{target,p} = \phi_{p, vnbd}^{max},
+\]
+else if \(\phi_{est,p} < \phi_{p, vnbd}^{min}\), then
+\[
+	\phi_{target,p} = \phi_{p, vnbd}^{min},
+\]
+otherwise
+\[
+	\phi_{target,p} = \phi_p^{n-1}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^-}
+	\mathcal{D}^-_{pf}\phi^{k-1} a_{pf}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^+}
+	\mathcal{D}^+_{pf}\phi^{k-1} a_{pf}.
+\]
+We can write this in a compact form as
+\begin{equation}
+	\phi_{target,p}^n =
+	\min
+	\left( \phi_{p, vnbd}^{max},
+	\max
+	\left( \phi_{p, vnbd}^{min}, \phi_{est,p}^n \right) \right).
+\end{equation}
+We assume, that
+\begin{equation}
+	\phi_{target,p}^n = \phi_p^{n-1}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^-}
+	\Psi_{pf}^{-,k-1}\mathcal{D}^-_{pf}\phi^{k-1} a_{pf}
+	- \lambda_p \sum_{f \in \mathcal{F}_p^+}
+	\Psi_{pf}^{+,k-1}\mathcal{D}^+_{pf}\phi^{k-1} a_{pf},
+\end{equation}
+\begin{equation}
+	\sum_{f \in \mathcal{F}_p^-}
+	\Psi_{pf}^{-,k-1}\mathcal{D}^-_{pf}\phi^{k-1} a_{pf}
+	+ \sum_{f \in \mathcal{F}_p^+}
+	\Psi_{pf}^{+,k-1}\mathcal{D}^+_{pf}\phi^{k-1} a_{pf}
+	=
+	\frac{\phi_p^{n-1} - \phi_{target,p}^n}{\lambda_p}.
+\end{equation}
+Furthermore, we want to minimize
+\begin{equation}
+	\sum_{f \in \mathcal{F}_p^-}
+	\left( \Psi_{pf}^{-,k-1} - 1 \right)^2
+	\left( \mathcal{D}^-_{pf}\phi^{k-1} a_{pf} \right)^2
+	+ \sum_{f \in \mathcal{F}_p^+}
+	\left( \Psi_{pf}^{+,k-1} - 1 \right)^2
+	\left( \mathcal{D}^+_{pf}\phi^{k-1} a_{pf} \right)^2
+\end{equation}
 \end{document}

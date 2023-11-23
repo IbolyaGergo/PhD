@@ -2350,7 +2350,17 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">2016_Moukalled_BOOK</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">2019_Hahn</bcf:citekey>
+    <bcf:citekey order="1" intorder="2">1996_Jasak</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">2016_Moukalled_BOOK</bcf:citekey>
+    <bcf:citekey order="2" intorder="2">1996_Jasak</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">2014_Mikula</bcf:citekey>
+    <bcf:citekey order="3" intorder="2">2019_Hahn</bcf:citekey>
+    <bcf:citekey order="3" intorder="3">2020_Ibolya_CONF</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">2019_Hahn</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">2016_Moukalled_BOOK</bcf:citekey>
+    <bcf:citekey order="5" intorder="2">2019_Hahn</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">2016_Moukalled_BOOK</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">2019_Hahn</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

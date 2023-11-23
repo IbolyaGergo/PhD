@@ -2,6 +2,7 @@
   author    = {Moukalled, Fadl and Mangani, Luca and Darwish, Marwan and Moukalled, F and Mangani, L and Darwish, M},
   title     = {The finite volume method},
   publisher = {Springer},
+  url       = {http://www.gidropraktikum.narod.ru/Moukalled-et-al-FVM-OpenFOAM-Matlab.pdf},
   year      = {2016},
 }
 
@@ -10,6 +11,7 @@
   title     = {Iterative inflow-implicit outflow-explicit finite volume scheme for level-set equations on polyhedron meshes},
   number    = {6},
   pages     = {1639--1654},
+  url       = {https://www.math.sk/mikula/hmfmb_cma_2018.pdf},
   volume    = {77},
   file      = {:/home/gibolya/Downloads/iterative_iioe.pdf:PDF},
   journal   = {Computers \& Mathematics with Applications},
@@ -22,6 +24,7 @@
   date      = {2007},
   title     = {Numerical computation of internal and external flows: The fundamentals of computational fluid dynamics},
   publisher = {Elsevier},
+  url       = {https://cfd.spbstu.ru/agarbaruk/doc/Hirsch C. Numerical Computation of Internal and External Flows.Volume1-Fundamentals of Computational Fluid Dynamics(Elsevier,2nd edn,2007).pdf},
 }
 
 @Book{1990_Hirsch_BOOK,
@@ -29,14 +32,7 @@
   date      = {1990},
   title     = {Numerical computation of internal and external flows, vol. 2: Computational methods for inviscid and viscous flows},
   publisher = {J. Wiley \& sons},
-}
-
-@InProceedings{2020_Ibolya_CONF,
-  author    = {Ibolya, Gergo and Mikula, Karol},
-  booktitle = {Proceedings of ALGORITMY},
-  date      = {2020},
-  title     = {Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method},
-  pages     = {191--200},
+  url       = {https://soaneemrana.org/onewebmedia/NUMERICAL COMPUTATION OF INTERNAL & EXTERNAL FLOWS BY C. HIRSEH (VOL.-2).pdf},
 }
 
 @Article{2014_Mikula,
@@ -44,10 +40,10 @@
   date         = {2014},
   journaltitle = {Applied Numerical Mathematics},
   title        = {Inflow-implicit/outflow-explicit finite volume methods for solving advection equations},
-  doi          = {10.1016/j.apnum.2014.06.002},
   issn         = {0168-9274},
   language     = {English},
   pages        = {16--37},
+  url          = {https://www.math.sk/mikula/mou_apnum.pdf},
   volume       = {85},
   keywords     = {65M08},
   zbl          = {1310.65103},
@@ -61,6 +57,7 @@
   title        = {Implicit total variation diminishing (TVD) schemes for steady-state calculations},
   number       = {3},
   pages        = {327--360},
+  url          = {https://ntrs.nasa.gov/api/citations/19830014814/downloads/19830014814.pdf},
   volume       = {57},
   publisher    = {Elsevier},
 }
@@ -69,21 +66,74 @@
   author    = {Toro, Eleuterio F},
   title     = {Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction},
   publisher = {Springer Science \& Business Media},
+  url       = {https://www.academia.edu/8844903/Riemann_Solvers_and_Numerical_Methods_for_Fluid_Dynamics_Third_Edition},
   year      = {2009},
 }
 
 @Article{2000_Hoffmann,
   author  = {Hoffmann, Klaus A and Chiang, Steve T},
   title   = {Computational fluid dynamics Volume I},
+  url     = {https://sharif.ir/~moosavi/Hoffmann_v1.pdf},
   journal = {Engineering education system},
   year    = {2000},
 }
 
-@Book{laney1998computational,
+@Book{1998_Laney_BOOK,
   author    = {Laney, Culbert B},
   title     = {Computational gasdynamics},
   publisher = {Cambridge university press},
+  url       = {https://aerocastle.files.wordpress.com/2012/10/laney.pdf},
   year      = {1998},
+}
+
+@Article{roenby2016computational,
+  author    = {Roenby, Johan and Bredmose, Henrik and Jasak, Hrvoje},
+  title     = {A computational method for sharp interface advection},
+  number    = {11},
+  pages     = {160405},
+  url       = {https://royalsocietypublishing.org/doi/10.1098/rsos.160405},
+  volume    = {3},
+  journal   = {Royal Society open science},
+  publisher = {The Royal Society},
+  year      = {2016},
+}
+
+@Article{1996_Jasak,
+  author    = {Jasak, Hrvoje},
+  title     = {Error analysis and estimation for the finite volume method with applications to fluid flows.},
+  file      = {:/home/gibolya/Downloads/Jasak-thesis.pdf:PDF},
+  publisher = {Imperial College London (University of London)},
+  year      = {1996},
+}
+
+@Article{2021_Frolkovic,
+  author  = {Frolkovi{\v{c}}, Peter and Mikula, Karol and Hahn, Jooyoung and Martin, Dirk and Basara, Branislav},
+  title   = {Flux balanced approximation with least-squares gradient for diffusion equation on polyhedral mesh.},
+  number  = {3},
+  url     = {http://www.math.sk/mikula/DCDS_2021_polymesh.pdf},
+  volume  = {14},
+  journal = {Discrete \& Continuous Dynamical Systems-Series S},
+  year    = {2021},
+}
+
+@InProceedings{2020_Ibolya_CONF,
+  author    = {Ibolya, Gerg\H{o} and Mikula, Karol},
+  booktitle = {Proceedings of ALGORITMY},
+  date      = {2020},
+  title     = {Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method},
+  pages     = {191--200},
+  url       = {https://www.math.sk/mikula/ibolya_alg2020.pdf},
+}
+
+@Article{khosla1974diagonally,
+  author    = {Khosla, PK and Rubin, SG},
+  title     = {A diagonally dominant second-order accurate implicit scheme},
+  number    = {2},
+  pages     = {207--209},
+  volume    = {2},
+  journal   = {Computers \& Fluids},
+  publisher = {Elsevier},
+  year      = {1974},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

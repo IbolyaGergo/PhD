@@ -1,0 +1,199 @@
+\documentclass[../thesis.tex]{subfiles}
+\begin{document}
+\begin{equation}
+    \begin{split}
+        \frac{|\Omega_p|}{\Delta t}(\phi^{n}_p - \phi_p^{n-1})
+        &+ \sum_{f \in \mathcal{F}_p^-}
+        \left(
+            \phi_q^{n} +\Psi_{pf}^{-}\mathcal{D}^-_{pf}\phi
+        \right) a_{pf}\\
+        &+ \sum_{f \in \mathcal{F}_p^+}
+        \left(
+            \phi_p^{n} + \Psi_{pf}^{+}\mathcal{D}^+_{pf}\phi
+        \right) a_{pf}\\
+        &+ \sum_{b \in \mathcal{B}_p^-}
+        \left(
+            \phi_e(\boldsymbol{x}_{pb}, t^{n})
+            + \Psi_{pb}^-\mathcal{D}^-_{pb}\phi
+        \right) a_{pb}\\
+        &+ \sum_{b \in \mathcal{B}_p^+}
+        \left(\phi_p^{n} +
+        \Psi_{pb}^{+}\mathcal{D}^+_{pb}\phi\right) a_{pb} = 0.
+    \end{split}
+\end{equation}
+For an internal cell
+\begin{equation}
+    \begin{split}
+        \frac{|\Omega_p|}{\Delta t}(\phi^{n}_p - \phi_p^{n-1})
+        &+ \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+        + \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+        \\
+        &+ \sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\mathcal{D}^-_{pf}\phi\ a_{pf}
+        + \sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\mathcal{D}^+_{pf}\phi\ a_{pf}
+        = 0.
+    \end{split}
+\end{equation}
+We split the antidiffusive fluxes to positive and negative values.
+Then we can write the sum of antidiffusive fluxes as
+\begin{equation}
+    \begin{split}
+        &\sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\mathcal{D}^-_{pf}\phi\ a_{pf}
+        + \sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\mathcal{D}^+_{pf}\phi\ a_{pf}
+        =\\
+        &\sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\max\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\min\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        \\
+        +&\sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\max\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\min\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right).
+    \end{split}
+\end{equation}
+Since the limiter is positive \(\Psi_f \geq 0, \), we can write
+\begin{equation}
+    \begin{split}
+        &\sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\max\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\max\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+        =\\
+        &\Psi_{p}^M\left(
+            \sum_{f \in \mathcal{F}_p^+}
+            \max\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+            +\sum_{f \in \mathcal{F}_p^-}
+            \max\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+        \right),
+    \end{split}
+\end{equation}
+where \(\Psi_{p}^M \geq 0. \)
+Similarly
+\begin{equation}
+    \begin{split}
+        &\sum_{f \in \mathcal{F}_p^+}
+        \Psi_{f}\min\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^-}
+        \Psi_{f}\min\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+        =\\
+        &\Psi_{p}^N\left(
+            \sum_{f \in \mathcal{F}_p^+}
+            \min\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+            +\sum_{f \in \mathcal{F}_p^-}
+            \min\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+        \right),
+    \end{split}
+\end{equation}
+where \(\Psi_{p}^N \geq 0. \)
+We denote
+\begin{equation}
+    \begin{split}
+        &M_p = \sum_{f \in \mathcal{F}_p^+}
+        \max\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^-}
+        \max\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right),\\
+        &N_p = \sum_{f \in \mathcal{F}_p^+}
+        \min\left( \mathcal{D}^+_{pf}\phi\ a_{pf}, 0 \right)
+        +\sum_{f \in \mathcal{F}_p^-}
+        \min\left( \mathcal{D}^-_{pf}\phi\ a_{pf}, 0 \right)
+    \end{split}
+\end{equation}
+we can equivalently write
+\begin{equation}
+        \frac{|\Omega_p|}{\Delta t}(\phi^{n}_p - \phi_p^{n-1})
+        + \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+        + \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+        +\Psi_p^M M_p + \Psi_p^N N_p
+        = 0.
+\end{equation}
+After finding the single value \(\Psi_p^M\),
+we should find a way how do we distribute it
+among the faces to get the most accurate solution.
+\begin{equation}
+    \phi^{n}_p - \phi_p^{n-1}
+    + \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    + \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    +\lambda_p \Psi_p^M M_p + \lambda_p \Psi_p^N N_p
+    = 0.
+\end{equation}
+We want
+\[
+    min
+    \leq
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \lambda_p \Psi_p^M M_p - \lambda_p \Psi_p^N N_p
+    \leq
+    max
+\]
+Since \( N_p \leq \Psi_p^N N_p \leq 0 \) we can write the
+sufficient conditions
+\[
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \lambda_p \Psi_p^M M_p - \lambda_p N_p
+    \leq
+    max
+\]
+\[
+    min
+    \leq
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \lambda_p \Psi_p^M M_p.
+\]
+Thus
+\[
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \lambda_p N_p - max
+    \leq
+    \lambda_p \Psi_p^M M_p
+\]
+and
+\[
+    \lambda_p \Psi_p^M M_p
+    \leq
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - min.
+\]
+It is possible to bound \(\Psi_p^M\) if
+\[
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \lambda_p N_p - max
+    \leq
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - min
+\]
+\[
+    - \lambda_p N_p
+    \leq
+    max - min
+\]
+\newpage
+We want
+\[
+    min
+    \leq
+    \phi_p^{n-1}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^-} \phi_q^{n} a_{pf}
+    - \lambda_p \sum_{f \in \mathcal{F}_p^+} \phi_p^{n} a_{pf}
+    - \alpha_p \left( \lambda_p M_p + \lambda_p N_p \right)
+    \leq
+    max
+\]
+\end{document}end if
