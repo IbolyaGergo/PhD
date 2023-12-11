@@ -1,9 +1,9 @@
 [0] Config.pm:306> INFO - This is Biber 2.18
 [0] Config.pm:309> INFO - Logfile is 'split-antidiffusion/split-antidiffusion.blg'
-[93] biber:340> INFO - === Mon Oct  9, 2023, 10:57:06
-[110] Biber.pm:418> INFO - Reading 'split-antidiffusion/split-antidiffusion.bcf'
-[189] Biber.pm:978> INFO - Found 0 citekeys in bib section 0
-[204] bbl.pm:654> INFO - Writing 'split-antidiffusion/split-antidiffusion.bbl' with encoding 'UTF-8'
-[204] bbl.pm:757> INFO - Output to split-antidiffusion/split-antidiffusion.bbl
-[204] Biber.pm:130> WARN - The file 'split-antidiffusion/split-antidiffusion.bcf' does not contain any citations!
-[204] Biber.pm:132> INFO - WARNINGS: 1
+[87] biber:340> INFO - === Mon Nov 27, 2023, 14:53:47
+[111] Biber.pm:418> INFO - Reading 'split-antidiffusion/split-antidiffusion.bcf'
+[187] Biber.pm:978> INFO - Found 0 citekeys in bib section 0
+[202] bbl.pm:654> INFO - Writing 'split-antidiffusion/split-antidiffusion.bbl' with encoding 'UTF-8'
+[202] bbl.pm:757> INFO - Output to split-antidiffusion/split-antidiffusion.bbl
+[202] Biber.pm:130> WARN - The file 'split-antidiffusion/split-antidiffusion.bcf' does not contain any citations!
+[202] Biber.pm:132> INFO - WARNINGS: 1

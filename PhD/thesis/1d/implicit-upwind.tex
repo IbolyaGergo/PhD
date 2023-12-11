@@ -1,0 +1,271 @@
+\documentclass[../thesis.tex]{subfiles}
+\begin{document}
+\section{Implicit monotone schemes in 1D}
+In this section we discuss some stability properties of implicit schemes.
+
+First we show that schemes written in a particular form satisfy the upwind range condition, meaning that the solution is
+always bounded by its neighbors in space-time
+as it travels along the characteristics.
+
+Next we show that such schemes are also total variation non-increasing (TVNI),
+or total variation diminishing (TVD), as it is commonly referred to.
+
+We conclude the section with the observation that if a scheme satisfies the
+implicit upwind range condition, then it also satisfies the TVD condition.
+
+Both conditions can be used to construct implicit high-order monotone schemes.
+However, as we will see, the upwind range condition is much more straightforward to
+apply, only requiring the solution to be bounded between its neighbors. It can be much more cumbersome to require the TVD property of a scheme directly.
+\subsection{Upwind range condition for implicit schemes}
+Let us consider the implicit upwind scheme in 1 space dimension
+\begin{equation}\label{eqn:implicit-upwind-1d}
+    \phi_{i}^{n} =
+    \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right).
+\end{equation}
+We assume, that the only unknown value is \(\phi_{i}^{n}\).
+To see why that statement holds, notice that the solution of the first order advection
+equation requires an inflow boundary condition. Thus, in the first cell, the value \(\phi_{0}^{n}\) is known from the inflow BC, so the only unknown value is \(\phi_{1}^{n}\). Then we compute the next value and so on, until reaching the \(n\)-th cell, where \(\phi_{i-1}^{n}\) is known and the only unknown value is \(\phi_{i}^{n}\).
+
+In this section we want to show that for Courant numbers \(c > 0\), schemes written
+in the form of \eqref{eqn:implicit-upwind-1d} satisfy the stability condition
+\begin{equation}\label{eqn:implicit-upwind-range-condition}
+    \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+    \leq
+    \phi_{i}^{n}\leq
+    \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right),
+\end{equation}
+which can be interpreted as the upwind range condition\cite{1998_Laney_BOOK}
+or data compatibility condition \cite{2009_Toro_BOOK} for implicit schemes.
+Notice that min and max is a combination of values from both time steps \(n, n-1\).
+This distinguishes the implicit upwind range property from the explicit one.
+In the explicit case, the min and max are chosen only from the values at the current time step \(n-1\).
+The idea is that the solution travels along characteristics and this value is always bounded by its neighbors in space-time.
+
+To prove \eqref{eqn:implicit-upwind-range-condition}, first we solve \eqref{eqn:implicit-upwind-1d} for the unknown \(\phi_{i}^{n}\).
+\begin{equation}\label{eqn:implicit-upwind-solution}
+    \phi_{i}^{n} =
+    \frac{1}{1+c}\phi_{i}^{n-1} + \frac{c}{1+c}\phi_{i-1}^{n}.
+\end{equation}
+Notice that
+\[
+    \frac{1}{1+c} = \frac{1+c-c}{1+c} = 1 - \frac{c}{1+c}.
+\]
+For convenience, let us denote
+\begin{equation}\label{eqn:implicit-upwind-coefficient}
+    k = \frac{c}{1+c}.
+\end{equation}
+Since \(0 \leq c \leq 1+c\), then
+\begin{equation}
+    \begin{split}
+        0 &\leq c \leq 1+c \rightarrow\\
+        0 &\leq \frac{c}{1+c} \leq 1 \rightarrow\\
+        0 &\leq k \leq 1.
+    \end{split}
+\end{equation}
+Thus, we can rewrite \eqref{eqn:implicit-upwind-solution} as
+\begin{equation}\label{eqn:implicit-uwpind-linear-interpolation}
+    \phi_{i}^{n} =
+    (1-k)\phi_{i}^{n-1} + k\phi_{i-1}^{n},
+\end{equation}
+where we can see that the solution \(\phi_{i}^{n}\) is a linear interpolation
+between \(\phi_{i}^{n-1}\) and \(\phi_{i-1}^{n}\), thus
+\eqref{eqn:implicit-upwind-range-condition} holds.
+\begin{theorem}
+    Let us consider a numerical scheme written in the form
+    \begin{equation}\label{eqn:solution-as-interpolation}
+    \phi_{i}^{n} =
+    (1-k)\phi_{i}^{n-1} + k\phi_{i-1}^{n}.
+    \end{equation}
+    Assume that \(\phi_{i-1}^{n}\) is known. If the coefficient is bounded \(0 \leq k \leq 1\), then the solution satisfies
+    \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem}
+        \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+        \leq
+        \phi_{i}^{n}
+        \leq
+        \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right),
+    \end{equation}
+    \begin{proof}
+        Without the loss of generality, let us begin with the case where the data satisfies
+        \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem-case-1-data}
+            \phi_{i-1}^{n} \leq \phi_{i}^{n-1}.
+        \end{equation}
+        Then we can write
+        \begin{equation}
+            \begin{split}
+                \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right) &= \phi_{i-1}^{n}\\
+                \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right) &= \phi_{i}^{n-1}.
+            \end{split}
+        \end{equation}
+        Thus, in the first case we want to show that
+        \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem-case-1}
+            \phi_{i-1}^{n}
+            \leq
+            \phi_{i}^{n}
+            \leq
+            \phi_{i}^{n-1}.
+        \end{equation}
+        We start by proving that \(\phi_{i}^{n} \leq \phi_{i}^{n-1}\).
+
+        Using \eqref{eqn:implicit-upwind-range-condition-theorem-case-1-data} and
+        the fact that \(0 \leq k \leq 1\)
+        \begin{equation*}
+            \begin{split}
+                \phi_{i-1}^{n} &\leq \phi_{i}^{n-1},\\
+                k \phi_{i-1}^{n} &\leq k \phi_{i}^{n-1},
+            \end{split}
+        \end{equation*}
+        where \(0 \leq k \leq 1\).
+        Then we use \eqref{eqn:solution-as-interpolation} to express \(k \phi_{i-1}^{n}\)
+        \begin{equation*}
+            \begin{split}
+                \phi_{i}^{n} - (1-k)\phi_{i}^{n-1} &\leq k \phi_{i}^{n-1},\\
+                \phi_{i}^{n} - \phi_{i}^{n-1} &\leq 0,\\
+                \phi_{i}^{n} &\leq  \phi_{i}^{n-1}.
+            \end{split}
+        \end{equation*}
+    It remains to show that \(\phi_{i-1}^{n} \leq \phi_{i}^{n}\).
+    \begin{equation*}
+        \begin{split}
+            \phi_{i-1}^{n} &\leq \phi_{i}^{n-1},\\
+            (1-k)\phi_{i-1}^{n} &\leq (1-k) \phi_{i}^{n-1}.
+        \end{split}
+    \end{equation*}
+    Again, using \eqref{eqn:solution-as-interpolation} to express \((1-k) \phi_{i}^{n-1}\)
+    \begin{equation*}
+        \begin{split}
+            (1-k)\phi_{i-1}^{n} &\leq \phi_{i}^{n} - k \phi_{i-1}^{n},\\
+            \phi_{i-1}^{n} &\leq \phi_{i}^{n}.
+        \end{split}
+    \end{equation*}
+    Thus,
+    \[
+        \phi_{i-1}^{n} \leq \phi_{i}^{n} \leq \phi_{i}^{n-1}.
+    \]
+    The proof for the other case where the data is such that \(\phi_{i-1}^{n} \geq \phi_{i}^{n-1}\) is straightforward.
+    \end{proof}
+\end{theorem}
+\subsection{TVD condition}
+The total variation of a mesh function \(\phi^{n} = {\phi_{i}^{n}}\) is defined
+as
+\begin{equation}
+    TV(\phi^{n}) =
+    \sum_{i = -\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|,
+\end{equation}
+see,~e.g., \cite{1977_VanLeer,1983_Harten,1984_Sweby,1985_Yee,1990_Hirsch_BOOK,1992_LeVeque_BOOK,1996_Jasak,1998_Laney_BOOK,2000_Hoffmann,2002_LeVeque_BOOK,2007_Hirsch_BOOK}.
+\begin{theorem}
+The solution of a numerical scheme written in the form
+\begin{equation}\label{eqn:implicit-upwind-1d-tvd-proof}
+    \phi_{i}^{n} =
+    \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right),
+\end{equation}
+for \(c > 0\) and data with compact support,
+such that \(\phi_{i}^{n-1} \rightarrow 0 \) as \(i \rightarrow \infty\)
+or \(i \rightarrow -\infty\), is total variation non-increasing
+\begin{equation}\label{eqn:tvd-condition}
+    TV(\phi_{i}^{n-1}) \geq TV(\phi_{i}^{n}).
+\end{equation}
+\begin{proof}
+We start by writing the scheme for cells \(i,i-1\)
+    \begin{align}
+        \phi_{i}^{n} &=
+        \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right),
+        \label{eqn:implicit-upwind-i}
+        \\
+        \phi_{i-1}^{n} &=
+        \phi_{i-1}^{n-1} - c\left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)
+        \label{eqn:implicit-upwind-i-1}.
+    \end{align}
+Then we subtract \eqref{eqn:implicit-upwind-i-1} from \eqref{eqn:implicit-upwind-i}
+to get
+\begin{equation}
+    \begin{split}
+        \phi_{i}^{n} - \phi_{i-1}^{n} =
+        \phi_{i}^{n-1} - \phi_{i-1}^{n-1}
+        - c\left( \phi_{i}^{n} - \phi_{i-1}^{n}
+        - \phi_{i-1}^{n} + \phi_{i-2}^{n} \right),
+        \\
+        \phi_{i}^{n} - \phi_{i-1}^{n} + c\left( \phi_{i}^{n} - \phi_{i-1}^{n}
+        - \phi_{i-1}^{n} + \phi_{i-2}^{n} \right)
+        =
+        \phi_{i}^{n-1} - \phi_{i-1}^{n-1},
+        \\
+        (1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
+        - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)
+        = \phi_{i}^{n-1} - \phi_{i-1}^{n-1}.
+    \end{split}
+\end{equation}
+We take the absolute value
+\begin{equation}\label{eqn:absolute-value-equivalence}
+    \begin{split}
+        |(1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
+        - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)|
+        = |\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|.
+    \end{split}
+\end{equation}
+Then we use the triangle inequality \(|a - b| \geq |a| - |b|\) and \(|c~a| = |c||a|\)
+\begin{equation}
+    |(1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
+    - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)|
+    \geq
+    (1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
+        - c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|,
+\end{equation}
+Thus, using \eqref{eqn:absolute-value-equivalence}
+\begin{equation}
+    |\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
+    \geq
+    (1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
+    - c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|.
+\end{equation}
+To complete the proof, we take the sum of both sides
+\begin{equation}\label{eqn:tvd-proof-sums}
+    \begin{split}
+        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
+        &\geq
+        \sum_{i=-\infty}^{\infty}(1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
+        - \sum_{i=-\infty}^{\infty} c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|,
+        \\
+        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
+        &\geq
+        (1+c)\sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|
+        - c \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n} - \phi_{i-2}^{n}|.
+    \end{split}
+\end{equation}
+To complete the proof, we use the fact that the data has compact support and the solution \(\phi^{n}\) satisfies the upwind range condition
+\eqref{eqn:implicit-upwind-range-condition}
+\begin{equation}
+    \begin{split}
+        \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+        \leq
+        \phi_{i}^{n}\leq
+        \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+        \text{ for all } i \in (-\infty,\infty),
+        \\
+        \phi_{-\infty,\infty}^{n-1} = 0,
+        \rightarrow
+        \phi_{-\infty,\infty}^{n} = 0
+        \rightarrow
+        \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n} - \phi_{i-2}^{n}|
+        = \sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|
+        =TV(\phi^{n}).
+    \end{split}
+\end{equation}
+Thus, using \eqref{eqn:tvd-proof-sums} we conclude
+\begin{equation}
+    \begin{split}
+        TV(\phi^{n-1})
+        &\geq
+        (1+c)TV(\phi^{n}) - c~TV(\phi^{n}),
+        \\
+        TV(\phi^{n-1})
+        &\geq
+        TV(\phi^{n}).
+    \end{split}
+\end{equation}
+\end{proof}
+\end{theorem}
+\subsection{Conclusion}
+Since we can transform a scheme written in the form of \eqref{eqn:implicit-upwind-1d}
+to a scheme written as \eqref{eqn:implicit-uwpind-linear-interpolation} and
+vice versa, then it follows that if a scheme satisfies the implicit upwind range property \eqref{eqn:implicit-upwind-range-condition} it is also TVD.
+\end{document}

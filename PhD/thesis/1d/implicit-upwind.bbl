@@ -19,89 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
-    \entry{1959_Godunov}{article}{}
-      \name{author}{1}{}{%
-        {{hash=53790e314cac7087c1e269a7463acaf2}{%
-           family={Godunov},
-           familyi={G\bibinitperiod},
-           given={Sergei\bibnamedelima Konstantinovich},
-           giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
-      }
-      \strng{namehash}{53790e314cac7087c1e269a7463acaf2}
-      \strng{fullhash}{53790e314cac7087c1e269a7463acaf2}
-      \strng{bibnamehash}{53790e314cac7087c1e269a7463acaf2}
-      \strng{authorbibnamehash}{53790e314cac7087c1e269a7463acaf2}
-      \strng{authornamehash}{53790e314cac7087c1e269a7463acaf2}
-      \strng{authorfullhash}{53790e314cac7087c1e269a7463acaf2}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Math. Sbornik}
-      \field{title}{A difference scheme for numerical solution of discontinuous solution of hydrodynamic equations}
-      \field{volume}{47}
-      \field{year}{1959}
-      \field{pages}{271\bibrangedash 306}
-      \range{pages}{36}
-    \endentry
-    \entry{2019_Hahn}{article}{}
-      \name{author}{5}{}{%
-        {{hash=c152e9de4728d2a19ee1ca619aaa098d}{%
-           family={Hahn},
-           familyi={H\bibinitperiod},
-           given={Jooyoung},
-           giveni={J\bibinitperiod}}}%
-        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
-           family={Mikula},
-           familyi={M\bibinitperiod},
-           given={Karol},
-           giveni={K\bibinitperiod}}}%
-        {{hash=25ad8db6299250ab3d2638d6f6d34737}{%
-           family={Frolkovič},
-           familyi={F\bibinitperiod},
-           given={Peter},
-           giveni={P\bibinitperiod}}}%
-        {{hash=a4d40503cda49c3d1cd4d4b83dc56649}{%
-           family={Medl’a},
-           familyi={M\bibinitperiod},
-           given={Matej},
-           giveni={M\bibinitperiod}}}%
-        {{hash=26d3cb4afb64535baa0722a9ef839935}{%
-           family={Basara},
-           familyi={B\bibinitperiod},
-           given={Branislav},
-           giveni={B\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
-      \strng{namehash}{885595f0d36702c304dace5ea4a9e140}
-      \strng{fullhash}{aaa9b95a1cde2fe4d135e2dc135885a2}
-      \strng{bibnamehash}{aaa9b95a1cde2fe4d135e2dc135885a2}
-      \strng{authorbibnamehash}{aaa9b95a1cde2fe4d135e2dc135885a2}
-      \strng{authornamehash}{885595f0d36702c304dace5ea4a9e140}
-      \strng{authorfullhash}{aaa9b95a1cde2fe4d135e2dc135885a2}
-      \field{sortinit}{H}
-      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Computers \& Mathematics with Applications}
-      \field{number}{6}
-      \field{title}{Iterative inflow-implicit outflow-explicit finite volume scheme for level-set equations on polyhedron meshes}
-      \field{volume}{77}
-      \field{year}{2019}
-      \field{pages}{1639\bibrangedash 1654}
-      \range{pages}{16}
-      \verb{file}
-      \verb :/home/gibolya/Downloads/iterative_iioe.pdf:PDF
-      \endverb
-      \verb{urlraw}
-      \verb https://www.math.sk/mikula/hmfmb_cma_2018.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.math.sk/mikula/hmfmb_cma_2018.pdf
-      \endverb
-    \endentry
     \entry{1983_Harten}{article}{}
       \name{author}{3}{}{%
         {{hash=b31882597bb5adf5c5cf5989e6bfa154}{%
@@ -141,6 +58,38 @@
       \field{pages}{35\bibrangedash 61}
       \range{pages}{27}
     \endentry
+    \entry{1990_Hirsch_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=16084829b6e7001ddd54d3c93d359b0c}{%
+           family={Hirsch},
+           familyi={H\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {J. Wiley \& sons}%
+      }
+      \strng{namehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{fullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{bibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorbibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authornamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorfullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \field{extraname}{1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Numerical computation of internal and external flows, vol. 2: Computational methods for inviscid and viscous flows}
+      \field{year}{1990}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://soaneemrana.org/onewebmedia/NUMERICAL COMPUTATION OF INTERNAL & EXTERNAL FLOWS BY C. HIRSEH (VOL.-2).pdf
+      \endverb
+      \verb{url}
+      \verb https://soaneemrana.org/onewebmedia/NUMERICAL%20COMPUTATION%20OF%20INTERNAL%20&%20EXTERNAL%20FLOWS%20BY%20C.%20HIRSEH%20(VOL.-2).pdf
+      \endverb
+    \endentry
     \entry{2007_Hirsch_BOOK}{book}{}
       \name{author}{1}{}{%
         {{hash=16084829b6e7001ddd54d3c93d359b0c}{%
@@ -158,6 +107,7 @@
       \strng{authorbibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
       \strng{authornamehash}{16084829b6e7001ddd54d3c93d359b0c}
       \strng{authorfullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \field{extraname}{2}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
@@ -172,40 +122,37 @@
       \verb https://cfd.spbstu.ru/agarbaruk/doc/Hirsch%20C.%20Numerical%20Computation%20of%20Internal%20and%20External%20Flows.Volume1-Fundamentals%20of%20Computational%20Fluid%20Dynamics(Elsevier,2nd%20edn,2007).pdf
       \endverb
     \endentry
-    \entry{2020_Ibolya_CONF}{inproceedings}{}
+    \entry{2000_Hoffmann}{article}{}
       \name{author}{2}{}{%
-        {{hash=e499920d5f7824029c52330e6eb18169}{%
-           family={Ibolya},
-           familyi={I\bibinitperiod},
-           given={Gergő},
-           giveni={G\bibinitperiod}}}%
-        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
-           family={Mikula},
-           familyi={M\bibinitperiod},
-           given={Karol},
-           giveni={K\bibinitperiod}}}%
+        {{hash=e1a73a8ab6850451b2fe534e020485c6}{%
+           family={Hoffmann},
+           familyi={H\bibinitperiod},
+           given={Klaus\bibnamedelima A},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=e97d87e20690ae452f45ceeb8d44b01e}{%
+           family={Chiang},
+           familyi={C\bibinitperiod},
+           given={Steve\bibnamedelima T},
+           giveni={S\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
       }
-      \strng{namehash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \strng{fullhash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \strng{bibnamehash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \strng{authorbibnamehash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \strng{authornamehash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \strng{authorfullhash}{52ff2d927190ee24d7be763f1ec2a09b}
-      \field{sortinit}{I}
-      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \strng{namehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{fullhash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{bibnamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authorbibnamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authornamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authorfullhash}{657c87df61405bc618a5b5455bfa6c3e}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{Proceedings of ALGORITMY}
-      \field{title}{Numerical solution of the 1d viscous Burgers and traffic flow equations by the inflow-implicit/outflow-explicit finite volume method}
-      \field{year}{2020}
-      \field{dateera}{ce}
-      \field{pages}{191\bibrangedash 200}
-      \range{pages}{10}
+      \field{journaltitle}{Engineering education system}
+      \field{title}{Computational fluid dynamics Volume I}
+      \field{year}{2000}
       \verb{urlraw}
-      \verb https://www.math.sk/mikula/ibolya_alg2020.pdf
+      \verb https://sharif.ir/~moosavi/Hoffmann_v1.pdf
       \endverb
       \verb{url}
-      \verb https://www.math.sk/mikula/ibolya_alg2020.pdf
+      \verb https://sharif.ir/~moosavi/Hoffmann_v1.pdf
       \endverb
     \endentry
     \entry{1996_Jasak}{article}{}
@@ -234,74 +181,6 @@
       \verb{file}
       \verb :/home/gibolya/Downloads/Jasak-thesis.pdf:PDF
       \endverb
-    \endentry
-    \entry{1974_Khosla}{article}{}
-      \name{author}{2}{}{%
-        {{hash=e2b0ec246b42eab055e56fd2d1fa4a8f}{%
-           family={Khosla},
-           familyi={K\bibinitperiod},
-           given={PK},
-           giveni={P\bibinitperiod}}}%
-        {{hash=1c670552323fc919a8a0bdf081fd16b1}{%
-           family={Rubin},
-           familyi={R\bibinitperiod},
-           given={SG},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
-      \strng{namehash}{09d51f72163ad25df875eaf625d94811}
-      \strng{fullhash}{09d51f72163ad25df875eaf625d94811}
-      \strng{bibnamehash}{09d51f72163ad25df875eaf625d94811}
-      \strng{authorbibnamehash}{09d51f72163ad25df875eaf625d94811}
-      \strng{authornamehash}{09d51f72163ad25df875eaf625d94811}
-      \strng{authorfullhash}{09d51f72163ad25df875eaf625d94811}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Computers \& Fluids}
-      \field{number}{2}
-      \field{title}{A diagonally dominant second-order accurate implicit scheme}
-      \field{volume}{2}
-      \field{year}{1974}
-      \field{pages}{207\bibrangedash 209}
-      \range{pages}{3}
-    \endentry
-    \entry{2004_Kuzmin}{article}{}
-      \name{author}{2}{}{%
-        {{hash=87b05f201e3bec951bf883a70c52d988}{%
-           family={Kuzmin},
-           familyi={K\bibinitperiod},
-           given={Dmitri},
-           giveni={D\bibinitperiod}}}%
-        {{hash=6ace5f48649a56137541c711e4b21415}{%
-           family={Turek},
-           familyi={T\bibinitperiod},
-           given={Stefan},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Elsevier}%
-      }
-      \strng{namehash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \strng{fullhash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \strng{bibnamehash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \strng{authorbibnamehash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \strng{authornamehash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \strng{authorfullhash}{fbbb06f2a6bc1e7b85e4595f96faedde}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Computational Physics}
-      \field{number}{1}
-      \field{title}{High-resolution FEM-TVD schemes based on a fully multidimensional flux limiter}
-      \field{volume}{198}
-      \field{year}{2004}
-      \field{pages}{131\bibrangedash 158}
-      \range{pages}{28}
     \endentry
     \entry{1998_Laney_BOOK}{book}{}
       \name{author}{1}{}{%
@@ -391,108 +270,6 @@
       \verb http://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf
       \endverb
     \endentry
-    \entry{2014_Mikula}{article}{}
-      \name{author}{3}{}{%
-        {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
-           family={Mikula},
-           familyi={M\bibinitperiod},
-           given={Karol},
-           giveni={K\bibinitperiod}}}%
-        {{hash=2cf3b1566035f04edb90a7c0e5db7caf}{%
-           family={Ohlberger},
-           familyi={O\bibinitperiod},
-           given={Mario},
-           giveni={M\bibinitperiod}}}%
-        {{hash=52996f75a95f7f7d461b075234781515}{%
-           family={Urbán},
-           familyi={U\bibinitperiod},
-           given={Jozef},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {English}%
-      }
-      \strng{namehash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \strng{fullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \strng{bibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \strng{authorbibnamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \strng{authornamehash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \strng{authorfullhash}{2e37ee9972d41fe03d42bfdc8045d16e}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0168-9274}
-      \field{journaltitle}{Applied Numerical Mathematics}
-      \field{title}{Inflow-implicit/outflow-explicit finite volume methods for solving advection equations}
-      \field{volume}{85}
-      \field{year}{2014}
-      \field{dateera}{ce}
-      \field{pages}{16\bibrangedash 37}
-      \range{pages}{22}
-      \verb{urlraw}
-      \verb https://www.math.sk/mikula/mou_apnum.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.math.sk/mikula/mou_apnum.pdf
-      \endverb
-      \keyw{65M08}
-    \endentry
-    \entry{2016_Moukalled_BOOK}{book}{}
-      \name{author}{6}{}{%
-        {{hash=cf9c0ed56db52e17c93b033852c9e66e}{%
-           family={Moukalled},
-           familyi={M\bibinitperiod},
-           given={Fadl},
-           giveni={F\bibinitperiod}}}%
-        {{hash=ca93f984440c49295fdbab405df8a144}{%
-           family={Mangani},
-           familyi={M\bibinitperiod},
-           given={Luca},
-           giveni={L\bibinitperiod}}}%
-        {{hash=f42258d3deecc7014d517e89bb4916a4}{%
-           family={Darwish},
-           familyi={D\bibinitperiod},
-           given={Marwan},
-           giveni={M\bibinitperiod}}}%
-        {{hash=090a7ac77260a7ca9bc89d916f36f898}{%
-           family={Moukalled},
-           familyi={M\bibinitperiod},
-           given={F},
-           giveni={F\bibinitperiod}}}%
-        {{hash=1ff4954c3e58a8b001eb53e8269c3438}{%
-           family={Mangani},
-           familyi={M\bibinitperiod},
-           given={L},
-           giveni={L\bibinitperiod}}}%
-        {{hash=2ab2b6dd25340d302e0592af4ff96e03}{%
-           family={Darwish},
-           familyi={D\bibinitperiod},
-           given={M},
-           giveni={M\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Springer}%
-      }
-      \strng{namehash}{7a0f36b13ca6ad3bbf7ede93e025f016}
-      \strng{fullhash}{d9829e19e1e916778e98f2e63eeb0bc8}
-      \strng{bibnamehash}{d9829e19e1e916778e98f2e63eeb0bc8}
-      \strng{authorbibnamehash}{d9829e19e1e916778e98f2e63eeb0bc8}
-      \strng{authornamehash}{7a0f36b13ca6ad3bbf7ede93e025f016}
-      \strng{authorfullhash}{d9829e19e1e916778e98f2e63eeb0bc8}
-      \field{sortinit}{M}
-      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The finite volume method}
-      \field{year}{2016}
-      \verb{urlraw}
-      \verb http://www.gidropraktikum.narod.ru/Moukalled-et-al-FVM-OpenFOAM-Matlab.pdf
-      \endverb
-      \verb{url}
-      \verb http://www.gidropraktikum.narod.ru/Moukalled-et-al-FVM-OpenFOAM-Matlab.pdf
-      \endverb
-    \endentry
     \entry{1984_Sweby}{article}{}
       \name{author}{1}{}{%
         {{hash=5d63a985b0b5917b1d4273e77b9e3509}{%
@@ -580,6 +357,52 @@
       \field{year}{1977}
       \field{pages}{276\bibrangedash 299}
       \range{pages}{24}
+    \endentry
+    \entry{1985_Yee}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9bf645073f0c77a41561d2497b9c2713}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={HC},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a5b3a949236f0acae22055d5f9aa5c5c}{%
+           family={Warming},
+           familyi={W\bibinitperiod},
+           given={RF},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f4c5bedc5d15b72c85e262d65e016a46}{%
+           family={Harten},
+           familyi={H\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{fullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{bibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorbibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authornamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorfullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{3}
+      \field{title}{Implicit total variation diminishing (TVD) schemes for steady-state calculations}
+      \field{volume}{57}
+      \field{year}{1985}
+      \field{dateera}{ce}
+      \field{pages}{327\bibrangedash 360}
+      \range{pages}{34}
+      \verb{urlraw}
+      \verb https://ntrs.nasa.gov/api/citations/19830014814/downloads/19830014814.pdf
+      \endverb
+      \verb{url}
+      \verb https://ntrs.nasa.gov/api/citations/19830014814/downloads/19830014814.pdf
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

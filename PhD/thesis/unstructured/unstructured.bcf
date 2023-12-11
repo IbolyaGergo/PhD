@@ -2360,8 +2360,16 @@
     <bcf:citekey order="5" intorder="1">1974_Khosla</bcf:citekey>
     <bcf:citekey order="5" intorder="2">2016_Moukalled_BOOK</bcf:citekey>
     <bcf:citekey order="5" intorder="3">2019_Hahn</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">2016_Moukalled_BOOK</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">2019_Hahn</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">1959_Godunov</bcf:citekey>
+    <bcf:citekey order="6" intorder="2">2009_Toro_BOOK</bcf:citekey>
+    <bcf:citekey order="6" intorder="3">2007_Hirsch_BOOK</bcf:citekey>
+    <bcf:citekey order="6" intorder="4">1992_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="6" intorder="5">1998_Laney_BOOK</bcf:citekey>
+    <bcf:citekey order="6" intorder="6">2002_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="7" intorder="2">1984_Sweby</bcf:citekey>
+    <bcf:citekey order="7" intorder="3">1983_Harten</bcf:citekey>
+    <bcf:citekey order="7" intorder="4">2004_Kuzmin</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

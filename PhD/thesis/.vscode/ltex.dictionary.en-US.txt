@@ -6,3 +6,6 @@ nonplanar
 inviscid
 ALGORITMY
 gasdynamics
+FEM-TVD
+Courant
+TVNI

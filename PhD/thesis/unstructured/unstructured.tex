@@ -346,14 +346,15 @@ considerations, we employ a deferred correction procedure
 The method we use is based on writing a high-order flux terms
 \eqref{eqn:faceval-no-limiter}, \eqref{eqn:faceval-bdry-no-limiter} - second order
 in our case - as a low-order scheme plus a high-order correction term as
-\begin{equation}
+\begin{equation}\label{eqn:high-order-low-order-combination}
 	\phi_{pf}^{HO} = \phi_{pf}^{LO} + (\phi_{pf}^{HO} - \phi_{pf}^{LO}).
 \end{equation}
 In our case of an implicit scheme, the first term appears in our calculations
 implicitly, while the second term is evaluated using the latest available values.
 By choosing an appropriate low-order flux, the linear-system will have an
 M-matrix, which has favorable stability properties (\textcolor{red}{reference here}).
-For the case $ a_{pf} \geq 0 $ we can rewrite the approximation of the face values as
+
+For the case \(a_{pf} \geq 0\) we can rewrite the approximation of the face values as
 \begin{equation}
 	\begin{split}
 		\phi_{pf}^{n-1/2}
@@ -363,140 +364,175 @@ For the case $ a_{pf} \geq 0 $ we can rewrite the approximation of the face valu
 		\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
 	\end{split}
 \end{equation}
-which is now written as the upwind cell center value plus a correction term.
-To simplify the notation, we denote the correction term as
-\[
-	\mathcal{D}^+_{pf}\phi
-	\equiv
-	\frac{1}{2}(-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
-	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
-\]
-the plus sign indicating that $ a_{pf} \geq 0 $ is non-negative.
-To ensure boundedness, we apply a limiter $ \Psi_{f} $ to the correction term
-\begin{equation} \label{rec_face}
-	\phi_{pf}^{n-1/2} = \phi_p^n + \Psi_{f} \mathcal{D}^+_{pf}\phi
+which is now written as \eqref{eqn:high-order-low-order-combination}, where the low-order
+flux is the implicit upwind flux
+\begin{equation}\label{eqn:faceval-implicit-upwind}
+	\phi_{pf}^{LO} =
+	\begin{cases}
+		\phi_p^n
+		& \text{if}\ a_{pf} \geq 0 \\
+		\phi_q^{n}
+		& \text{if}\ a_{pf} < 0.
+	\end{cases}
 \end{equation}
-For the case $ a_{pf} < 0 $ we can rewrite the approximation of the face values as
-\begin{equation}
-	\begin{split}
-		\phi_{pf}^{n-1/2}
-		&= \frac{1}{2}(\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}) \\
-		&= \phi_q^{n} + \frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}),
-	\end{split}
+By applying the deferred correction procedure
+discussed above, the face value in the \(k\)-th iteration is computed as
+\begin{equation}\label{eqn:fval-iteration-outflow}
+	\phi_{pf}^{n-1/2,k} = \phi_p^{n,k} +
+	\frac{1}{2}(-\phi_p^{n,k-1} + \nabla\phi_p^{n,k-1}\cdot\mathbf{d}_{pf} +
+	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
+\end{equation}
+where \(k = 1 \dots K\), \(\phi_p^{n,0} = \phi_p^{n-1}\) and
+\(\nabla\phi_p^{n,k-1}\) is computed using \(\phi_p^{n,k-1}\).
+To simplify the notation, we denote the correction term as
+\begin{equation}\label{eqn:correction-term-outflow}
+	\mathcal{D}^+_{pf}\phi^{k}
+	\equiv
+	\frac{1}{2}(-\phi_p^{n,k} + \nabla\phi_p^{n,k}\cdot\mathbf{d}_{pf} +
+	\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}),
+\end{equation}
+where the plus sign indicates that \(a_{pf} \geq 0 \) is non-negative.
+Analogously to the outflow case, if \(a_{pf} < 0\), we can rewrite the
+approximation of the face values as
+\begin{equation}\label{eqn:fval-iteration-inflow}
+	\phi_{pf}^{n-1/2,k}
+	= \phi_q^{n} + \frac{1}{2}(-\phi_q^{n,k-1} + \nabla\phi_q^{n,k-1}\cdot\mathbf{d}_{qf} +
+	\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}),
 \end{equation}
 which is now written, as in the outflow case,
 as the upwind cell center value plus a correction term.
 To simplify the notation, we denote the correction term as
-\[
-	\mathcal{D}_{pf}^-\phi
+\begin{equation}\label{eqn:correction-term-inflow}
+	\mathcal{D}_{pf}^-\phi^k
 	\equiv
-	\frac{1}{2}(-\phi_q^{n} + \nabla\phi_q^{n}\cdot\mathbf{d}_{qf} +
+	\frac{1}{2}(-\phi_q^{n,k} + \nabla\phi_q^{n,k}\cdot\mathbf{d}_{qf} +
 	\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}),
-\]
-the minus sign indicating that $ a_{pf} < 0 $ is negative.
+\end{equation}
+the minus sign indicating that \(a_{pf} < 0\) is negative.
 
 We do similarly at boundary faces. For \(a_{pb} \geq 0\) we have
-\begin{align*}
-	\phi_{pb}^{n-1/2}
-	&= \frac{1}{2}
-	\left(
-		\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
-	\right)\\
-	&= \phi_p^{n} + \frac{1}{2}
-	\left(
-		-\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
-	\right)\\
-	&= \phi_p^{n} + \mathcal{D}^+_{pb}\phi,
-\end{align*}
-where \[
-	\mathcal{D}^+_{pb}\phi =
-	\frac{1}{2}\left(
-		-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
-		\right).
-	\]
-For \(a_{pb} < 0\) we have
-\begin{align*}
-	\phi_{pb}^{n-1/2}
-	&= \frac{1}{2}
-	\left(
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n})
-	\right)\\
-	&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \frac{1}{2}
-	\left(
-		\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} - \phi_e(\mathbf{x}_{pb}, t^{n})
-	\right)\\
-	&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \mathcal{D}^-_{pb}\phi,
-\end{align*}
-We end up with a linear system of equations
 \begin{equation}
 	\begin{split}
-		\frac{|\Omega_p|}{\Delta t}(\phi_p^{n} - \phi_p^{n-1})
-	&+ \sum_{f \in \mathcal{F}_p^-}
-	\left(
-		\phi_q^n + \frac{\Psi_f}{2}
+		\phi_{pb}^{n-1/2}
+		&= \frac{1}{2}
 		\left(
-			-\phi_q^n + \nabla\phi_q^n\cdot\mathbf{d}_{qf} +
-			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pf}
-		\right)
-	\right) a_{pf}\\
-	&+ \sum_{f \in \mathcal{F}_p^+}
-	\left(
-		\phi_p^n + \frac{\Psi_f}{2}
-		\left(
-			-\phi_p^n + \nabla\phi_p^n\cdot\mathbf{d}_{pf} +
-			\phi_q^{n-1} + \nabla\phi_q^{n-1}\cdot\mathbf{d}_{qf}
-		\right)
-	\right) a_{pf}\\
-	&+ \sum_{b \in \mathcal{B}_p^-}
-	\left(
-		\phi_e(\mathbf{x}_{pb}, t^{n}) + \frac{\Psi_b}{2}
-		\left(
-			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb}
-			- \phi_e(\mathbf{x}_{pb}, t^{n})
-		\right)
-	\right) a_{pb}\\
-	&+ \sum_{b \in \mathcal{B}_p^+}
-	\left(
-		\phi_p^{n} + \frac{\Psi_b}{2}
+			\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb}
+			+ \phi_e(\mathbf{x}_{pb}, t^{n-1})
+		\right)\\
+		&= \phi_p^{n} + \frac{1}{2}
 		\left(
 			-\phi_p^{n} + \nabla\phi_p^{n}\cdot\mathbf{d}_{pb}
 			+ \phi_e(\mathbf{x}_{pb}, t^{n-1})
-		\right)
-	\right) a_{pb} = 0.
+		\right)\\
+		&= \phi_p^{n} + \mathcal{D}^+_{pb}\phi
 	\end{split}
 \end{equation}
-We solve the system iteratively by applying the deferred correction procedure~\cite{2016_Moukalled_BOOK} for similar reasons as in~\cite{2019_Hahn}.
-In order to keep the parallel computations simple, in each cell a 1-ring neighborhood structure should be considered only.
-However, to compute the gradient of a neighbor cell \(q\), we would need access to cells outside the 1-ring neighborhood. Thus, the gradients of neighbors \( q \) should be computed using the latest available values from the previous iteration.
-For the case \(a_{pf} \geq 0\), the face value in the \(k\)-th iteration becomes
-\begin{equation}
-	\phi_{pf}^{n-1/2,k} = \phi_p^{n,k} + \Psi_{f}^{k-1} \mathcal{D}^{+,k-1}_{pf}\phi
+\begin{equation}\label{eqn:fval-bdry-iteration-outflow}
+	\phi_{pb}^{n-1/2,k} = \phi_p^{n,k} + \mathcal{D}^+_{pb}\phi^{k-1}
 \end{equation}
-\begin{equation}
+where
+\begin{equation}\label{eqn:correction-bdry-term-outflow}
+	\mathcal{D}^+_{pb}\phi^{k} =
+	\frac{1}{2}\left(
+		-\phi_p^{n,k} + \nabla\phi_p^{n,k}\cdot\mathbf{d}_{pf} + \phi_e(\mathbf{x}_{pb}, t^{n-1})
+		\right).
+\end{equation}
+For \(a_{pb} < 0\) we have
+\begin{equation}\label{eqn:fval-bdry-iteration-inflow}
+	\begin{split}
+		\phi_{pb}^{n-1/2}
+		&= \frac{1}{2}
+		\left(
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} + \phi_e(\mathbf{x}_{pb}, t^{n})
+		\right)\\
+		&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \frac{1}{2}
+		\left(
+			\phi_p^{n-1} + \nabla\phi_p^{n-1}\cdot\mathbf{d}_{pb} - \phi_e(\mathbf{x}_{pb}, t^{n})
+		\right)\\
+		&= \phi_e(\mathbf{x}_{pb}, t^{n}) + \mathcal{D}^-_{pb}\phi.
+	\end{split}
+\end{equation}
+Notice that there is no need to compute the inflow boundary term iteratively.
+
+Substituting \eqref{eqn:fval-iteration-inflow}, \eqref{eqn:fval-iteration-outflow},
+\eqref{eqn:fval-bdry-iteration-inflow}, \eqref{eqn:fval-bdry-iteration-outflow} to
+\eqref{eqn:integral-claw-2ndO-approx-3d} we end up with a linear system
+\begin{equation}\label{eqn:system-no-limiter}
 	\begin{split}
 		\frac{|\Omega_p|}{\Delta t}(\phi^{n,k}_p - \phi_p^{n-1})
 		&+ \sum_{f \in \mathcal{F}_p^-}
 		\left(
-			\phi_q^{n,k} +\Psi_{pf}^{-, k-1}\mathcal{D}^-_{pf}\phi^{k-1}
-		\right) a_{pf}\\
-		&+ \sum_{f \in \mathcal{F}_p^+}
+			\phi_q^{n,k} + \mathcal{D}^-_{pf}\phi^{k-1}
+		\right) a_{pf}
+		+ \sum_{f \in \mathcal{F}_p^+}
 		\left(
-			\phi_p^{n,k} + \Psi_{pf}^{+, k-1}\mathcal{D}^+_{pf}\phi^{k-1}
+			\phi_p^{n,k} + \mathcal{D}^+_{pf}\phi^{k-1}
 		\right) a_{pf}\\
 		&+ \sum_{b \in \mathcal{B}_p^-}
 		\left(
 			\phi_e(\mathbf{x}_{pb}, t^{n})
-			+ \Psi_{pb}^-\mathcal{D}^-_{pb}\phi
-		\right) a_{pb}\\
-		&+ \sum_{b \in \mathcal{B}_p^+}
+			+ \mathcal{D}^-_{pb}\phi
+		\right) a_{pb}
+		+ \sum_{b \in \mathcal{B}_p^+}
 		\left(\phi_p^{n,k} +
-		\Psi_{pb}^{+, k-1}\mathcal{D}^+_{pb}\phi^{k-1}\right) a_{pb} = 0.
+		\mathcal{D}^+_{pb}\phi^{k-1}\right) a_{pb} = 0.
 	\end{split}
 \end{equation}
-This yields a system with an M-matrix, which has favorable properties (\textcolor{red}{reference here}). The inverse of an M-matrix has positive components. We can think of the solution of the system as applying the inverse matrix \(\mathbf{M}^{-1}\) to the RHS.
+This yields a system with an M-matrix, which has favorable properties
+(\textcolor{red}{reference here}). The inverse of an M-matrix has
+positive components. We can think of the solution of the system as
+applying the inverse matrix \(\mathbf{M}^{-1}\) to the RHS.
+\subsection{Numerical experiments}
+\subsection{Limiter}
+Solving the system \eqref{eqn:system-no-limiter} for a smooth profile
+we get an \(\text{EOC} \approx 2\). For a step function initial profile,
+however, in the vicinity of the discontinuity we observe spurious
+oscillations. This behavior is inherent for linear high-order schemes in 1D,
+proved by Godunov's theorem \cite{1959_Godunov,2009_Toro_BOOK,2007_Hirsch_BOOK,1992_LeVeque_BOOK,1998_Laney_BOOK,2002_LeVeque_BOOK,},
+which states that any linear monotone scheme can be at most first-order accurate.
+To circumvent this obstacle, we have to employ a nonlinear scheme even for
+linear equations, who's coefficients depend on the solution itself. There were many
+attempts to do this. This type of limiting process is well established
+for 1D problems, see, e.g.~\cite{1977_VanLeer,1984_Sweby,1983_Harten,2004_Kuzmin}. One way of
+interpreting limiters is that we limit the high-order correction terms
+in a way to ensure boundedness of the numerical solution.
+\subsection{Limiter in 1D}
+\subsection{Limiter for unstructured mesh}
+Thus, for a general mesh, we define the limited face value for outflow \(a_{pf} > 0\)
+as follows:
+\begin{equation}\label{eqn:faceval-limited-outflow}
+	\phi_{pf}^{n-1/2} = \phi_p^n + \Psi_{pf} \mathcal{D}^+_{pf}\phi,
+\end{equation}
+where \(\Psi_{pf}\) is a limiter chosen in a way to ensure boundedness. In this work,
+we bound the limiter
+\begin{equation}\label{eqn:limiter-upper-lower-bound}
+	0 \leq \Psi_{pf} \leq 1.
+\end{equation}
+This is equivalent to a convex combination of the
+implicit upwind flux \eqref{eqn:faceval-implicit-upwind} and our proposed
+high-order flux \eqref{eqn:faceval-no-limiter}.
+We can see that, if we write the face value \eqref{eqn:faceval-limited-outflow}
+in the form \eqref{eqn:high-order-low-order-combination} as
+\begin{equation}
+	\begin{split}
+		\phi_{pf}^{HO}
+		&= \phi_{pf}^{LO} + \Psi_{pf}(\phi_{pf}^{HO} - \phi_{pf}^{LO})\\
+		&= \left( 1 - \Psi_{pf} \right)\phi_{pf}^{LO} + \Psi_{pf}\phi_{pf}^{HO}.
+	\end{split}
+\end{equation}
+In the outflow case \(a_{pf} \geq 0\), if \(\Psi_{pf} = 0\), we have the implicit
+upwind flux \eqref{eqn:faceval-implicit-upwind}, and in the other extreme case
+if \(\Psi_{pf} = 1\) we have the unlimited high-order flux
+\eqref{eqn:faceval-no-limiter}. The inflow case \(a_{pf} < 0\) is analogous to the outflow case.
 
+Substituting the limited face value \eqref{eqn:faceval-limited-outflow} to
+\eqref{eqn:fvm-discretization-3d}, because \(\Psi_{pf}\) depends on the solution,
+yields a nonlinear system of equations. Similarly to the unlimited case,
+we solve the equations using the deferred correction procedure.
+The face value in the \(k\)-th iteration becomes
+\begin{equation}
+	\phi_{pf}^{n-1/2,k} = \phi_p^{n,k} + \Psi_{pf}^k \mathcal{D}^+_{pf}\phi^{k-1}.
+\end{equation}
 We rearrange the terms
 \begin{equation}
 	\begin{split}
