@@ -237,6 +237,12 @@
       \field{title}{Finite volume methods for hyperbolic problems}
       \field{volume}{31}
       \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque - Finite Volume Methods for Hyperbolic Equations.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Finite%20Volume%20Methods%20for%20Hyperbolic%20Equations.pdf
+      \endverb
     \endentry
     \entry{1992_LeVeque_BOOK}{book}{}
       \name{author}{1}{}{%
@@ -322,6 +328,9 @@
       \field{labeltitlesource}{title}
       \field{title}{Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction}
       \field{year}{2009}
+      \verb{file}
+      \verb :/home/gibolya/Downloads/Toro-Riemann_Solvers_and_Numerical_Methods_fo.pdf:PDF
+      \endverb
       \verb{urlraw}
       \verb https://www.academia.edu/8844903/Riemann_Solvers_and_Numerical_Methods_for_Fluid_Dynamics_Third_Edition
       \endverb

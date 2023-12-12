@@ -1,0 +1,419 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{1983_Harten}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b31882597bb5adf5c5cf5989e6bfa154}{%
+           family={Harten},
+           familyi={H\bibinitperiod},
+           given={Amiram},
+           giveni={A\bibinitperiod}}}%
+        {{hash=abbc763550a217a607ccd737ae8ee05f}{%
+           family={Lax},
+           familyi={L\bibinitperiod},
+           given={Peter\bibnamedelima D},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=b48c5d30cf09e44c5ae863d0ab28103c}{%
+           family={Leer},
+           familyi={L\bibinitperiod},
+           given={Bram\bibnamedelima van},
+           giveni={B\bibinitperiod\bibinitdelim v\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \strng{fullhash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \strng{bibnamehash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \strng{authorbibnamehash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \strng{authornamehash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \strng{authorfullhash}{58c3abd78bdf3ce04701481c73bcbf39}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM review}
+      \field{number}{1}
+      \field{title}{On upstream differencing and Godunov-type schemes for hyperbolic conservation laws}
+      \field{volume}{25}
+      \field{year}{1983}
+      \field{pages}{35\bibrangedash 61}
+      \range{pages}{27}
+    \endentry
+    \entry{1990_Hirsch_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=16084829b6e7001ddd54d3c93d359b0c}{%
+           family={Hirsch},
+           familyi={H\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {J. Wiley \& sons}%
+      }
+      \strng{namehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{fullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{bibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorbibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authornamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorfullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \field{extraname}{1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Numerical computation of internal and external flows, vol. 2: Computational methods for inviscid and viscous flows}
+      \field{year}{1990}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://soaneemrana.org/onewebmedia/NUMERICAL COMPUTATION OF INTERNAL & EXTERNAL FLOWS BY C. HIRSEH (VOL.-2).pdf
+      \endverb
+      \verb{url}
+      \verb https://soaneemrana.org/onewebmedia/NUMERICAL%20COMPUTATION%20OF%20INTERNAL%20&%20EXTERNAL%20FLOWS%20BY%20C.%20HIRSEH%20(VOL.-2).pdf
+      \endverb
+    \endentry
+    \entry{2007_Hirsch_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=16084829b6e7001ddd54d3c93d359b0c}{%
+           family={Hirsch},
+           familyi={H\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{fullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{bibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorbibnamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authornamehash}{16084829b6e7001ddd54d3c93d359b0c}
+      \strng{authorfullhash}{16084829b6e7001ddd54d3c93d359b0c}
+      \field{extraname}{2}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Numerical computation of internal and external flows: The fundamentals of computational fluid dynamics}
+      \field{year}{2007}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://cfd.spbstu.ru/agarbaruk/doc/Hirsch C. Numerical Computation of Internal and External Flows.Volume1-Fundamentals of Computational Fluid Dynamics(Elsevier,2nd edn,2007).pdf
+      \endverb
+      \verb{url}
+      \verb https://cfd.spbstu.ru/agarbaruk/doc/Hirsch%20C.%20Numerical%20Computation%20of%20Internal%20and%20External%20Flows.Volume1-Fundamentals%20of%20Computational%20Fluid%20Dynamics(Elsevier,2nd%20edn,2007).pdf
+      \endverb
+    \endentry
+    \entry{2000_Hoffmann}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e1a73a8ab6850451b2fe534e020485c6}{%
+           family={Hoffmann},
+           familyi={H\bibinitperiod},
+           given={Klaus\bibnamedelima A},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=e97d87e20690ae452f45ceeb8d44b01e}{%
+           family={Chiang},
+           familyi={C\bibinitperiod},
+           given={Steve\bibnamedelima T},
+           giveni={S\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{fullhash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{bibnamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authorbibnamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authornamehash}{657c87df61405bc618a5b5455bfa6c3e}
+      \strng{authorfullhash}{657c87df61405bc618a5b5455bfa6c3e}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Engineering education system}
+      \field{title}{Computational fluid dynamics Volume I}
+      \field{year}{2000}
+      \verb{urlraw}
+      \verb https://sharif.ir/~moosavi/Hoffmann_v1.pdf
+      \endverb
+      \verb{url}
+      \verb https://sharif.ir/~moosavi/Hoffmann_v1.pdf
+      \endverb
+    \endentry
+    \entry{1996_Jasak}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d62bc09e89bff10783d2d7091a4a6aa6}{%
+           family={Jasak},
+           familyi={J\bibinitperiod},
+           given={Hrvoje},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Imperial College London (University of London)}%
+      }
+      \strng{namehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{fullhash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{bibnamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authorbibnamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authornamehash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \strng{authorfullhash}{d62bc09e89bff10783d2d7091a4a6aa6}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Error analysis and estimation for the finite volume method with applications to fluid flows.}
+      \field{year}{1996}
+      \verb{file}
+      \verb :/home/gibolya/Downloads/Jasak-thesis.pdf:PDF
+      \endverb
+    \endentry
+    \entry{1998_Laney_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7002a36f38778722cdbf822b333e3ce4}{%
+           family={Laney},
+           familyi={L\bibinitperiod},
+           given={Culbert\bibnamedelima B},
+           giveni={C\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{7002a36f38778722cdbf822b333e3ce4}
+      \strng{fullhash}{7002a36f38778722cdbf822b333e3ce4}
+      \strng{bibnamehash}{7002a36f38778722cdbf822b333e3ce4}
+      \strng{authorbibnamehash}{7002a36f38778722cdbf822b333e3ce4}
+      \strng{authornamehash}{7002a36f38778722cdbf822b333e3ce4}
+      \strng{authorfullhash}{7002a36f38778722cdbf822b333e3ce4}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computational gasdynamics}
+      \field{year}{1998}
+      \verb{urlraw}
+      \verb https://aerocastle.files.wordpress.com/2012/10/laney.pdf
+      \endverb
+      \verb{url}
+      \verb https://aerocastle.files.wordpress.com/2012/10/laney.pdf
+      \endverb
+    \endentry
+    \entry{2002_LeVeque_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{fullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{bibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorbibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authornamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorfullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Finite volume methods for hyperbolic problems}
+      \field{volume}{31}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque - Finite Volume Methods for Hyperbolic Equations.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Finite%20Volume%20Methods%20for%20Hyperbolic%20Equations.pdf
+      \endverb
+    \endentry
+    \entry{1992_LeVeque_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{fullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{bibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorbibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authornamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorfullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Numerical methods for conservation laws}
+      \field{volume}{214}
+      \field{year}{1992}
+      \verb{urlraw}
+      \verb http://tevza.org/home/course/modelling-II_2016/books/Leveque - Numerical Methods for Conservation Laws.pdf
+      \endverb
+      \verb{url}
+      \verb http://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf
+      \endverb
+    \endentry
+    \entry{1984_Sweby}{article}{}
+      \name{author}{1}{}{%
+        {{hash=5d63a985b0b5917b1d4273e77b9e3509}{%
+           family={Sweby},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima K},
+           giveni={P\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \strng{fullhash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \strng{bibnamehash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \strng{authorbibnamehash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \strng{authornamehash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \strng{authorfullhash}{5d63a985b0b5917b1d4273e77b9e3509}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM journal on numerical analysis}
+      \field{number}{5}
+      \field{title}{High resolution schemes using flux limiters for hyperbolic conservation laws}
+      \field{volume}{21}
+      \field{year}{1984}
+      \field{pages}{995\bibrangedash 1011}
+      \range{pages}{17}
+    \endentry
+    \entry{2009_Toro_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d08402bc1d8b752e447abc9b0a2d039c}{%
+           family={Toro},
+           familyi={T\bibinitperiod},
+           given={Eleuterio\bibnamedelima F},
+           giveni={E\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \strng{fullhash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \strng{bibnamehash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \strng{authorbibnamehash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \strng{authornamehash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \strng{authorfullhash}{d08402bc1d8b752e447abc9b0a2d039c}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction}
+      \field{year}{2009}
+      \verb{file}
+      \verb :/home/gibolya/Downloads/Toro-Riemann_Solvers_and_Numerical_Methods_fo.pdf:PDF
+      \endverb
+      \verb{urlraw}
+      \verb https://www.academia.edu/8844903/Riemann_Solvers_and_Numerical_Methods_for_Fluid_Dynamics_Third_Edition
+      \endverb
+      \verb{url}
+      \verb https://www.academia.edu/8844903/Riemann_Solvers_and_Numerical_Methods_for_Fluid_Dynamics_Third_Edition
+      \endverb
+    \endentry
+    \entry{1977_VanLeer}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8cce1bbdbb258721a1579b743bbe9c17}{%
+           family={Van\bibnamedelima Leer},
+           familyi={V\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Bram},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{fullhash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{bibnamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authorbibnamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authornamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authorfullhash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of computational physics}
+      \field{number}{3}
+      \field{title}{Towards the ultimate conservative difference scheme. IV. A new approach to numerical convection}
+      \field{volume}{23}
+      \field{year}{1977}
+      \field{pages}{276\bibrangedash 299}
+      \range{pages}{24}
+    \endentry
+    \entry{1985_Yee}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9bf645073f0c77a41561d2497b9c2713}{%
+           family={Yee},
+           familyi={Y\bibinitperiod},
+           given={HC},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a5b3a949236f0acae22055d5f9aa5c5c}{%
+           family={Warming},
+           familyi={W\bibinitperiod},
+           given={RF},
+           giveni={R\bibinitperiod}}}%
+        {{hash=f4c5bedc5d15b72c85e262d65e016a46}{%
+           family={Harten},
+           familyi={H\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{fullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{bibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorbibnamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authornamehash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \strng{authorfullhash}{82b1d81de5ff23d1e8cf10ed18896a32}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{3}
+      \field{title}{Implicit total variation diminishing (TVD) schemes for steady-state calculations}
+      \field{volume}{57}
+      \field{year}{1985}
+      \field{dateera}{ce}
+      \field{pages}{327\bibrangedash 360}
+      \range{pages}{34}
+      \verb{urlraw}
+      \verb https://ntrs.nasa.gov/api/citations/19830014814/downloads/19830014814.pdf
+      \endverb
+      \verb{url}
+      \verb https://ntrs.nasa.gov/api/citations/19830014814/downloads/19830014814.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

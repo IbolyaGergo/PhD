@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  8 DEC 2023 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  11 DEC 2023 13:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -254,27 +254,37 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@postskip=\skip59
 \thm@headsep=\skip60
 \dth@everypar=\toks30
-)
-\c@theorem=\count288
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/physics/physics.sty
+Package: physics 
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/usr/local/texlive/2022/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2023-02-07 L3 programming layer (loader) 
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count288
+\l__pdf_internal_box=\box54
+))
+Package: xparse 2023-02-02 L3 Experimental document command parser
+))
+\c@theorem=\count289
  (/usr/local/texlive/2022/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count289
+\c@float@type=\count290
 \float@exts=\toks31
-\float@box=\box54
+\float@box=\box55
 \@float@everytoks=\toks32
-\@floatcapt=\box55
+\@floatcapt=\box56
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
  (/usr/local/texlive/2022/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count290
+\etb@tempcnta=\count291
 )
-\csq@reset=\count291
-\csq@gtype=\count292
-\csq@glevel=\count293
-\csq@qlevel=\count294
-\csq@maxlvl=\count295
-\csq@tshold=\count296
+\csq@reset=\count292
+\csq@gtype=\count293
+\csq@glevel=\count294
+\csq@qlevel=\count295
+\csq@maxlvl=\count296
+\csq@tshold=\count297
 \csq@ltx@everypar=\toks33
  (/usr/local/texlive/2022/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
@@ -283,17 +293,9 @@ Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
-)) (/usr/local/texlive/2022/texmf-dist/tex/latex/xpatch/xpatch.sty (/usr/local/texlive/2022/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-02-07 L3 programming layer (loader) 
- (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count297
-\l__pdf_internal_box=\box56
-))
+)) (/usr/local/texlive/2022/texmf-dist/tex/latex/xpatch/xpatch.sty
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
- (/usr/local/texlive/2022/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2023-02-02 L3 Experimental document command parser
-)) (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/biblatex.sty
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2022/07/12 v3.18b programmable bibliographies (PK/MW)
  (/usr/local/texlive/2022/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
@@ -722,21 +724,26 @@ Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5] (1d/implicit-upwind.aux)
+] [2] [3] [4]
+Overfull \hbox (0.99576pt too wide) in paragraph at lines 273--275
+\OT1/cmr/m/n/12 Explicit fi-nite vol-ume schemes can be in-ter-preted as a reconstruct-evolve-average (REA)
+ []
+
+[5] [6] [7] (1d/implicit-upwind.aux)
 Package rerunfilecheck Info: File `implicit-upwind.out' has not changed.
-(rerunfilecheck)             Checksum: 7488079395F72E1A1FA13C6D51BFBAB6;743.
+(rerunfilecheck)             Checksum: 79E794C39FFF1073375F26AECE407F5B;1204.
 Package logreq Info: Writing requests to 'implicit-upwind.run.xml'.
 \openout1 = `implicit-upwind.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21349 strings out of 476029
- 377099 string characters out of 5790172
+ 21946 strings out of 476029
+ 382891 string characters out of 5790172
  1871346 words of memory out of 5000000
- 41472 multiletter control sequences out of 15000+600000
+ 42052 multiletter control sequences out of 15000+600000
  519149 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,17n,95p,730b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,17n,97p,730b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{cite.0@2007_Hirsch_BOOK} has been referenced but does not exist, replaced by a fixed one
 
@@ -773,11 +780,11 @@ pdfTeX warning (dest): name{cite.0@2009_Toro_BOOK} has been referenced but does 
 
 pdfTeX warning (dest): name{cite.0@1998_Laney_BOOK} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on 1d/implicit-upwind.pdf (5 pages, 113873 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on 1d/implicit-upwind.pdf (7 pages, 132932 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 204 PDF objects out of 1000 (max. 8388607)
+ 173 compressed objects within 2 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

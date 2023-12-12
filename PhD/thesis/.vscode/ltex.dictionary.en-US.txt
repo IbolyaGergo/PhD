@@ -9,3 +9,5 @@ gasdynamics
 FEM-TVD
 Courant
 TVNI
+piecewise
+extrema
