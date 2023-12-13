@@ -19,32 +19,96 @@ apply, only requiring the solution to be bounded between its neighbors. It can b
 \subsection{Upwind range condition for implicit schemes}
 Let us consider the implicit upwind scheme in 1 space dimension
 \begin{equation}\label{eqn:implicit-upwind-1d}
-    \phi_{i}^{n} =
-    \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right).
+    \phi_{i}^{n+1} =
+    \phi_{i}^{n} - c\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right).
 \end{equation}
-We assume, that the only unknown value is \(\phi_{i}^{n}\).
+We assume, that the only unknown value is \(\phi_{i}^{n+1}\).
 To see why that statement holds, notice that the solution of the first order advection
-equation requires an inflow boundary condition. Thus, in the first cell, the value \(\phi_{0}^{n}\) is known from the inflow BC, so the only unknown value is \(\phi_{1}^{n}\). Then we compute the next value and so on, until reaching the \(n\)-th cell, where \(\phi_{i-1}^{n}\) is known and the only unknown value is \(\phi_{i}^{n}\).
+equation requires an inflow boundary condition. Thus, in the first cell, the value \(\phi_{0}^{n+1}\) is known from the inflow BC, so the only unknown value is \(\phi_{1}^{n+1}\). Then we compute the next value and so on, until reaching the \(n\)-th cell, where \(\phi_{i-1}^{n+1}\) is known and the only unknown value is \(\phi_{i}^{n+1}\).
 
-In this section we want to show that for Courant numbers \(c > 0\), schemes written
-in the form of \eqref{eqn:implicit-upwind-1d} satisfy the stability condition
+In this section we want to show that schemes of the form of \eqref{eqn:implicit-upwind-1d} satisfy the stability condition
 \begin{equation}\label{eqn:implicit-upwind-range-condition}
-    \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+    \min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right)
     \leq
-    \phi_{i}^{n}\leq
-    \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right),
+    \phi_{i}^{n+1}
+    \leq
+    \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right),
 \end{equation}
-which can be interpreted as the upwind range condition\cite{1998_Laney_BOOK}
+for \(c > 0\). We can distinguish three cases:
+\begin{enumerate}
+    \item \(\phi_{i}^{n} > \phi_{i-1}^{n+1}:\)
+        \[\min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i-1}^{n+1},\quad
+        \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i}^{n}.\]
+        We can rewrite \eqref{eqn:implicit-upwind-range-condition} as
+        \begin{equation*}
+            \begin{split}
+                \phi_{i-1}^{n+1}
+                &\leq
+                \phi_{i}^{n+1}
+                \leq
+                \phi_{i}^{n},
+                \\
+                0
+                &\leq
+                \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+                \leq
+                \phi_{i}^{n} - \phi_{i-1}^{n+1},
+                \\
+                0
+                &\leq
+                \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \leq
+                1.
+            \end{split}
+        \end{equation*}
+    \item \(\phi_{i}^{n} < \phi_{i-1}^{n+1}:\)
+        \[\min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i}^{n},\quad
+        \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i-1}^{n+1}.\]
+        We can rewrite \eqref{eqn:implicit-upwind-range-condition} as
+        \begin{equation*}
+            \begin{split}
+                \phi_{i}^{n}
+                &\leq
+                \phi_{i}^{n+1}
+                \leq
+                \phi_{i-1}^{n+1},
+                \\
+                \phi_{i}^{n} - \phi_{i-1}^{n+1}
+                &\leq
+                \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+                \leq
+                0,
+                \\
+                1
+                &\geq
+                \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \geq
+                0.
+            \end{split}
+        \end{equation*}
+    \item \(\phi_{i}^{n} = \phi_{i-1}^{n+1}\), in which case we have\[\phi_{i}^{n} = \phi_{i-1}^{n+1} = \phi_{i}^{n+1}.\]
+\end{enumerate}
+Notice, that for the first two cases, where \(\phi_{i}^{n} \neq \phi_{i-1}^{n+1}\) we got the same expression.
+Thus, we can use
+\begin{equation}\label{eqn:upwind-range-simpler}
+    0
+    \leq
+    \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    \leq
+    1
+\end{equation}
+instead of \eqref{eqn:implicit-upwind-range-condition} to simplify the analysis.
+The condition above can be interpreted as the upwind range condition\cite{1998_Laney_BOOK}
 or data compatibility condition \cite{2009_Toro_BOOK} for implicit schemes.
 Notice that min and max is a combination of values from both time steps \(n, n-1\).
 This distinguishes the implicit upwind range property from the explicit one.
 In the explicit case, the min and max are chosen only from the values at the current time step \(n-1\).
 The idea is that the solution travels along characteristics and this value is always bounded by its neighbors in space-time.
 
-To prove \eqref{eqn:implicit-upwind-range-condition}, first we solve \eqref{eqn:implicit-upwind-1d} for the unknown \(\phi_{i}^{n}\).
+To prove \eqref{eqn:implicit-upwind-range-condition}, first we solve \eqref{eqn:implicit-upwind-1d} for the unknown \(\phi_{i}^{n+1}\).
 \begin{equation}\label{eqn:implicit-upwind-solution}
-    \phi_{i}^{n} =
-    \frac{1}{1+c}\phi_{i}^{n-1} + \frac{c}{1+c}\phi_{i-1}^{n}.
+    \phi_{i}^{n+1} =
+    \frac{1}{1+c}\phi_{i}^{n} + \frac{c}{1+c}\phi_{i-1}^{n+1}.
 \end{equation}
 Notice that
 \[
@@ -64,84 +128,68 @@ Since \(0 \leq c \leq 1+c\), then
 \end{equation}
 Thus, we can rewrite \eqref{eqn:implicit-upwind-solution} as
 \begin{equation}\label{eqn:implicit-uwpind-linear-interpolation}
-    \phi_{i}^{n} =
-    (1-k)\phi_{i}^{n-1} + k\phi_{i-1}^{n},
+    \phi_{i}^{n+1} =
+    (1-k)\phi_{i}^{n} + k\phi_{i-1}^{n+1},
 \end{equation}
-where we can see that the solution \(\phi_{i}^{n}\) is a linear interpolation
-between \(\phi_{i}^{n-1}\) and \(\phi_{i-1}^{n}\), thus
+where we can see that the solution \(\phi_{i}^{n+1}\) is an interpolation
+between \(\phi_{i}^{n}\) and \(\phi_{i-1}^{n+1}\), thus
 \eqref{eqn:implicit-upwind-range-condition} holds.
 \begin{theorem}
-    Let us consider a numerical scheme written in the form
-    \begin{equation}\label{eqn:solution-as-interpolation}
-    \phi_{i}^{n} =
-    (1-k)\phi_{i}^{n-1} + k\phi_{i-1}^{n}.
+    Let us consider a numerical scheme of the form
+    \begin{equation}\label{eqn:proof-urc-sol-as-interp}
+    \phi_{i}^{n+1} =
+    (1-k)\phi_{i}^{n} + k\phi_{i-1}^{n+1}.
     \end{equation}
-    Assume that \(\phi_{i-1}^{n}\) is known. If the coefficient is bounded \(0 \leq k \leq 1\), then the solution satisfies
+    Assume that \(\phi_{i-1}^{n}\) is known. If \(0 \leq k \leq 1\), then the solution satisfies
     \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem}
-        \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
+        \min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right)
         \leq
-        \phi_{i}^{n}
+        \phi_{i}^{n+1}
         \leq
-        \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right),
+        \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right),
     \end{equation}
     \begin{proof}
-        Without the loss of generality, let us begin with the case where the data satisfies
-        \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem-case-1-data}
-            \phi_{i-1}^{n} \leq \phi_{i}^{n-1}.
-        \end{equation}
-        Then we can write
-        \begin{equation}
-            \begin{split}
-                \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right) &= \phi_{i-1}^{n}\\
-                \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right) &= \phi_{i}^{n-1}.
-            \end{split}
-        \end{equation}
-        Thus, in the first case we want to show that
-        \begin{equation}\label{eqn:implicit-upwind-range-condition-theorem-case-1}
-            \phi_{i-1}^{n}
+        Let us begin with the case \(\phi_{i}^{n} \neq \phi_{i-1}^{n+1}\), for which we have to show that
+        \begin{equation}\label{eqn:proof-urc-cond-neq}
+            0
             \leq
-            \phi_{i}^{n}
+            \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
             \leq
-            \phi_{i}^{n-1}.
+            1.
         \end{equation}
-        We start by proving that \(\phi_{i}^{n} \leq \phi_{i}^{n-1}\).
-
-        Using \eqref{eqn:implicit-upwind-range-condition-theorem-case-1-data} and
-        the fact that \(0 \leq k \leq 1\)
+        We substitute \eqref{eqn:proof-urc-sol-as-interp} to \eqref{eqn:proof-urc-cond-neq}
         \begin{equation*}
             \begin{split}
-                \phi_{i-1}^{n} &\leq \phi_{i}^{n-1},\\
-                k \phi_{i-1}^{n} &\leq k \phi_{i}^{n-1},
+                0
+                &\leq
+                \frac{(1-k)\phi_{i}^{n} + k\phi_{i-1}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \leq
+                1,
+                \\
+                0
+                &\leq
+                \frac{(1-k)\left( \phi_{i}^{n} - \phi_{i-1}^{n+1} \right)}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \leq
+                1,
+                \\
+                0
+                &\leq
+                1-k
+                \leq
+                1,\\
+                0
+                &\leq
+                k
+                \leq
+                1,
             \end{split}
         \end{equation*}
-        where \(0 \leq k \leq 1\).
-        Then we use \eqref{eqn:solution-as-interpolation} to express \(k \phi_{i-1}^{n}\)
-        \begin{equation*}
-            \begin{split}
-                \phi_{i}^{n} - (1-k)\phi_{i}^{n-1} &\leq k \phi_{i}^{n-1},\\
-                \phi_{i}^{n} - \phi_{i}^{n-1} &\leq 0,\\
-                \phi_{i}^{n} &\leq  \phi_{i}^{n-1}.
-            \end{split}
-        \end{equation*}
-    It remains to show that \(\phi_{i-1}^{n} \leq \phi_{i}^{n}\).
-    \begin{equation*}
-        \begin{split}
-            \phi_{i-1}^{n} &\leq \phi_{i}^{n-1},\\
-            (1-k)\phi_{i-1}^{n} &\leq (1-k) \phi_{i}^{n-1}.
-        \end{split}
-    \end{equation*}
-    Again, using \eqref{eqn:solution-as-interpolation} to express \((1-k) \phi_{i}^{n-1}\)
-    \begin{equation*}
-        \begin{split}
-            (1-k)\phi_{i-1}^{n} &\leq \phi_{i}^{n} - k \phi_{i-1}^{n},\\
-            \phi_{i-1}^{n} &\leq \phi_{i}^{n}.
-        \end{split}
-    \end{equation*}
-    Thus,
+        which we assumed that holds.
+    For the case of \(\phi_{i}^{n} = \phi_{i-1}^{n+1}\) we get
     \[
-        \phi_{i-1}^{n} \leq \phi_{i}^{n} \leq \phi_{i}^{n-1}.
+        \phi_{i}^{n+1} = (1-k)\phi_{i}^{n} + k~\phi_{i}^{n} = \phi_{i}^{n},
     \]
-    The proof for the other case where the data is such that \(\phi_{i-1}^{n} \geq \phi_{i}^{n-1}\) is straightforward.
+    thus completing the proof.
     \end{proof}
 \end{theorem}
 \subsection{TVD condition}
@@ -152,113 +200,158 @@ as
     \sum_{i = -\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|,
 \end{equation}
 see,~e.g., \cite{1977_VanLeer,1983_Harten,1984_Sweby,1985_Yee,1990_Hirsch_BOOK,1992_LeVeque_BOOK,1996_Jasak,1998_Laney_BOOK,2000_Hoffmann,2002_LeVeque_BOOK,2007_Hirsch_BOOK}.
+To prove the TVD property of the implicit upwind scheme \eqref{eqn:implicit-upwind-1d},
+first we have to show that if the initial data has compact support, than the solution has this property.
+\begin{theorem}
+    If the initial data has compact support, thus
+    \(\phi_{i}^{n} \rightarrow 0 \) as \(i \rightarrow \infty\) or \(i \rightarrow -\infty\), then the solution of a scheme written as \eqref{eqn:implicit-upwind-1d} will also satisfy \(\phi_{i}^{n+1} \rightarrow 0 \) as \(i \rightarrow \infty\) or \(i \rightarrow -\infty\).
+\begin{proof}
+    Let us begin with proving that if \(\phi_{i}^{n} \rightarrow 0 \)  as \(i \rightarrow -\infty\), then \(\phi_{i}^{n+1} \rightarrow 0 \) as \(i \rightarrow -\infty\).
+
+    Assume, that for any \(\epsilon \in \mathbb{R}^+\), there exists \(I_{\epsilon} \in \mathbb{Z}\) such that
+    \begin{equation}\label{eqn:proof-compact-1}
+        0 < \phi_{i}^{n} < \epsilon \text{ for all } i < I_{\epsilon}.
+    \end{equation}
+    To have a unique solution, an inflow boundary condition must be given.
+    Let \(\mathcal{C}_{I_{\epsilon}}\) represent the cell at the inflow boundary.
+    Thus, we have to specify \(\phi_{I_{\epsilon}-1}^{n+1}\).
+    Since we attempt to solve the transport equation with positive speed \(v > 0\), the boundary value \(\phi_{I_{\epsilon}-1}^{n+1}\) must be coming from the upstream direction. Thus, it must be bounded by the values
+    \[
+        0 < \min_{i<I_{\epsilon}-1}(\phi_{i}^{n})
+        < \phi_{I_{\epsilon}-1}^{n+1}
+        < \max_{i<I_{\epsilon}-1}(\phi_{i}^{n})
+        < \epsilon,
+    \]
+    since \(I_{\epsilon}-1 < I_{\epsilon}\).
+    Thus,
+    \[
+        \phi_{i}^{n+1} \rightarrow 0 \text{ as } i \rightarrow -\infty,
+    \]
+    concluding the first part of the proof.
+
+    To finish, we want to show that if \(\phi_{i}^{n} \rightarrow 0 \)  as \(i \rightarrow \infty\), then \(\phi_{i}^{n+1} \rightarrow 0 \) as \(i \rightarrow \infty\).
+    Assume, that for any \(\epsilon_1 \in \mathbb{R}^+\), there exists \(I_{\epsilon_1} \in \mathbb{Z}\) such that
+    \begin{equation}\label{eqn:proof-compact-2}
+        0 < \phi_{i}^{n} < \epsilon_1 \text{ for all } i \geq I_{\epsilon_1}.
+    \end{equation}
+    Since
+    \begin{equation}
+        \min\left( \phi_{I_{\epsilon_1}-1}^{n+1},\phi_{I_{\epsilon_1}}^{n} \right)
+            \leq
+            \phi_{I_{\epsilon_1}}^{n+1}
+            \leq
+            \max\left( \phi_{I_{\epsilon_1}-1}^{n+1},\phi_{I_{\epsilon_1}}^{n} \right),
+    \end{equation}
+    this implies that
+    \[
+        |\phi_{I_{\epsilon_1}}^{n} - \phi_{I_{\epsilon_1}}^{n+1}|
+        \leq
+        |\phi_{I_{\epsilon_1}}^{n} - \phi_{I_{\epsilon_1}-1}^{n+1}|.
+    \]
+    Now choose an \(i > I_{\epsilon_2} > I_{\epsilon_1}\), such that for any \(\epsilon_2 \in \mathbb{R}^+\)
+    \[
+        |\phi_{i}^{n} - \phi_{i}^{n+1}|
+        < |\max_{i \geq I_{\epsilon_1}}(\phi_{i}^{n}) - \phi_{I_{\epsilon_2}}^{n+1}| < \epsilon_2.
+    \]
+    Denoting \(\epsilon = \epsilon_1 + \epsilon_2\) we conclude that there exists
+    \(I_{\epsilon} > I_{\epsilon_2} > I_{\epsilon_1}\) such that
+    \[
+        |\phi_{i}^{n} - \phi_{i}^{n+1}| < \epsilon,
+    \]
+    which implies that if \(\phi_{i}^{n} \rightarrow 0 \) as \(i \rightarrow \infty\), then the solution will also \(\phi_{i}^{n+1} \rightarrow 0 \) as \(i \rightarrow \infty\), thus completing the proof.
+\end{proof}
+\end{theorem}
 \begin{theorem}
 The solution of a numerical scheme written in the form
 \begin{equation}\label{eqn:implicit-upwind-1d-tvd-proof}
-    \phi_{i}^{n} =
-    \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right),
+    \phi_{i}^{n+1} =
+    \phi_{i}^{n} - c\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right),
 \end{equation}
 for \(c > 0\) and data with compact support,
-such that \(\phi_{i}^{n-1} \rightarrow 0 \) as \(i \rightarrow \infty\)
+such that \(\phi_{i}^{n} \rightarrow 0 \) as \(i \rightarrow \infty\)
 or \(i \rightarrow -\infty\), is total variation non-increasing
 \begin{equation}\label{eqn:tvd-condition}
-    TV(\phi_{i}^{n-1}) \geq TV(\phi_{i}^{n}).
+    TV(\phi_{i}^{n+1}) \leq TV(\phi_{i}^{n}).
 \end{equation}
 \begin{proof}
-We start by writing the scheme for cells \(i,i-1\)
+First we put the terms with \(n+1\) to the left-hand side, then we write the scheme for cells \(i,i-1\)
     \begin{align}
-        \phi_{i}^{n} &=
-        \phi_{i}^{n-1} - c\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right),
         \label{eqn:implicit-upwind-i}
+        \phi_{i}^{n+1}
+        + c\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right)
+        &= \phi_{i}^{n},
         \\
-        \phi_{i-1}^{n} &=
-        \phi_{i-1}^{n-1} - c\left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)
-        \label{eqn:implicit-upwind-i-1}.
+        \label{eqn:implicit-upwind-i-1}
+        \phi_{i-1}^{n+1}
+        + c\left( \phi_{i-1}^{n+1} - \phi_{i-2}^{n+1} \right)
+        &= \phi_{i-1}^{n}.
     \end{align}
 Then we subtract \eqref{eqn:implicit-upwind-i-1} from \eqref{eqn:implicit-upwind-i}
 to get
 \begin{equation}
     \begin{split}
-        \phi_{i}^{n} - \phi_{i-1}^{n} =
-        \phi_{i}^{n-1} - \phi_{i-1}^{n-1}
-        - c\left( \phi_{i}^{n} - \phi_{i-1}^{n}
-        - \phi_{i-1}^{n} + \phi_{i-2}^{n} \right),
+        \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+        + c\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+        \right) - c\left( \phi_{i-1}^{n+1} + \phi_{i-2}^{n+1} \right)
+        = \phi_{i}^{n} - \phi_{i-1}^{n},
         \\
-        \phi_{i}^{n} - \phi_{i-1}^{n} + c\left( \phi_{i}^{n} - \phi_{i-1}^{n}
-        - \phi_{i-1}^{n} + \phi_{i-2}^{n} \right)
-        =
-        \phi_{i}^{n-1} - \phi_{i-1}^{n-1},
-        \\
-        (1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
-        - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)
-        = \phi_{i}^{n-1} - \phi_{i-1}^{n-1}.
+        (1+c)\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right)
+        - c \left( \phi_{i-1}^{n+1} - \phi_{i-2}^{n+1} \right)
+        = \phi_{i}^{n} - \phi_{i-1}^{n}.
     \end{split}
 \end{equation}
-We take the absolute value
+We take the absolute value of both sides
 \begin{equation}\label{eqn:absolute-value-equivalence}
     \begin{split}
-        |(1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
-        - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)|
-        = |\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|.
+        |(1+c)\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right)
+        - c \left( \phi_{i-1}^{n+1} - \phi_{i-2}^{n+1} \right)|
+        = |\phi_{i}^{n} - \phi_{i-1}^{n}|.
     \end{split}
 \end{equation}
-Then we use the triangle inequality \(|a - b| \geq |a| - |b|\) and \(|c~a| = |c||a|\)
+Then we use the triangle inequality \(|a| - |b| \leq |a - b|\) and \(|c~a| = |c||a|\) to obtain
 \begin{equation}
-    |(1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
-    - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)|
-    \geq
     (1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
-        - c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|,
+    - c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|
+    \leq
+    |(1+c)\left( \phi_{i}^{n} - \phi_{i-1}^{n} \right)
+    - c \left( \phi_{i-1}^{n} - \phi_{i-2}^{n} \right)|.
 \end{equation}
 Thus, using \eqref{eqn:absolute-value-equivalence}
 \begin{equation}
-    |\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
-    \geq
-    (1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
-    - c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|.
+    (1+c)|\phi_{i}^{n+1} - \phi_{i-1}^{n+1}|
+    - c |\phi_{i-1}^{n+1} - \phi_{i-2}^{n+1}|
+    \leq
+    |\phi_{i}^{n} - \phi_{i-1}^{n}|.
 \end{equation}
 To complete the proof, we take the sum of both sides
 \begin{equation}\label{eqn:tvd-proof-sums}
     \begin{split}
-        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
-        &\geq
-        \sum_{i=-\infty}^{\infty}(1+c)|\phi_{i}^{n} - \phi_{i-1}^{n}|
-        - \sum_{i=-\infty}^{\infty} c |\phi_{i-1}^{n} - \phi_{i-2}^{n}|,
+        \sum_{i=-\infty}^{\infty}(1+c)|\phi_{i}^{n+1} - \phi_{i-1}^{n+1}|
+        - \sum_{i=-\infty}^{\infty} c |\phi_{i-1}^{n+1} - \phi_{i-2}^{n+1}|
+        &\leq
+        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|,
         \\
-        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n-1} - \phi_{i-1}^{n-1}|
-        &\geq
-        (1+c)\sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|
-        - c \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n} - \phi_{i-2}^{n}|.
+        (1+c)\sum_{i=-\infty}^{\infty}|\phi_{i}^{n+1} - \phi_{i-1}^{n+1}|
+        - c \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n+1} - \phi_{i-2}^{n+1}|
+        &\leq
+        \sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|.
     \end{split}
 \end{equation}
-To complete the proof, we use the fact that the data has compact support and the solution \(\phi^{n}\) satisfies the upwind range condition
-\eqref{eqn:implicit-upwind-range-condition}
+We assumed that the initial data has compact support, which implies that the solution also have this property, meaning that
 \begin{equation}
-    \begin{split}
-        \min\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
-        \leq
-        \phi_{i}^{n}\leq
-        \max\left( \phi_{i-1}^{n},\phi_{i}^{n-1} \right)
-        \text{ for all } i \in (-\infty,\infty),
-        \\
-        \phi_{-\infty,\infty}^{n-1} = 0,
-        \rightarrow
-        \phi_{-\infty,\infty}^{n} = 0
-        \rightarrow
-        \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n} - \phi_{i-2}^{n}|
-        = \sum_{i=-\infty}^{\infty}|\phi_{i}^{n} - \phi_{i-1}^{n}|
-        =TV(\phi^{n}).
-    \end{split}
+    \sum_{i=-\infty}^{\infty} |\phi_{i-1}^{n+1} - \phi_{i-2}^{n+1}|
+    = \sum_{i=-\infty}^{\infty}|\phi_{i}^{n+1} - \phi_{i-1}^{n+1}|
+    =TV(\phi^{n+1}).
 \end{equation}
 Thus, using \eqref{eqn:tvd-proof-sums} we conclude
 \begin{equation}
     \begin{split}
-        TV(\phi^{n-1})
-        &\geq
-        (1+c)TV(\phi^{n}) - c~TV(\phi^{n}),
+        (1+c)TV(\phi^{n+1}) - c~TV(\phi^{n+1})
+        &\leq
+        TV(\phi^{n}),
         \\
-        TV(\phi^{n-1})
-        &\geq
+        TV(\phi^{n+1})
+        &\leq
         TV(\phi^{n}).
     \end{split}
 \end{equation}
@@ -268,127 +361,127 @@ Thus, using \eqref{eqn:tvd-proof-sums} we conclude
 Since we can transform any scheme written in the form of \eqref{eqn:implicit-upwind-1d}
 to a scheme written as \eqref{eqn:implicit-uwpind-linear-interpolation} and
 vice versa, then it follows that if a scheme satisfies the implicit upwind range property \eqref{eqn:implicit-upwind-range-condition} it is also TVD.
-\subsection{Interpreting implicit schemes as a reconstruction in the current time step}
+% \subsection{Interpreting implicit schemes as a reconstruction in the current time step}
 
-Explicit finite volume schemes can be interpreted as a reconstruct-evolve-average (REA)
-algorithm \cite{1992_LeVeque_BOOK,2002_LeVeque_BOOK,1977_VanLeer}:
-\begin{enumerate}
-    \item Reconstruct a piecewise polynomial function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages
-    \item Evolve the function to obtain \(\tilde{\phi}_{i}^{n}(x,t_{n+1})\)
-    \item Compute the average of this evolved function over each cell to obtain the new cell averages\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{p_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
-\end{enumerate}
-Meaning, we reconstruct the values in a given cell using the cell averages.
-For example, the explicit upwind scheme can be interpreted as a piecewise constant reconstruction in the current time step. Then, we evolve this reconstruction and compute
-the cell averages in the new time step. We repeat this process until we reach the
-desired time.
+% Explicit finite volume schemes can be interpreted as a reconstruct-evolve-average (REA)
+% algorithm \cite{1992_LeVeque_BOOK,2002_LeVeque_BOOK,1977_VanLeer}:
+% \begin{enumerate}
+%     \item Reconstruct a piecewise polynomial function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages
+%     \item Evolve the function to obtain \(\tilde{\phi}_{i}^{n}(x,t_{n+1})\)
+%     \item Compute the average of this evolved function over each cell to obtain the new cell averages\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{p_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
+% \end{enumerate}
+% Meaning, we reconstruct the values in a given cell using the cell averages.
+% For example, the explicit upwind scheme can be interpreted as a piecewise constant reconstruction in the current time step. Then, we evolve this reconstruction and compute
+% the cell averages in the new time step. We repeat this process until we reach the
+% desired time.
 
-This interpretation can help construct high-order schemes, where instead of constant
-reconstruction we use linear, parabolic, etc., depending on the desired accuracy.
-Also, if we make sure that our reconstruction does not generate new extrema, then evolving and averaging operations will neither, meaning that our numerical solution
-will be oscillation free.
+% This interpretation can help construct high-order schemes, where instead of constant
+% reconstruction we use linear, parabolic, etc., depending on the desired accuracy.
+% Also, if we make sure that our reconstruction does not generate new extrema, then evolving and averaging operations will neither, meaning that our numerical solution
+% will be oscillation free.
 
-In this section we would like to show that implicit schemes can also be interpreted similarly by considering that the values travel along characteristics. Thus, the
-values in the new time step can be interpreted as values in the current time step.
+% In this section we would like to show that implicit schemes can also be interpreted similarly by considering that the values travel along characteristics. Thus, the
+% values in the new time step can be interpreted as values in the current time step.
 
-In this section we restrict our discussion to the simplest problem of advection with positive constant speed \(v > 0\).
+% In this section we restrict our discussion to the simplest problem of advection with positive constant speed \(v > 0\).
 
-We start with the most straightforward piecewise constant reconstruction:
-\begin{enumerate}
-    \item Reconstruct a piecewise constant function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages \(\phi_{i}^{n}\).
-    Thus,
-    \[
-        \tilde{\phi}_{i}^{n}(x,t_n) = \phi_{i}^{n} \text{ for all } x \in \mathcal{C}_i.
-    \]
-    \item Evolve the function using the exact solution of the advection equation
-    \[
-        \tilde{\phi}_{i}^{n}(x,t_{n+1}) = \tilde{\phi}_{i}^{n}(x - v\Delta t,t_{n})
-    \]
-    \item Compute the average of this evolved function over each cell to obtain the new cell averages
-    \[
-        \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x},
-    \]
-    or, equivalently
-    \[
-        \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i-v\Delta t}\tilde{\phi}_{i}^{n}(x,t_{n}) \dd{x}.
-    \]
-\end{enumerate}
-If the advection with a speed \(v\) over a time step \(\Delta t\) is smaller than a cell width \(\Delta x\), thus the time step is restricted by
-\begin{equation}\label{eqn:cfl-1}
-    \begin{split}
-        &0 \leq v\Delta t \leq \Delta x
-        \\
-        &0 \leq \frac{v\Delta t}{\Delta x} \leq 1,
-        \\
-        &0 \leq c \leq 1,
-    \end{split}
-\end{equation}
-where \(c\) is the Courant number, the algorithm yields the first order explicit upwind scheme. The new cell averages are computed as
-\begin{equation}\label{eqn:explicit-upwind-1}
-    \begin{split}
-        \phi_{i}^{n+1} &=\frac{1}{\Delta x}\left(
-            v\Delta t~\phi_{i-1}^{n} + \left( \Delta x - v\Delta t \right)\phi_{i}^{n}
-        \right)
-        \\
-        &=\frac{v\Delta t}{\Delta x}\phi_{i-1}^{n}
-        + \left( 1 - \frac{v\Delta t}{\Delta x} \right)\phi_{i}^{n}
-        \\
-        &= c~\phi_{i-1}^{n}
-        + \left( 1 - c \right)\phi_{i}^{n}.
-    \end{split}
-\end{equation}
-We can see, that if the CFL condition \eqref{eqn:cfl-1} holds, the new cell
-average is a linear interpolation between \(\phi_{i}^{n-1}\) and \(\phi_{i}^{n}\).
+% We start with the most straightforward piecewise constant reconstruction:
+% \begin{enumerate}
+%     \item Reconstruct a piecewise constant function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages \(\phi_{i}^{n}\).
+%     Thus,
+%     \[
+%         \tilde{\phi}_{i}^{n}(x,t_n) = \phi_{i}^{n} \text{ for all } x \in \mathcal{C}_i.
+%     \]
+%     \item Evolve the function using the exact solution of the advection equation
+%     \[
+%         \tilde{\phi}_{i}^{n}(x,t_{n+1}) = \tilde{\phi}_{i}^{n}(x - v\Delta t,t_{n})
+%     \]
+%     \item Compute the average of this evolved function over each cell to obtain the new cell averages
+%     \[
+%         \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x},
+%     \]
+%     or, equivalently
+%     \[
+%         \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i-v\Delta t}\tilde{\phi}_{i}^{n}(x,t_{n}) \dd{x}.
+%     \]
+% \end{enumerate}
+% If the advection with a speed \(v\) over a time step \(\Delta t\) is smaller than a cell width \(\Delta x\), thus the time step is restricted by
+% \begin{equation}\label{eqn:cfl-1}
+%     \begin{split}
+%         &0 \leq v\Delta t \leq \Delta x
+%         \\
+%         &0 \leq \frac{v\Delta t}{\Delta x} \leq 1,
+%         \\
+%         &0 \leq c \leq 1,
+%     \end{split}
+% \end{equation}
+% where \(c\) is the Courant number, the algorithm yields the first order explicit upwind scheme. The new cell averages are computed as
+% \begin{equation}\label{eqn:explicit-upwind-1}
+%     \begin{split}
+%         \phi_{i}^{n+1} &=\frac{1}{\Delta x}\left(
+%             v\Delta t~\phi_{i-1}^{n} + \left( \Delta x - v\Delta t \right)\phi_{i}^{n}
+%         \right)
+%         \\
+%         &=\frac{v\Delta t}{\Delta x}\phi_{i-1}^{n}
+%         + \left( 1 - \frac{v\Delta t}{\Delta x} \right)\phi_{i}^{n}
+%         \\
+%         &= c~\phi_{i-1}^{n}
+%         + \left( 1 - c \right)\phi_{i}^{n}.
+%     \end{split}
+% \end{equation}
+% We can see, that if the CFL condition \eqref{eqn:cfl-1} holds, the new cell
+% average is a linear interpolation between \(\phi_{i}^{n-1}\) and \(\phi_{i}^{n}\).
 
-Let us compare this with the implicit upwind scheme. We assume that in a cell the
-values \(\phi_{i}^{n}\) and \(\phi_{i-1}^{n+1}\) are known, and we want to compute
-the new cell average \(\phi_{i}^{n+1}\).
+% Let us compare this with the implicit upwind scheme. We assume that in a cell the
+% values \(\phi_{i}^{n}\) and \(\phi_{i-1}^{n+1}\) are known, and we want to compute
+% the new cell average \(\phi_{i}^{n+1}\).
 
-Assume constant reconstruction in the cell \(\mathcal{C}_i\) at the current time step \(t_n\)
-as before
-\[
-    \tilde{\phi}_{i}^{n}(x,t_n) = \phi_{i}^{n} \text{ for } x \in \mathcal{C}_i,
-\]
-and a constant reconstruction in the cell \(\mathcal{C}_{i-1}\) at the new time step \(t_{n+1}\)
-as
-\[
-    \tilde{\phi}_{i-1}^{n+1}(x,t_{n+1}) = \phi_{i-1}^{n+1}
-    \text{ for } x \in \mathcal{C}_{i-1}.
-\]
-Using the exact solution of the advection equation, we can project the reconstruction
-at time \(t_{n+1}\) to the current time \(t_{n}\), by evolving it back in time as
-\[
-    \tilde{\phi}_{i-1}^{n+1}(x,t_{n})
-    = \tilde{\phi}_{i-1}^{n+1}(x + v\Delta t,t_{n+1})
-    \text{ for } x \in \mathcal{C}_{i-1} - v\Delta t.
-\]
-In the explicit case, we computed the new average using the values \(\phi_{i-1}^{n}\),
-\(\phi_{i}^{n}\). But now, instead of \(\phi_{i-1}^{n}\) we have \(\phi_{i-1}^{n+1}\).
-What we can make is to compute an estimated value \(\phi_{i-1}^{n,*}\) to compute
-the new cell average as in \eqref{eqn:explicit-upwind-1}
-\begin{equation}
-    \phi_{i}^{n+1}
-    = c~\phi_{i-1}^{n,*}
-    + \left( 1 - c \right)\phi_{i}^{n}.
-\end{equation}
-We can express the cell average \(\phi_{i-1}^{n,*}\) using \(\phi_{i-1}^{n+1}, \phi_{i}^{n+1}\) by averaging in cell \(\mathcal{C}_{i-1}\)
-\begin{equation}
-    \phi_{i-1}^{n,*}
-    = \left( 1-c \right)\phi_{i-1}^{n+1}
-    + c~\phi_{i}^{n+1}.
-\end{equation}
-Thus, we can solve the 2 equations above for 2 unknowns \(\phi_{i-1}^{n,*}, \phi_{i}^{n+1}\). This yields
-\begin{equation*}
-    \begin{split}
-        \phi_{i-1}^{n,*}
-        = \left( 1 - \frac{c}{1+c} \right)\phi_{i-1}^{n+1}
-        + \frac{c}{1+c}\phi_{i}^{n},
-        \\
-        \phi_{i}^{n+1}
-        = \frac{c}{1+c}\phi_{i-1}^{n+1}
-        + \left( 1 - \frac{c}{1+c} \right)\phi_{i}^{n},
-    \end{split}
-\end{equation*}
-yielding the same result for the new cell average as solving the equation directly.
-Also notice that both values are linear interpolations between the known values
-\(\phi_{i-1}^{n+1}, \phi_{i}^{n}\).
+% Assume constant reconstruction in the cell \(\mathcal{C}_i\) at the current time step \(t_n\)
+% as before
+% \[
+%     \tilde{\phi}_{i}^{n}(x,t_n) = \phi_{i}^{n} \text{ for } x \in \mathcal{C}_i,
+% \]
+% and a constant reconstruction in the cell \(\mathcal{C}_{i-1}\) at the new time step \(t_{n+1}\)
+% as
+% \[
+%     \tilde{\phi}_{i-1}^{n+1}(x,t_{n+1}) = \phi_{i-1}^{n+1}
+%     \text{ for } x \in \mathcal{C}_{i-1}.
+% \]
+% Using the exact solution of the advection equation, we can project the reconstruction
+% at time \(t_{n+1}\) to the current time \(t_{n}\), by evolving it back in time as
+% \[
+%     \tilde{\phi}_{i-1}^{n+1}(x,t_{n})
+%     = \tilde{\phi}_{i-1}^{n+1}(x + v\Delta t,t_{n+1})
+%     \text{ for } x \in \mathcal{C}_{i-1} - v\Delta t.
+% \]
+% In the explicit case, we computed the new average using the values \(\phi_{i-1}^{n}\),
+% \(\phi_{i}^{n}\). But now, instead of \(\phi_{i-1}^{n}\) we have \(\phi_{i-1}^{n+1}\).
+% What we can make is to compute an estimated value \(\phi_{i-1}^{n,*}\) to compute
+% the new cell average as in \eqref{eqn:explicit-upwind-1}
+% \begin{equation}
+%     \phi_{i}^{n+1}
+%     = c~\phi_{i-1}^{n,*}
+%     + \left( 1 - c \right)\phi_{i}^{n}.
+% \end{equation}
+% We can express the cell average \(\phi_{i-1}^{n,*}\) using \(\phi_{i-1}^{n+1}, \phi_{i}^{n+1}\) by averaging in cell \(\mathcal{C}_{i-1}\)
+% \begin{equation}
+%     \phi_{i-1}^{n,*}
+%     = \left( 1-c \right)\phi_{i-1}^{n+1}
+%     + c~\phi_{i}^{n+1}.
+% \end{equation}
+% Thus, we can solve the 2 equations above for 2 unknowns \(\phi_{i-1}^{n,*}, \phi_{i}^{n+1}\). This yields
+% \begin{equation*}
+%     \begin{split}
+%         \phi_{i-1}^{n,*}
+%         = \left( 1 - \frac{c}{1+c} \right)\phi_{i-1}^{n+1}
+%         + \frac{c}{1+c}\phi_{i}^{n},
+%         \\
+%         \phi_{i}^{n+1}
+%         = \frac{c}{1+c}\phi_{i-1}^{n+1}
+%         + \left( 1 - \frac{c}{1+c} \right)\phi_{i}^{n},
+%     \end{split}
+% \end{equation*}
+% yielding the same result for the new cell average as solving the equation directly.
+% Also notice that both values are linear interpolations between the known values
+% \(\phi_{i-1}^{n+1}, \phi_{i}^{n}\).
 \end{document}
