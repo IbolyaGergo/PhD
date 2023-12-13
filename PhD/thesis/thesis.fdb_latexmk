@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber thesis"] 1702280779 "thesis.bcf" "thesis.bbl" "thesis" 1702284906 0
+["biber thesis"] 1702475916 "thesis.bcf" "thesis.bbl" "thesis" 1702476416 0
   "./thesis.bib" 1702280775 9168 7cb1dbebd7a4d0963c331563d6209866 ""
-  "thesis.bcf" 1702284905 108291 bc0556deac4da94bf8d049961ff02f03 "pdflatex"
+  "thesis.bcf" 1702476416 108291 bc0556deac4da94bf8d049961ff02f03 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1702284904 "/home/gibolya/IGergo/school/PhD/thesis/thesis.tex" "thesis.pdf" "thesis" 1702284906 0
-  "/home/gibolya/IGergo/school/PhD/thesis/thesis.tex" 1702280006 334 091cb352804a02f4cb6d9f7d846f5d4a ""
+["pdflatex"] 1702476414 "/home/gibolya/IGergo/school/PhD/thesis/thesis.tex" "thesis.pdf" "thesis" 1702476416 0
+  "/home/gibolya/IGergo/school/PhD/thesis/thesis.tex" 1702476414 364 e4d96e0488aa8d8397cc8599dca29ab9 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -38,12 +38,14 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb" 1248133631 34586 5a65dc15601f9c74fe3fb3f37b3b8b6f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1248133631 36118 fad905eba93cff5bce1e185fe980a177 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1248133631 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2022/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
   "/usr/local/texlive/2022/texmf-dist/tex/generic/babel-english/english.ldf" 1496785618 7008 9ff5fdcc865b01beca2b0fe4a46231d4 ""
@@ -145,13 +147,14 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1676751213 4623355 58034c3eb7ddf7eacc726a83d01e26d2 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1676751328 7879247 d95776519dcb244bce463b8381253830 ""
   "/usr/local/texlive/2022/texmf.cnf" 1676751207 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "1d/implicit-upwind.tex" 1702284584 13482 59954c7bceb1eb3530510c52bd1b436e ""
-  "preamble.tex" 1702284903 1165 56fa56512cd3b0da3e15de36de4acce6 ""
-  "thesis.aux" 1702284905 4805 3cc4bf70f59115f420abb11f541656f9 "pdflatex"
-  "thesis.bbl" 1702280780 17197 0e500554bd320c808257770ba271e8e9 "biber thesis"
-  "thesis.out" 1702284905 1204 79e794c39fff1073375f26aece407f5b "pdflatex"
-  "thesis.run.xml" 1702284905 2345 aceb721e777de8c62b52cdc7c120260c "pdflatex"
-  "thesis.tex" 1702280006 334 091cb352804a02f4cb6d9f7d846f5d4a ""
+  "1d/implicit-rea.tex" 1702476329 6215 8083f9c4a90848dfce74f949088a5622 ""
+  "1d/implicit-upwind.tex" 1702475910 22095 61eb7c205e44593f3da543ae2df96889 ""
+  "preamble.tex" 1702457493 1174 434b59bb3ae27e06938a34c2013f6d7a ""
+  "thesis.aux" 1702476416 5172 edc099c989bbbf9e64d63f8bf5999af7 "pdflatex"
+  "thesis.bbl" 1702475918 17197 0e500554bd320c808257770ba271e8e9 "biber thesis"
+  "thesis.out" 1702476416 1204 79e794c39fff1073375f26aece407f5b "pdflatex"
+  "thesis.run.xml" 1702476416 2345 aceb721e777de8c62b52cdc7c120260c "pdflatex"
+  "thesis.tex" 1702476414 364 e4d96e0488aa8d8397cc8599dca29ab9 ""
   (generated)
   "thesis.aux"
   "thesis.bcf"

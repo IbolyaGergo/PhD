@@ -1,12 +1,17 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  13 DEC 2023 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  13 DEC 2023 15:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/gibolya/IGergo/school/PhD/thesis/thesis.tex
-(/home/gibolya/IGergo/school/PhD/thesis/thesis.tex
+**/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex
+(/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-02-07> (/usr/local/texlive/2022/texmf-dist/tex/latex/base/report.cls
+L3 programming layer <2023-02-07> (/usr/local/texlive/2022/texmf-dist/tex/latex/subfiles/subfiles.cls
+Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
+Preamble taken from file `../thesis.tex'
+(/usr/local/texlive/2022/texmf-dist/tex/latex/import/import.sty
+Package: import 2020/04/01  v 6.2
+) (1d/../thesis.tex (/usr/local/texlive/2022/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
 (/usr/local/texlive/2022/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
@@ -601,34 +606,32 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip83
 )) (/usr/local/texlive/2022/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
- (/usr/local/texlive/2022/texmf-dist/tex/latex/import/import.sty
-Package: import 2020/04/01  v 6.2
-))
+)))
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (./thesis.aux)
-\openout1 = `thesis.aux'.
+ (1d/implicit-rea.aux)
+\openout1 = `implicit-rea.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 2.
+LaTeX Font Info:    ... okay on input line 2.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -697,24 +700,23 @@ File: slovak.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `thesis.bcf'.
+\openout3 = `implicit-rea.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' found.
- (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 3.
-Package biblatex Info: Reference segment=0 on input line 3.
-Package hyperref Info: Link coloring OFF on input line 3.
- (./thesis.out) (./thesis.out)
+Package biblatex Info: ... file 'implicit-rea.bbl' found.
+ (1d/implicit-rea.bbl)
+Package biblatex Info: Reference section=0 on input line 2.
+Package biblatex Info: Reference segment=0 on input line 2.
+Package hyperref Info: Link coloring OFF on input line 2.
+ (1d/implicit-rea.out) (1d/implicit-rea.out)
 \@outlinefile=\write4
-\openout4 = `thesis.out'.
+\openout4 = `implicit-rea.out'.
 
- (./1d/implicit-upwind.tex
-LaTeX Font Info:    Trying to load font information for U+msa on input line 21.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 21.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -722,33 +724,42 @@ Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5]) (./1d/implicit-rea.tex [6] [7] [8]) [9] [10
+] [2]
 
-]
-Overfull \hbox (0.13777pt too wide) in paragraph at lines 10--10
-[]\OT1/cmr/m/n/12 HC Yee, RF Warm-ing, and A Harten. \  Im-plicit to-tal vari-a-tion di-min-ish-ing (TVD)
- []
+LaTeX Warning: Reference `eqn:implicit-upwind-1d' on page 3 undefined on input line 129.
 
-[11] (./thesis.aux)
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 79E794C39FFF1073375F26AECE407F5B;1204.
-Package logreq Info: Writing requests to 'thesis.run.xml'.
-\openout1 = `thesis.run.xml'.
+[3] (1d/implicit-rea.aux)
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `implicit-rea.out' has not changed.
+(rerunfilecheck)             Checksum: E859FA7F658A6D250376D03D2C3DFED8;450.
+Package logreq Info: Writing requests to 'implicit-rea.run.xml'.
+\openout1 = `implicit-rea.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21980 strings out of 476029
- 383478 string characters out of 5790172
- 1867346 words of memory out of 5000000
- 42073 multiletter control sequences out of 15000+600000
- 520225 words of font info for 61 fonts, out of 8000000 for 9000
+ 21874 strings out of 476029
+ 381185 string characters out of 5790172
+ 1863346 words of memory out of 5000000
+ 42023 multiletter control sequences out of 15000+600000
+ 518196 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 77i,17n,80p,718b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (11 pages, 193885 bytes).
+ 97i,16n,97p,727b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{cite.0@1977_VanLeer} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2002_LeVeque_BOOK} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@1992_LeVeque_BOOK} has been referenced but does not exist, replaced by a fixed one
+
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on 1d/implicit-rea.pdf (3 pages, 98872 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 71 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 94 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
+ 9 words of extra memory for PDF output out of 10000 (max. 10000000)
 

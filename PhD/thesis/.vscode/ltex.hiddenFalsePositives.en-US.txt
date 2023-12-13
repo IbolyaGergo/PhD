@@ -11,3 +11,4 @@
 {"rule":"IF_IS","sentence":"^\\QFor the case \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q we can rewrite the approximation of the face values as \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, which is now written as \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, where the low-order flux is the implicit upwind flux \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q if \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q if \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, By applying the deferred correction procedure discussed above, the face value in the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-th iteration is computed as \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, where \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q and \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is computed using \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"HE_VERB_AGR","sentence":"^\\QSIAM journal on numerical analysis\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QSbornik\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q1d/implicit-upwind 1d/implicit-rea\\E$"}

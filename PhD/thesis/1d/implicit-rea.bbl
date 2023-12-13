@@ -1,0 +1,118 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{2002_LeVeque_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge university press}%
+      }
+      \strng{namehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{fullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{bibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorbibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authornamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorfullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Finite volume methods for hyperbolic problems}
+      \field{volume}{31}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque - Finite Volume Methods for Hyperbolic Equations.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Finite%20Volume%20Methods%20for%20Hyperbolic%20Equations.pdf
+      \endverb
+    \endentry
+    \entry{1992_LeVeque_BOOK}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{fullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{bibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorbibnamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authornamehash}{c5fc096f540a44e56f892cc83176f0fb}
+      \strng{authorfullhash}{c5fc096f540a44e56f892cc83176f0fb}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Numerical methods for conservation laws}
+      \field{volume}{214}
+      \field{year}{1992}
+      \verb{urlraw}
+      \verb http://tevza.org/home/course/modelling-II_2016/books/Leveque - Numerical Methods for Conservation Laws.pdf
+      \endverb
+      \verb{url}
+      \verb http://tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Numerical%20Methods%20for%20Conservation%20Laws.pdf
+      \endverb
+    \endentry
+    \entry{1977_VanLeer}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8cce1bbdbb258721a1579b743bbe9c17}{%
+           family={Van\bibnamedelima Leer},
+           familyi={V\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Bram},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{fullhash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{bibnamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authorbibnamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authornamehash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \strng{authorfullhash}{8cce1bbdbb258721a1579b743bbe9c17}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of computational physics}
+      \field{number}{3}
+      \field{title}{Towards the ultimate conservative difference scheme. IV. A new approach to numerical convection}
+      \field{volume}{23}
+      \field{year}{1977}
+      \field{pages}{276\bibrangedash 299}
+      \range{pages}{24}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
