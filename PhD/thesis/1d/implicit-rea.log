@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  13 DEC 2023 15:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  8 JAN 2024 09:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -724,28 +724,21 @@ Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2]
-
-LaTeX Warning: Reference `eqn:implicit-upwind-1d' on page 3 undefined on input line 129.
-
-[3] (1d/implicit-rea.aux)
-
-LaTeX Warning: There were undefined references.
-
+] [2] [3] [4] (1d/implicit-rea.aux)
 Package rerunfilecheck Info: File `implicit-rea.out' has not changed.
-(rerunfilecheck)             Checksum: E859FA7F658A6D250376D03D2C3DFED8;450.
+(rerunfilecheck)             Checksum: 8905F9EE0FB0EF73ED652FE4BA8AAEB8;90.
 Package logreq Info: Writing requests to 'implicit-rea.run.xml'.
 \openout1 = `implicit-rea.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21874 strings out of 476029
- 381185 string characters out of 5790172
- 1863346 words of memory out of 5000000
- 42023 multiletter control sequences out of 15000+600000
- 518196 words of font info for 54 fonts, out of 8000000 for 9000
+ 21893 strings out of 476029
+ 381440 string characters out of 5790172
+ 1867346 words of memory out of 5000000
+ 42035 multiletter control sequences out of 15000+600000
+ 521103 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,16n,97p,727b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,17n,97p,727b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{cite.0@1977_VanLeer} has been referenced but does not exist, replaced by a fixed one
 
@@ -755,11 +748,11 @@ pdfTeX warning (dest): name{cite.0@2002_LeVeque_BOOK} has been referenced but do
 
 pdfTeX warning (dest): name{cite.0@1992_LeVeque_BOOK} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on 1d/implicit-rea.pdf (3 pages, 98872 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on 1d/implicit-rea.pdf (4 pages, 121892 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 19 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 119 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
+ 25 named destinations out of 1000 (max. 500000)
+ 17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

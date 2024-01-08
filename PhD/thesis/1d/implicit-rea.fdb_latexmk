@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber 1d/implicit-rea"] 1702476007 "1d/implicit-rea.bcf" "1d/implicit-rea.bbl" "1d/implicit-rea" 1702476699 0
-  "./thesis.bib" 1702280775 9168 7cb1dbebd7a4d0963c331563d6209866 ""
-  "1d/implicit-rea.bcf" 1702476699 107050 c5a42a6f3a39c69bea03091b08262633 "pdflatex"
+["biber 1d/implicit-rea"] 0 "1d/implicit-rea.bcf" "1d/implicit-rea.bbl" "1d/implicit-rea" 1704701958 -1
+  "./thesis.bib" 1702498197 12388 362a33f3e6528e94f2f0d9fa91002ee3 ""
+  "1d/implicit-rea.bcf" 1704701958 107050 c5a42a6f3a39c69bea03091b08262633 "pdflatex"
   (generated)
   "1d/implicit-rea.bbl"
   "1d/implicit-rea.blg"
   (rewritten before read)
-["pdflatex"] 1702476696 "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex" "1d/implicit-rea.pdf" "implicit-rea" 1702476699 0
-  "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex" 1702476687 6371 02bd37a85641d357d6cecc6377e51ee5 ""
+["pdflatex"] 1704701957 "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex" "1d/implicit-rea.pdf" "implicit-rea" 1704701958 0
+  "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex" 1704701957 9019 17b39635dcbaac51e119a4f336513041 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -21,6 +21,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm" 1136768653 1504 f280e6069e577ca4a981806c471fe65c ""
@@ -33,8 +34,10 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2022/texmf-dist/tex/generic/atbegshi/atbegshi.sty" 1575674566 24708 5584a51a7101caf7e6bbf1fc27d8f7b1 ""
@@ -139,12 +142,12 @@
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1676751328 7879247 d95776519dcb244bce463b8381253830 ""
   "/usr/local/texlive/2022/texmf.cnf" 1676751207 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "1d/../thesis.tex" 1702476414 364 e4d96e0488aa8d8397cc8599dca29ab9 ""
-  "1d/implicit-rea.aux" 1702476699 1621 0c493cad3f8d0f886b0d5d0dc91da0b1 "pdflatex"
-  "1d/implicit-rea.bbl" 1702476009 4535 b89e128db246f84542fc01d8e29d6a3b "biber 1d/implicit-rea"
-  "1d/implicit-rea.out" 1702476699 450 e859fa7f658a6d250376d03d2c3dfed8 "pdflatex"
-  "1d/implicit-rea.run.xml" 1702476699 2387 aa38fd66953cf3974c7020712d9ee0f8 "pdflatex"
-  "1d/implicit-rea.tex" 1702476687 6371 02bd37a85641d357d6cecc6377e51ee5 ""
-  "preamble.tex" 1702457493 1174 434b59bb3ae27e06938a34c2013f6d7a ""
+  "1d/implicit-rea.aux" 1704701958 1733 0c864aeea553107988f712504c1fa46b "pdflatex"
+  "1d/implicit-rea.bbl" 1702708794 4535 b89e128db246f84542fc01d8e29d6a3b "biber 1d/implicit-rea"
+  "1d/implicit-rea.out" 1704701958 90 8905f9ee0fb0ef73ed652fe4ba8aaeb8 "pdflatex"
+  "1d/implicit-rea.run.xml" 1704701958 2387 aa38fd66953cf3974c7020712d9ee0f8 "pdflatex"
+  "1d/implicit-rea.tex" 1704701957 9019 17b39635dcbaac51e119a4f336513041 ""
+  "preamble.tex" 1702478333 1390 48bddb1cad9d7626ea5ae4ea87b53a12 ""
   (generated)
   "1d/implicit-rea.aux"
   "1d/implicit-rea.bcf"

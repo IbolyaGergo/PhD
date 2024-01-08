@@ -1,50 +1,92 @@
 \documentclass[../thesis.tex]{subfiles}
 \begin{document}
-\subsection{Interpreting implicit schemes as a reconstruction in the current time step}
+\section[]{Reconstruct-evolve-average \\* interpretation of implicit schemes}
 
-Explicit finite volume schemes can be interpreted as a reconstruct-evolve-average(REA)
+It is well known that explicit finite volume schemes can be interpreted as a reconstruct-evolve-average(REA)
 algorithm \cite{1992_LeVeque_BOOK,2002_LeVeque_BOOK,1977_VanLeer}:
 \begin{enumerate}
     \item Reconstruct a piecewise polynomial function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages
     \item Evolve the function to obtain \(\tilde{\phi}_{i}^{n}(x,t_{n+1})\)
-    \item Compute the average of this evolved function over each cell to obtain the new cell averages\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{p_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
+    \item Compute the average of this evolved function over each cell to obtain the new cell averages\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_{i}}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
 \end{enumerate}
-Meaning, we reconstruct the values in a given cell using the cell averages.
-For example, the explicit upwind scheme can be interpreted as a piecewise constant reconstruction in the current time step. Then, we evolve this reconstruction and compute
-the cell averages in the new time step. We repeat this process until we reach the
-desired time.
+% Meaning, we reconstruct the values in a given cell using the cell averages.
+% For example, the explicit upwind scheme can be interpreted as a piecewise constant reconstruction in the current time step. Then, we evolve this reconstruction and compute
+% the cell averages in the new time step. We repeat this process until we reach the
+% desired time.
 
-This interpretation can help construct high-order schemes, where instead of constant
-reconstruction we use linear, parabolic, etc., depending on the desired accuracy.
-Also, if we make sure that our reconstruction does not generate new extrema, then evolving and averaging operations will neither, meaning that our numerical solution
-will be oscillation free.
+This interpretation can help us to construct high-order schemes.
+Many flux and slope limiters can be designed using the fact that if the reconstruction process does not generate new extrema, then evolving and averaging operations will neither, meaning that our numerical solution will be oscillation free.
 
 In this section we would like to show that implicit schemes can also be interpreted similarly by considering that the values travel along characteristics. Thus, the
 values in the new time step can be interpreted as values in the current time step.
 
 In this section we restrict our discussion to the simplest problem of advection with positive constant speed \(v > 0\).
-
+\subsection[]{Courant numbers \(< 1\)}
+\subsubsection{Explicit case}
 We start with the most straightforward piecewise constant reconstruction:
 \begin{enumerate}
-    \item Reconstruct a piecewise constant function \(\tilde{\phi}_{i}^{n}(x,t_n)\) for all \(x \in \mathcal{C}_i\) from the known cell averages \(\phi_{i}^{n}\).
-    Thus,
+    \item Reconstruct a piecewise constant function \(\tilde{\phi}_{i}^{n}(x,t_n)\) from the known cell averages \(\phi_{i}^{n}\):
     \[
-        \tilde{\phi}_{i}^{n}(x,t_n) = \phi_{i}^{n} \text{ for all } x \in \mathcal{C}_i.
+        \tilde{\phi}_{i}^{n}(x,t_n)
+        = \phi_{i}^{n} \text{ for } x \in \mathcal{C}_{i} = (x_{i-1/2},x_{i+1/2}).
     \]
     \item Evolve the function using the exact solution of the advection equation
     \[
-        \tilde{\phi}_{i}^{n}(x,t_{n+1}) = \tilde{\phi}_{i}^{n}(x - v\Delta t,t_{n})
+        \tilde{\phi}_{i}^{n}(x,t_{n+1}) = \tilde{\phi}_{i}^{n}(x - v\Delta t,t_{n}),
     \]
+    meaning, that
+    \[
+        \tilde{\phi}_{i}^{n}(x,t_{n+1})
+        = \phi_{i}^{n} \text{ for } x \in \mathcal{C}_{i} + v\Delta t.\]
     \item Compute the average of this evolved function over each cell to obtain the new cell averages
-    \[
-        \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x},
-    \]
-    or, equivalently
-    \[
-        \phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_i-v\Delta t}\tilde{\phi}_{i}^{n}(x,t_{n}) \dd{x}.
-    \]
+    \begin{equation*}
+        \begin{split}
+            \phi_{i}^{n+1}
+            = \frac{1}{\Delta x}\int_{\mathcal{C}_i}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}= \frac{1}{\Delta x}\left(
+                \int_{x_{i-1/2}}^{x_{i+1/2}}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}
+                \right),
+        \end{split}
+    \end{equation*}
 \end{enumerate}
-If the advection with a speed \(v\) over a time step \(\Delta t\) is smaller than a cell width \(\Delta x\), thus the time step is restricted by
+To evaluate the integral, we need to know, by what values it the region \(\mathcal{C}_{i}\) occupied at time \(t_{n+1}\).
+If the advection speed \(v\) over a time step \(\Delta t\) is smaller than a cell width \(\Delta x\), thus
+\begin{equation}
+    0 \leq v\Delta t \leq \Delta x,
+\end{equation}
+then
+\begin{equation}
+    \tilde{\phi}_{i}^{n}(x,t_{n+1}) =
+    \begin{cases}
+        \phi_{i-1}^{n} & \text{for}\ x \in (x_{i-1/2},x_{i-1/2} + v\Delta t)
+        \\
+        \phi_{i}^{n} & \text{for}\ x \in (x_{i-1/2} + v\Delta t,x_{i+1/2}).
+    \end{cases}
+\end{equation}
+\begin{equation*}
+    \begin{split}
+        \phi_{i}^{n+1}
+        &= \frac{1}{\Delta x}\left(
+            \int_{x_{i-1/2}}^{x_{i-1/2} + v\Delta t}\phi_{i-1}^{n} \dd{x}
+            + \int_{x_{i-1/2} + v\Delta t}^{x_{i+1/2}}\phi_{i}^{n} \dd{x}
+            \right),
+        \\
+        &= \frac{1}{\Delta x}\left(
+            \phi_{i-1}^{n}\int_{x_{i-1/2}}^{x_{i-1/2} + v\Delta t} \dd{x}
+            + \phi_{i}^{n}\int_{x_{i-1/2} + v\Delta t}^{x_{i+1/2}} \dd{x}
+            \right),
+        \\
+        &= \frac{1}{\Delta x}\left(
+            \phi_{i-1}^{n}\int_{x_{i-1/2}}^{x_{i-1/2} + v\Delta t} \dd{x}
+            + \phi_{i}^{n}\int_{x_{i-1/2} + v\Delta t}^{x_{i+1/2}} \dd{x}
+            \right),
+        \\
+        &=\frac{v\Delta t}{\Delta x}\phi_{i-1}^{n}
+        + \left( 1 - \frac{v\Delta t}{\Delta x} \right)\phi_{i}^{n}
+        \\
+        &= c~\phi_{i-1}^{n}
+        + \left( 1 - c \right)\phi_{i}^{n}.
+    \end{split}
+\end{equation*}
 \begin{equation}\label{eqn:cfl-1}
     \begin{split}
         &0 \leq v\Delta t \leq \Delta x
@@ -54,7 +96,8 @@ If the advection with a speed \(v\) over a time step \(\Delta t\) is smaller tha
         &0 \leq c \leq 1,
     \end{split}
 \end{equation}
-where \(c\) is the Courant number, the algorithm yields the first order explicit upwind scheme. The new cell averages are computed as
+where \(c\) is the Courant number, the algorithm yields the first order explicit upwind scheme.
+The new cell averages can be computed using the above described algorithm as
 \begin{equation}\label{eqn:explicit-upwind-1}
     \begin{split}
         \phi_{i}^{n+1} &=\frac{1}{\Delta x}\left(
@@ -71,14 +114,27 @@ where \(c\) is the Courant number, the algorithm yields the first order explicit
 We can see, that if the CFL condition \eqref{eqn:cfl-1} holds, the new cell
 average is a linear interpolation between \(\phi_{i}^{n-1}\) and \(\phi_{i}^{n}\).
 
-Let us compare this with the implicit upwind scheme
+\subsubsection{Implicit case}
+Let us first look at the implicit upwind scheme
 \begin{equation}\label{eqn:rea-implicit-upwind-1d}
     \phi_{i}^{n+1} =
     \phi_{i}^{n} - c\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right).
 \end{equation}
-We assume that in a cell the
-values \(\phi_{i}^{n}\) and \(\phi_{i-1}^{n+1}\) are known, and we want to compute
-the new cell average \(\phi_{i}^{n+1}\).
+Solving for the new cell average \(\phi_{i}^{n+1}\) we get
+\begin{equation*}
+    \begin{split}
+        \phi_{i-1}^{n,*}
+        = \left( 1 - \frac{c}{1+c} \right)\phi_{i-1}^{n+1}
+        + \frac{c}{1+c}\phi_{i}^{n},
+        \\
+        \phi_{i}^{n+1}
+        = \frac{c}{1+c}\phi_{i-1}^{n+1}
+        + \left( 1 - \frac{c}{1+c} \right)\phi_{i}^{n}.
+    \end{split}
+\end{equation*}
+Using the fact that if we start the computation at the inflow boundary, where an inflow boundary condition must be specified, reaching the \(n\)-th cell, \(\phi_{i}^{n}\) and \(\phi_{i-1}^{n+1}\) will be known. Thus, using these values, we obtain the new cell average \(\phi_{i}^{n+1}\).
+
+How can this equation be interpreted as an REA algorithm?
 
 Assume constant reconstruction in the cell \(\mathcal{C}_i\) at the current time step \(t_n\)
 as before
@@ -91,13 +147,12 @@ as
     \tilde{\phi}_{i-1}^{n+1}(x,t_{n+1}) = \phi_{i-1}^{n+1}
     \text{ for } x \in \mathcal{C}_{i-1}.
 \]
-Using the exact solution of the advection equation, we can project the reconstruction
-at time \(t_{n+1}\) to the current time \(t_{n}\), by evolving it back in time as
+Using the exact solution of the advection equation, we evolve the value from the current time step
 \[
-    \tilde{\phi}_{i-1}^{n+1}(x,t_{n})
-    = \tilde{\phi}_{i-1}^{n+1}(x + v\Delta t,t_{n+1})
-    \text{ for } x \in \mathcal{C}_{i-1} - v\Delta t.
+    \tilde{\phi}_{i}^{n}(x,t_{n+1}) = \tilde{\phi}_{i}^{n}(x - v\Delta t,t_{n}).
 \]
+To obtain the new cell average, we need to evaluate the integral
+\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_{i}}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
 In the explicit case, we computed the new average using the values \(\phi_{i-1}^{n}\),
 \(\phi_{i}^{n}\). But now, instead of \(\phi_{i-1}^{n}\) we have \(\phi_{i-1}^{n+1}\).
 What we can make is to compute an estimated value \(\phi_{i-1}^{n,*}\) to compute
@@ -113,7 +168,7 @@ We can express the cell average \(\phi_{i-1}^{n,*}\) using \(\phi_{i-1}^{n+1}, \
     = \left( 1-c \right)\phi_{i-1}^{n+1}
     + c~\phi_{i}^{n+1}.
 \end{equation}
-Thus, we can solve the 2 equations above for 2 unknowns \(\phi_{i-1}^{n,*}, \phi_{i}^{n+1}\). This yields
+Thus, we can solve the 2 equations above for 2 unknowns \(\phi_{i-1}^{n,*}, \phi_{i}^{n+1}\) to get
 \begin{equation*}
     \begin{split}
         \phi_{i-1}^{n,*}
@@ -125,8 +180,9 @@ Thus, we can solve the 2 equations above for 2 unknowns \(\phi_{i-1}^{n,*}, \phi
         + \left( 1 - \frac{c}{1+c} \right)\phi_{i}^{n},
     \end{split}
 \end{equation*}
-yielding the same result for the new cell average as solving the equation directly.
-This shows that the REA interpretation of the scheme \eqref{eqn:implicit-upwind-1d} is correct.
+yielding the same result for the new cell average as solving the equation
+directly. This shows that the REA interpretation of the implicit upwind scheme \eqref{eqn:rea-implicit-upwind-1d} is correct.
 Also notice that both values are linear interpolations between the known values
-\(\phi_{i-1}^{n+1}, \phi_{i}^{n}\).
+\(\phi_{i-1}^{n+1}, \phi_{i}^{n}\). Thus, to solve the above equation \eqref{eqn:rea-implicit-upwind-1d},we don't need an estimated value for \(\phi_{i-1}^{n}\).
+However, interpreting the solution in this manner can help us to deepen our understanding of the behavior of the solutions. Also, in later sections, it will be a great help for us to develop implicit high-resolution schemes.
 \end{document}
