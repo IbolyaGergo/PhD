@@ -19,6 +19,46 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{2023_Frolkovic}{article}{}
+      \name{author}{2}{}{%
+        {{hash=25ad8db6299250ab3d2638d6f6d34737}{%
+           family={Frolkovič},
+           familyi={F\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=659e3c354329ac8a6897f69954217f91}{%
+           family={Žeravỳ},
+           familyi={Ž\bibinitperiod},
+           given={Michal},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{e9246d514f4c7ba7b233b921e12decce}
+      \strng{fullhash}{e9246d514f4c7ba7b233b921e12decce}
+      \strng{bibnamehash}{e9246d514f4c7ba7b233b921e12decce}
+      \strng{authorbibnamehash}{e9246d514f4c7ba7b233b921e12decce}
+      \strng{authornamehash}{e9246d514f4c7ba7b233b921e12decce}
+      \strng{authorfullhash}{e9246d514f4c7ba7b233b921e12decce}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Applied Mathematics and Computation}
+      \field{title}{High resolution compact implicit numerical scheme for conservation laws}
+      \field{volume}{442}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{pages}{127720}
+      \range{pages}{1}
+      \verb{urlraw}
+      \verb https://www.researchgate.net/profile/Peter-Frolkovic/publication/365886997_High_resolution_compact_implicit_numerical_scheme_for_conservation_laws/links/63888ddf2c563722f2297b03/High-resolution-compact-implicit-numerical-scheme-for-conservation-laws.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.researchgate.net/profile/Peter-Frolkovic/publication/365886997_High_resolution_compact_implicit_numerical_scheme_for_conservation_laws/links/63888ddf2c563722f2297b03/High-resolution-compact-implicit-numerical-scheme-for-conservation-laws.pdf
+      \endverb
+    \endentry
     \entry{1983_Harten}{article}{}
       \name{author}{3}{}{%
         {{hash=b31882597bb5adf5c5cf5989e6bfa154}{%

@@ -2362,9 +2362,10 @@
     <bcf:citekey order="3" intorder="9">2000_Hoffmann</bcf:citekey>
     <bcf:citekey order="3" intorder="10">2002_LeVeque_BOOK</bcf:citekey>
     <bcf:citekey order="3" intorder="11">2007_Hirsch_BOOK</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">1992_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="4" intorder="2">2002_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="4" intorder="3">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">1992_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="5" intorder="2">2002_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="5" intorder="3">1977_VanLeer</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
