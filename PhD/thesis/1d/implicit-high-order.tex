@@ -1,0 +1,1348 @@
+\documentclass[../thesis.tex]{subfiles}
+\begin{document}
+\graphicspath{ {./img/} }
+\subsection[]{High-order implicit schemes based polynomial reconstruction}
+We are interested in constructing implicit finite-volume schemes that can be solved efficiently. Thus, e.g., yields a similar system of equations with a bidiagonal matrix as in the case of implicit-upwind scheme, where we can simply compute the solution one by one, starting at the inflow boundary.
+As a guidance, let us use our knowledge of the solutions of the advection equation. In that case we know that the solution is the initial values translating along characteristics, see Figure~\ref{fig:characteristics-1d}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Characteristics-crop.pdf}
+	\caption{Averages in \(x-t\) coordinates}
+	\label{fig:characteristics-1d}
+\end{figure}
+The finite-volume schemes differ only in their definition of the numerical fluxes, thus, how can it predict the flow of a quantity through a cell face in a given time interval.
+Our goal is to compute the flux through the face at \(x_{i+1/2}\) using the known cell averages.
+For convenience, we shift to space coordinates.
+This way we can see the connection directly between well established explicit schemes based on polynomial reconstruction \cite{1977_VanLeer,2002_LeVeque_BOOK} and our implicit schemes.
+We could equivalently shift to time coordinates, as it was done in, e.g., \cite{2023_Barsukow,2022_Eimer}.
+We are interested in compact schemes in a sense that to compute the time-average of the flux through the face at \(x_{i+1/2}\) we want to use the stencil \(i-1, i, i+1\).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{2nd-order-crop.pdf}
+	\caption{Linear reconstruction with slope \(\sigma\)}
+	\label{fig:linear-rec-1d}
+\end{figure}
+Let us begin with a linear reconstruction yielding second-order finite volume schemes, see Figure \ref{fig:linear-rec-1d}.
+For \(v>0\), the quantity that flow through the face at \(x_{i+1/2}\) is simply the shaded area
+\[ v\Delta t\left[
+    \phi_{i}^{n+1} + \sigma_{i}\left( \frac{\Delta x}{2} + \frac{v\Delta t}{2} \right)
+\right], \]
+where \(\sigma_{i}\) is the slope.
+Thus, the full update of the cell average is
+\begin{equation}
+    \begin{split}
+        \phi_{i}^{n+1}\Delta x
+        =
+        \phi_{i}^{n}\Delta x
+        &-v\Delta t\left[
+            \phi_{i}^{n+1} + \sigma_{i}\left( \frac{\Delta x}{2} + \frac{v\Delta t}{2} \right)
+        \right]
+        \\
+        &+v\Delta t\left[
+            \phi_{i-1}^{n+1} + \sigma_{i-1}\left( \frac{\Delta x}{2} + \frac{v\Delta t}{2} \right)
+        \right].
+    \end{split}
+\end{equation}
+Dividing by the cell width \(\Delta x\) and further simplifying we can write a general second order scheme as
+\begin{equation}\label{eqn:second-order-implicit}
+    \begin{split}
+        \phi_{i}^{n+1}
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            + \sigma_{i}\Delta x\frac{1+c}{2} - \phi_{i-1}^{n+1}
+            -\sigma_{i-1}\Delta x\frac{1+c}{2} \right)
+        \\
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            - \phi_{i-1}^{n+1}
+            \right)
+            -c\left(
+            \sigma_{i} - \sigma_{i-1}
+            \right)\Delta x\frac{1+c}{2},
+    \end{split}
+\end{equation}
+where \(c = \frac{v\Delta t}{\Delta x}\) is the Courant number.
+Different choices for the slope \(\sigma_{i}\)
+yield different schemes studied in previous works,
+see, e.g.,~\cite{2018_Frolkovic,2023_Frolkovic,2014_Mikula}.
+
+In particular, if our linear reconstruction satisfies the integral equations
+\begin{equation}
+    \begin{split}
+        \frac{1}{\Delta x}
+        \int_{x_{i+1/2}}^{x_{i+3/2}}
+        \phi_{i}^{n+1} + \sigma_{i}
+        \left( x - (x_{i}-v\Delta t) \right)\dd{x}
+        &= \phi_{i+1}^{n},
+        \\
+        \frac{1}{\Delta x}
+        \int_{x_{i-1/2}-v\Delta t}^{x_{i+1/2}-v\Delta t}
+        \phi_{i}^{n+1} + \sigma_{i}
+        \left( x - (x_{i}-v\Delta t) \right)\dd{x}
+        &= \phi_{i}^{n+1},
+    \end{split}
+\end{equation}
+we get the slope
+\begin{equation}
+    \label{eqn:iioe-slope}
+    \sigma_{i} = \frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}.
+\end{equation}
+Substituting \eqref{eqn:iioe-slope} to \eqref{eqn:second-order-implicit} yields the scheme
+\begin{equation}\label{eqn:iioe-1d}
+    \begin{split}
+        \phi_{i}^{n+1}
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            - \phi_{i-1}^{n+1}
+            \right)
+            -c\left(
+            \sigma_{i} - \sigma_{i-1}
+            \right)\Delta x\frac{1+c}{2},
+        \\
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            - \phi_{i-1}^{n+1}
+            \right)
+            -c\left(
+                \frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+                - \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{(1+c)\Delta x}
+            \right)\Delta x\frac{1+c}{2},
+        \\
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            - \phi_{i-1}^{n+1}
+            \right)
+            -\frac{c}{2}\left(
+                \phi_{i+1}^{n} - \phi_{i}^{n+1}
+                - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
+            \right),
+        \\
+        &= \phi_{i}^{n}
+            -c\left(
+                \frac{\phi_{i+1}^{n} + \phi_{i}^{n+1}}{2}
+                - \frac{\phi_{i}^{n} + \phi_{i-1}^{n+1}}{2}
+            \right),
+    \end{split}
+\end{equation}
+which one can recognize is the IIOE scheme for linear advection with constant speed in 1D \cite{2014_Mikula,2018_Frolkovic,2020_Ibolya_CONF}.
+\subsection[]{Stabilization of implicit schemes}
+In this section we construct stabilized schemes by requiring the updated cell average to lie between values \(\phi_{i-1}^{n+1},\phi_{i}^{n}\), thus
+\begin{equation}\label{eqn:implicit-upwind-range-condition}
+    \min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right)
+    \leq
+    \phi_{i}^{n+1}
+    \leq
+    \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right),
+\end{equation}
+for \(c > 0\). We can distinguish three cases:
+\begin{enumerate}
+    \item \(\phi_{i}^{n} > \phi_{i-1}^{n+1}:\)
+        \[\min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i-1}^{n+1},\quad
+        \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i}^{n}.\]
+        We can rewrite \eqref{eqn:implicit-upwind-range-condition} as
+        \begin{equation*}
+            \begin{split}
+                \phi_{i-1}^{n+1}
+                &\leq
+                \phi_{i}^{n+1}
+                \leq
+                \phi_{i}^{n},
+                \\
+                0
+                &\leq
+                \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+                \leq
+                \phi_{i}^{n} - \phi_{i-1}^{n+1},
+                \\
+                0
+                &\leq
+                \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \leq
+                1.
+            \end{split}
+        \end{equation*}
+    \item \(\phi_{i}^{n} < \phi_{i-1}^{n+1}:\)
+        \[\min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i}^{n},\quad
+        \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i-1}^{n+1}.\]
+        We can rewrite \eqref{eqn:implicit-upwind-range-condition} as
+        \begin{equation*}
+            \begin{split}
+                \phi_{i}^{n}
+                &\leq
+                \phi_{i}^{n+1}
+                \leq
+                \phi_{i-1}^{n+1},
+                \\
+                \phi_{i}^{n} - \phi_{i-1}^{n+1}
+                &\leq
+                \phi_{i}^{n+1} - \phi_{i-1}^{n+1}
+                \leq
+                0,
+                \\
+                1
+                &\geq
+                \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+                \geq
+                0.
+            \end{split}
+        \end{equation*}
+    \item \(\phi_{i}^{n} = \phi_{i-1}^{n+1}\), in which case we have\[\phi_{i}^{n} = \phi_{i-1}^{n+1} = \phi_{i}^{n+1}.\]
+\end{enumerate}
+Notice, that for the first two cases, where \(\phi_{i}^{n} \neq \phi_{i-1}^{n+1}\) we can simply require
+\begin{equation}\label{eqn:upwind-range-simpler}
+    0
+    \leq
+    \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    \leq
+    1
+\end{equation}
+instead of \eqref{eqn:implicit-upwind-range-condition} to simplify the analysis.
+The condition above can be interpreted as the upwind range condition\cite{1998_Laney_BOOK}
+or data compatibility condition \cite{2009_Toro_BOOK}, or upwind monotonic property \cite{1989_Huynh_CONF} for implicit schemes.
+The idea is that the solution travels along characteristics and this value is always bounded by its neighbors in space-time.
+Notice that min and max is a combination of values from both time steps \(n, n+1\).
+This distinguishes the implicit upwind range property from the explicit one.
+In the explicit case, the min and max are chosen only from the values at the current time step \(n\).
+
+First, we show that if a scheme satisfies the upwind-range-condition, then it is also total variation non-increasing, or TVD.
+In order to show this, first notice that if the new cell average \(\phi_{i}^{n+1}\) lies
+between the values \(\phi_{i-1}^{n+1}, \phi_{i}^{n}\), then it can be written as a convex combination of the two
+\begin{equation}\label{eqn:convex-combination}
+    \phi_{i}^{n+1} =
+    k_{i}\phi_{i}^{n} + (1-k_{i})\phi_{i-1}^{n+1},
+\end{equation}
+for some \(0 \leq k_{i} \leq 1\).
+For \(k_{i} > 0\), we can recast the above to a conservation form as
+\begin{equation}\label{eqn:convex-combination-conservative}
+    \begin{split}
+        \phi_{i}^{n+1}
+        &=
+        k_{i}\phi_{i}^{n} + (1-k_{i})\phi_{i-1}^{n+1},
+        \\
+        \frac{1}{k_{i}}\phi_{i}^{n+1}
+        &=
+        \phi_{i}^{n} + \frac{1-k_{i}}{k_{i}}\phi_{i-1}^{n+1},
+        \\
+        \frac{1}{k_{i}}\phi_{i}^{n+1} + \phi_{i}^{n+1} - \phi_{i}^{n+1}
+        &=
+        \phi_{i}^{n} + \frac{1-k_{i}}{k_{i}}\phi_{i-1}^{n+1},
+        \\
+        \phi_{i}^{n+1} + \frac{1-k_{i}}{k_{i}}\phi_{i}^{n+1}
+        &=
+        \phi_{i}^{n} + \frac{1-k_{i}}{k_{i}}\phi_{i-1}^{n+1},
+        \\
+        \phi_{i}^{n+1}
+        &=
+        \phi_{i}^{n} - \frac{1-k_{i}}{k_{i}}\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right).
+    \end{split}
+\end{equation}
+Notice that if \(0 \leq k_{i} \leq 1\), then \( \frac{1-k_{i}}{k_{i}} > 0\), which is sufficient for a scheme to be TVD, see, e.g.,~\cite{2007_Duraisamy,2023_Frolkovic}.
+We can solve \eqref{eqn:second-order-implicit} for the
+new cell average
+\begin{equation}\label{eqn: second order implicit - solution}
+    \phi_{i}^{n+1} =
+    \frac{\phi_{i}^{n} +
+    c~\phi_{i-1}^{n+1}}{1+c}
+    -\frac{c}{2}\left(
+        \sigma_{i} - \sigma_{i-1}
+        \right)\Delta x.
+\end{equation}
+Substituting to the upwind range condition
+\[
+    0
+    \leq
+    \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+    {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    \leq
+    1
+\]we get
+\begin{equation}
+    \begin{split}\label{eqn: urc-all c-necessary}
+        0
+        &\leq
+        \frac{
+        \frac{\phi_{i}^{n} +
+        c~\phi_{i-1}^{n+1}}{1+c}
+        -\frac{c}{2}\left(
+            \sigma_{i} - \sigma_{i-1}
+            \right)\Delta x - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{1+c}
+        -\frac{c}{2}\left(
+            \sigma_{i} - \sigma_{i-1}
+            \right)\Delta x}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1.
+    \end{split}
+\end{equation}
+We require that the outflow be at most the downwind outflow, by considering
+\begin{equation}\label{eqn: urc-all c-bounded slope}
+    \begin{split}
+        0
+        \leq
+        \frac{\phi_{i-1}^{n+1}
+        +\sigma_{i-1}\frac{1+c}{2}\Delta x
+        - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        1,
+        \\
+        0
+        \leq
+        \frac{1+c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        1,
+        \\
+        0
+        \leq
+        \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        \frac{c}{1+c},
+        \\
+        |\sigma_{i-1}|
+        &\leq
+        2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}.
+    \end{split}
+\end{equation}
+If the slope \(\sigma_{i-1}\) is available, then
+\(\sigma_{i}\) has to satisfy
+\begin{equation}
+    \begin{split}
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        -\left(\frac{1}{1+c}
+        + \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}\right)
+        &\leq
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1-\left(\frac{1}{1+c}
+        + \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}\right),
+        \\
+        -\left(\frac{1}{1+c}
+        + \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}\right)
+        &\leq
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{c}{1+c}
+        - \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+        \\
+        \frac{1}{1+c}
+        + \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\geq
+        \frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \geq
+        \frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -\frac{c}{1+c},
+        \\
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -\frac{2}{1+c}
+        &\leq
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{2}{c(1+c)}
+        + \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+        \\
+        \left|\sigma_{i-1}
+        -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}\right|
+        &\leq
+        |\sigma_{i}|
+        \leq
+        \left|\frac{2}{c}
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}
+        + \sigma_{i-1}\right|.
+    \end{split}
+\end{equation}
+From \eqref{eqn: urc-all c-bounded slope} we have
+\begin{equation}
+    \begin{split}
+        |\sigma_{i}|
+        &\leq
+        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+        {(1+c)\Delta x},
+        \\
+        \left|\sigma_{i-1}
+        -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}\right|
+        \leq
+        |\sigma_{i}|
+        &\leq
+        \min\left( \left|\frac{2}{c}
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}
+        + \sigma_{i-1}\right|,
+        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+        {(1+c)\Delta x}\right).
+    \end{split}
+\end{equation}
+Using \eqref{eqn: urc-all c-necessary} and \eqref{eqn: urc-all c-bounded slope}, we can derive sufficient condition for the slope \(\sigma_{i}\)
+\begin{equation}\label{eqn: urc-all c- sufficient}
+    \begin{split}
+        0
+        \leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        1 - \frac{c}{1+c},
+        \\
+        0
+        \leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        \frac{1}{1+c},
+        \\
+        0
+        \leq
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        \frac{2}{c}
+        \frac{1}{1+c},
+        \\
+        |\sigma_{i}|
+        &\leq
+        \frac{2}{c}
+        \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
+        {(1+c)\Delta x}.
+    \end{split}
+\end{equation}
+\begin{equation}
+    |\sigma_{i}|
+    \leq
+    \min \left(
+        \frac{2}{c}
+        \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
+        {(1+c)\Delta x},
+        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+        {(1+c)\Delta x}
+    \right).
+\end{equation}
+\begin{remark}
+    We can derive similar schemes appearing in \cite{2023_Frolkovic} by writing the slope as a convex combination
+    \begin{equation}
+        \begin{split}
+            \sigma_{i} &=
+            (1-\omega_{i})
+            \frac{\phi_{i+1}^{n}-\phi_{i}^{n+1}}
+            {(1+c)\Delta x}
+            + \omega_{i}
+            \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+            {(1+c)\Delta x},
+            \\
+            &=
+            \left( 1 - \omega_{i} + \omega_{i}r_i \right)
+            \frac{\phi_{i+1}^{n}-\phi_{i}^{n+1}}
+            {(1+c)\Delta x},
+            \\
+            &=
+            \Psi_{i}
+            \frac{\phi_{i+1}^{n}-\phi_{i}^{n+1}}
+            {(1+c)\Delta x},
+        \end{split}
+    \end{equation}
+where
+\begin{equation}
+    0 \leq \omega_{i} \leq 1,\quad
+    \Psi_{i} = \Psi_{i}(r_{i}) =
+    \left( 1 - \omega_{i} + \omega_{i}r_{i} \right),
+    \quad
+    r_{i} = \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    {\phi_{i+1}^{n}-\phi_{i}^{n+1}}.
+\end{equation}
+Substituting the new form of the slopes we get
+\begin{equation}\label{eqn: Frolkovic - necessary condition}
+    \begin{split}
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{
+            \Psi_{i}
+            \frac{\phi_{i+1}^{n}-\phi_{i}^{n+1}}
+            {(1+c)\Delta x}\Delta x}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{
+            \Psi_{i-1}
+            \frac{\phi_{i}^{n}-\phi_{i-1}^{n+1}}
+            {(1+c)\Delta x}\Delta x}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        +\frac{c}{2(1+c)}
+        \Psi_{i-1}
+        \leq
+        1.
+    \end{split}
+\end{equation}
+Also, we consider
+\begin{equation}
+    \begin{split}\label{eqn: Frolkovic - psi bounds}
+        0
+        &\leq
+        \frac{\phi_{i-1}^{n+1}
+        +\sigma_{i-1}\frac{1+c}{2}\Delta x
+        - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{\phi_{i-1}^{n+1}
+        +\Psi_{i-1}
+        \frac{\phi_{i}^{n}-\phi_{i-1}^{n+1}}
+        {(1+c)\Delta x}\frac{1+c}{2}\Delta x
+        - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \Psi_{i-1}
+        \leq
+        2.
+    \end{split}
+\end{equation}
+If \(\Psi_{i-1}\) is available, then
+\begin{equation}
+    \begin{split}
+        -\left(
+            \frac{1}{1+c} + \frac{c}{2(1+c)}\Psi_{i-1} \right)
+        &\leq
+        -\frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        1-\left(
+            \frac{1}{1+c} + \frac{c}{2(1+c)}\Psi_{i-1} \right),
+        \\
+        -\left(
+            \frac{1}{1+c} + \frac{c}{2(1+c)}\Psi_{i-1} \right)
+        &\leq
+        -\frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        \frac{c}{1+c} - \frac{c}{2(1+c)}\Psi_{i-1},
+        \\
+        \frac{1}{1+c} + \frac{c}{2(1+c)}\Psi_{i-1}
+        &\geq
+        \frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        \geq
+        \frac{c}{2(1+c)}\Psi_{i-1} - \frac{c}{1+c},
+        \\
+        \frac{2}{c} + \Psi_{i-1}
+        &\geq
+        \frac{\Psi_{i}}{r_{i}}
+        \geq
+        \Psi_{i-1} - 2,
+        \\
+        \Psi_{i-1} - 2
+        &\leq
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        \frac{2}{c} + \Psi_{i-1},
+        \\
+        0
+        &\leq
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        \frac{2}{c} + \Psi_{i-1},
+    \end{split}
+\end{equation}
+since \(\Psi_{i-1} - 2 \leq 0\) from \eqref{eqn: Frolkovic - psi bounds}.
+Thus,
+\begin{equation}
+    0
+    \leq
+    \Psi_{i}
+    \leq
+    \min
+    \left( 2,
+    r_{i}\left( \frac{2}{c} + \Psi_{i-1} \right)
+    \right)\ \text{for}\ r_{i} > 0,
+\end{equation}
+and
+\begin{equation}
+    \Psi_{i} = 0\ \text{for}\ r_{i} = 0.
+\end{equation}
+This condition, however, differs a little from the one appearing in \cite{2023_Frolkovic}. Based on an
+ENO reconstruction, the condition \eqref{eqn: Frolkovic - psi bounds} changes to
+\begin{equation}
+    -1
+    \leq
+    \Psi_{i-1}
+    \leq
+    2.
+\end{equation}
+
+It is also possible to derive a sufficient condition for \(\Psi_{i}\). Using \eqref{eqn: Frolkovic - necessary condition} and \eqref{eqn: Frolkovic - psi bounds}, it is sufficient to satisfy
+\begin{equation}
+    \begin{split}
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        1 - \frac{c}{1+c},
+        \\
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2(1+c)}
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        \frac{1}{1+c},
+        \\
+        0
+        &\leq
+        \frac{\Psi_{i}}{r_{i}}
+        \leq
+        \frac{2}{c}.
+    \end{split}
+\end{equation}
+\begin{equation}
+    0
+    \leq
+    \Psi_{i}
+    \leq
+    \min\left( 2, \frac{2r_{i}}{c} \right),
+    \quad
+    \text{for}\ r_{i} > 0,
+    \quad
+    \text{and } \Psi_{i} = 0
+    \quad
+    \text{for}\ r_{i} \leq 0.
+\end{equation}
+\end{remark}
+% \subsubsection[]{For all \(c > 1\)}
+% For Courant numbers \(c > 1\), in order to choose the closest values in the space-time neighborhood of \(\phi_{i}^{n+1}\) from values of \((i-1, i, i+1)\), the URC becomes
+% \[
+%     0
+%     \leq
+%     \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%     {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     \leq
+%     1.
+% \]
+% Substituting the general second order scheme for the new cell average we get
+% \begin{equation}
+%     \begin{split}\label{eqn: urc-all c gr 1-necessary}
+%         0
+%         &\leq
+%         \frac{
+%         \frac{\phi_{i}^{n} +
+%         c~\phi_{i-1}^{n+1}}{1+c}
+%         -\frac{c}{2}\left(
+%             \sigma_{i} - \sigma_{i-1}
+%             \right)\Delta x - \phi_{i-1}^{n+1}}{\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         1,
+%         \\
+%         0
+%         &\leq
+%         \frac{
+%         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{1+c}
+%         -\frac{c}{2}\left(
+%             \sigma_{i} - \sigma_{i-1}
+%             \right)\Delta x}{\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         1,
+%         \\
+%         0
+%         &\leq
+%         \frac{1}{1+c}
+%         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         +\frac{c}{2}
+%         \frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         1.
+%     \end{split}
+% \end{equation}
+% For convenience, let us denote the ratio of the different URC-s as
+% \begin{equation}
+%     s_{i} =
+%     \frac{\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     {\phi_{i}^{n} - \phi_{i-1}^{n+1}}.
+% \end{equation}
+% Now, similarly as before, we can derive a sufficient
+% condition by considering
+% \begin{equation}
+%     \begin{split}
+%         0
+%         &\leq
+%         \frac{\phi_{i-1}^{n+1}
+%         +\sigma_{i-1}\frac{1+c}{2}\Delta x
+%         - \phi_{i-1}^{n+1}}{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         1,
+%         \\
+%         0
+%         &\leq
+%         \frac{1+c}{2}\frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         1,
+%         \\
+%         0
+%         &\leq
+%         \frac{c}{2}\frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         \frac{c}{1+c},
+%         \\
+%         0
+%         &\leq
+%         \frac{c}{2}\frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \frac{\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         \leq
+%         \frac{c}{1+c},
+%         \\
+%         0
+%         &\leq
+%         \frac{c}{2}\frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         s_{i}
+%         \leq
+%         \frac{c}{1+c}.
+%     \end{split}
+% \end{equation}
+% Notice, that in the denominator we have \(\phi_{i}^{n}\) instead of \(\phi_{i-1}^{n}\).
+% We still want to have a slope using as much of the available values as possible.
+
+% So, for \(s_{i} > 0\) we get
+% \begin{equation}
+%     0
+%     \leq
+%     \frac{c}{2}\frac{\sigma_{i-1}\Delta x}
+%     {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     \leq
+%     \frac{c}{s_{i}(1+c)}.
+% \end{equation}
+% Using the above inequalities we can obtain a sufficient condition
+% \begin{equation}
+%     \begin{split}
+%         0
+%         \leq
+%         \frac{1}{s_{i}(1+c)}
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\leq
+%         1 - \frac{c}{s_{i}(1+c)},
+%         \\
+%         0
+%         \leq
+%         \frac{1}{s_{i}(1+c)}
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\leq
+%         \frac{s_{i}(1+c) - c}{s_{i}(1+c)},
+%         \\
+%         -\frac{1}{s_{i}(1+c)}
+%         \leq
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\leq
+%         \frac{s_{i}(1+c) - c}{s_{i}(1+c)}
+%         -\frac{1}{s_{i}(1+c)},
+%         \\
+%         \frac{1}{s_{i}(1+c)}
+%         \geq
+%         \frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\geq
+%         -\frac{s_{i}(1+c) - c}{s_{i}(1+c)}
+%         +\frac{1}{s_{i}(1+c)},
+%         \\
+%         \frac{1 + c - s_{i}(1+c)}{s_{i}(1+c)}
+%         \leq
+%         \frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\leq
+%         \frac{1}{s_{i}(1+c)},
+%         \\
+%         \frac{1-s_{i}}{s_{i}}
+%         \leq
+%         \frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         &\leq
+%         \frac{1}{s_{i}(1+c)},
+%     \end{split}
+% \end{equation}
+% which we can satisfy only if
+% \begin{equation}
+%     \begin{split}
+%         \frac{1-s_{i}}{s_{i}}
+%         &\leq
+%         \frac{1}{s_{i}(1+c)},
+%         \\
+%         1-s_{i}
+%         &\leq
+%         \frac{1}{1+c},
+%         \\
+%         1-\frac{1}{1+c}
+%         &\leq
+%         s_{i},
+%         \\
+%         \frac{c}{1+c}
+%         &\leq
+%         s_{i},
+%     \end{split}
+% \end{equation}
+% We can write
+% \begin{equation}
+%     \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     =
+%     \frac{\phi_{i}^{n} - \phi_{i}^{n+1}
+%     + \phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     =
+%     \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     +
+%     \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}.
+% \end{equation}
+% Thus,
+% \begin{equation}
+%     \begin{split}
+%         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         =
+%         \frac{1}{1+c}
+%             \left(
+%                 \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+%             {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         +
+%         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%             {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%             \right)
+%             -\frac{c}{2}
+%             \frac{\sigma_{i}\Delta x}
+%             {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%             +\frac{c}{2}
+%             \frac{\sigma_{i-1}\Delta x}
+%             {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \\
+%         \left( 1 - \frac{1}{1+c} \right)
+%         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         =
+%         \frac{1}{1+c}
+%         \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         +\frac{c}{2}
+%         \frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \\
+%         \frac{c}{1+c}
+%         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         =
+%         \frac{1}{1+c}
+%         \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         -\frac{c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         +\frac{c}{2}
+%         \frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         \\
+%         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         =
+%         \frac{1}{c}
+%         \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         -\frac{1+c}{2}
+%         \frac{\sigma_{i}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%         +\frac{1+c}{2}
+%         \frac{\sigma_{i-1}\Delta x}
+%         {\phi_{i-1}^{n} - \phi_{i-1}^{n+1}}
+%     \end{split}
+% \end{equation}
+\subsection[]{A compact, third-order accurate, semi-implicit \\*piecewise-parabolic method}
+Following a philosophy as in \cite{1977_VanLeer},
+we can compute the average-flux at the face \(i+1/2\) using a piecewise-parabolic reconstruction from the cell averages \(\phi_{i+1}^{n}, \phi_{i}^{n}, \phi_{i}^{n+1}\). A second order polynomial can be written in the form
+\begin{equation}
+    \phi(x) = c_0 + c_1 x + c_2 x^2.
+\end{equation}
+Thus, we need to compute the three unknown coefficients. In order to do this, we require the reconstruction to satisfy the average equations in the appropriate intervals:
+\begin{equation}
+    \begin{split}
+        \int_{x_{i+1/2}}^{x_{i+3/2}} p(x) \dd{x}
+        &= \phi_{i+1}^{n},
+        \\
+        \int_{x_{i-1/2}}^{x_{i+1/2}} p(x) \dd{x}
+        &= \phi_{i}^{n},
+        \\
+        \int_{x_{i-1/2} - c\Delta x}^{x_{i+1/2} - c\Delta x} p(x) \dd{x}
+        &= \phi_{i}^{n+1}.
+    \end{split}
+\end{equation}
+For convenience, we can make the change of variables
+\begin{equation}
+    \xi = \frac{x-x_{i-1/2}}{\Delta x},
+\end{equation}
+which yields
+\begin{equation}\label{eqn: parabola-xi}
+    \phi(\xi) = c_0 + c_1\xi + c_2\xi^2.
+\end{equation}
+The integral equations become
+\begin{equation}\label{eqn: parabola-integral-xi}
+    \begin{split}
+        \int_{1}^{2} p(\xi) \dd{\xi}
+        &= \phi_{i+1}^{n},
+        \\
+        \int_{0}^{1} p(\xi) \dd{\xi}
+        &= \phi_{i}^{n},
+        \\
+        \int_{-c}^{1-c} p(\xi) \dd{\xi}
+        &= \phi_{i}^{n+1}.
+    \end{split}
+\end{equation}
+Solving the equations yields
+\begin{equation}
+    \begin{split}
+        c_0 &= \phi_{i}^{n+1}
+        +\frac{1-3c}{6(1+c)}
+        \left( \phi_{i+1}^{n}-\phi_{i}^{n} \right)
+        +\frac{-2+3c+3c^2}{3(1+c)}
+        \frac{\phi_{i}^{n}-\phi_{i}^{n+1}}{c},
+        \\
+        c_1 &=
+        \frac{c-1}{1+c}
+        \left( \phi_{i+1}^{n}-\phi_{i}^{n} \right)
+        +\frac{2}{1+c}
+        \frac{\phi_{i}^{n}-\phi_{i}^{n+1}}{c},
+        \\
+        c_2 &=
+        \frac{1}{1+c}
+        \left( \phi_{i+1}^{n}-\phi_{i}^{n} \right)
+        -\frac{1}{1+c}
+        \frac{\phi_{i}^{n}-\phi_{i}^{n+1}}{c}.
+    \end{split}
+\end{equation}
+To get the average flux through the face \(x = x_{i+1/2}\), or \(\xi = 1\), we integrate
+\begin{equation}
+    \begin{split}
+        \int_{x_{i+1/2}-c\Delta x}^{x_{i+1/2}} p(x) \dd{x}
+        =
+        \int_{1-c}^{1} p(\xi) \dd{\xi}
+        &= c~c_0 + \frac{c(2-c)}{2}c_1 + \frac{c(3-3c+c^2)}{3}c_2
+        \\
+        &=c \left( \phi_{i}^{n+1}
+        +\frac{1-c}{6}\left( \phi_{i+1}^{n}-\phi_{i}^{n} \right)
+        +\frac{1+2c}{3}
+        \frac{\phi_{i}^{n}-\phi_{i}^{n+1}}{c} \right)
+        \\
+        &= \frac{c-1}{3}\phi_{i}^{n+1}
+        +\frac{2+3c+c^2}{6}\phi_{i}^{n}
+        -\frac{c(c-1)}{6}\phi_{i+1}^{n}.
+    \end{split}
+\end{equation}
+Also, evaluating the flux on the inflow face yields the system of equations
+\begin{equation}
+    -\frac{1-c}{3}\phi_{i-1}^{n+1}
+    +\frac{2+c}{3}\phi_{i}^{n+1}
+    =
+    \frac{(1+c)(2+c)}{6}\phi_{i-1}^{n}
+    +\frac{(1-c)(2+c)}{3}\phi_{i}^{n}
+    -\frac{c(1-c)}{6}\phi_{i+1}^{n}
+\end{equation}
+The choice for the slope
+\begin{equation}
+    \begin{split}
+        \sigma_{i} = \frac{1-c}{6}
+        \frac{\phi_{i+1}^{n} - \phi_{i}^{n}}
+        {\Delta x}
+        + \frac{1+2c}{3}
+        \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+        {c \Delta x}
+    \end{split}
+\end{equation}
+is the slope for a piecewise-parabolic reconstruction, thus, resulting in a third-order method.
+\begin{equation}
+    \begin{split}
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{2}
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c(1-c)}{12}
+        \frac{\phi_{i+1}^{n} - \phi_{i}^{n}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -\frac{1+2c}{6}
+        \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{c}{2}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+        \frac{c(1-c)}{12}
+        \frac{\phi_{i+1}^{n} - \phi_{i}^{n}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{1+2c}{6}
+        \frac{\phi_{i}^{n} - \phi_{i}^{n+1}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+        \\
+        \frac{c(1-c)(\phi_{i+1}^{n} - \phi_{i}^{n})
+        + 2(1+2c)(\phi_{i}^{n} - \phi_{i}^{n+1})}
+        {12(\phi_{i}^{n} - \phi_{i-1}^{n+1})},
+    \end{split}
+\end{equation}
+\subsection{High-order correction formulation}
+Any high-order method discussed earlier can be written in the form
+\begin{equation}
+    \begin{split}
+        \phi_{i}^{n+1}
+        &= \phi_{i}^{n} - c\left(
+            \phi_{i}^{n+1}
+            + D_{i+1/2} - \phi_{i-1}^{n+1}
+            - D_{i-1/2} \right),
+    \end{split}
+\end{equation}
+where \(D_{i+1/2}\) is a high-order correction term for the unconditionally stable first-order implicit upwind flux.
+For stability, we want to ensure the upwind-range-condition is satisfied.
+Since
+\begin{equation}
+    \begin{split}
+        \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &=
+        \frac{\phi_{i}^{n} - c\left(
+                \phi_{i}^{n+1} + D_{i+1/2}
+                - \phi_{i-1}^{n+1} - D_{i-1/2}
+                \right) - \phi_{i-1}^{n+1}}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+        \\
+        \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &=
+        1 - c\frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -c\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \\
+        \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+            {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &=
+        \frac{1}{1+c}
+        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    \end{split}
+\end{equation}
+Substituting to the URC we get
+\begin{equation}
+    \begin{split}
+        0
+        &\leq
+        \frac{1}{1+c}
+        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
+        -\frac{1}{1+c}
+        &\leq
+        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1-\frac{1}{1+c},
+        \\
+        -\frac{1}{1+c}
+        &\leq
+        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1-\frac{1}{1+c},
+        \\
+        -\frac{1}{1+c}
+        &\leq
+        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{c}{1+c},
+        \\
+        -1
+        &\leq
+        -c\frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        c,
+        \\
+        \frac{1}{c}
+        &\geq
+        \frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \geq
+        -1,
+        \\
+        -1
+        &\leq
+        \frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c}.
+    \end{split}
+\end{equation}
+If \(\phi_{i}^{n} - \phi_{i-1}^{n+1} > 0\), then
+\begin{equation}
+    \begin{split}
+        -(\phi_{i}^{n} - \phi_{i-1}^{n+1})
+        &\leq
+        D_{i+1/2} - D_{i-1/2}
+        \leq
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
+        \\
+        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
+        &\leq
+        D_{i+1/2}
+        \leq
+        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
+    \end{split}
+\end{equation}
+If \(\phi_{i}^{n} - \phi_{i-1}^{n+1} < 0\), then
+\begin{equation}
+    \begin{split}
+        -(\phi_{i}^{n} - \phi_{i-1}^{n+1})
+        &\geq
+        D_{i+1/2} - D_{i-1/2}
+        \geq
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
+        \\
+        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
+        &\geq
+        D_{i+1/2}
+        \geq
+        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
+    \end{split}
+\end{equation}
+Let \(D_{i+1/2}^{HO}\) be a high-order correction term of our choice. We want to use it whenever possible.
+We can write the boundedness of the correction term elegantly using the median function \cite{1989_Huynh_CONF}.
+In order to define the median function, first we need a definition of the minmod function of 2 variables \cite{2002_LeVeque_BOOK}:
+\begin{equation}
+    \mbox{minmod}(a,b) =
+    \begin{cases}
+        a & \text{if}\ |a| < |b|\ \text{and}\ ab > 0, \\
+        b & \text{if}\ |b| < |a|\ \text{and}\ ab > 0, \\
+        0 & \text{if}\ ab < 0.
+    \end{cases}
+\end{equation}
+Then, the median function of 3 variables can be defined as \cite{1989_Huynh_CONF}
+\begin{equation}
+    \begin{split}
+        \mbox{median}(a,b,c)
+        &= a + \mbox{minmod}\left( b - a, c - a \right)
+        \\
+        &= b + \mbox{minmod}\left( a - b, c - b \right).
+    \end{split}
+\end{equation}
+The median of three numbers is the one of the three which lies between the other two. Also, it is important to notice that the median lies in the interval defined by any two of the three arguments \cite{1989_Huynh_CONF}. Thus, it is a convenient way to define the correction term as
+\begin{equation}
+    D_{i+1/2} = \mbox{median}\left(
+        D_{i+1/2}^{HO},
+        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
+        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
+    \right).
+\end{equation}
+This choice ensures the required boundedness for stability while choosing the high-order correction whenever it yields a stable flux.
+Notice, however, that to compute a correction term \(D_{i+1/2}\), we also need \(D_{i-1/2}\), which might not be available to us.
+If we bound the correction term \(D_{i-1/2}\), we can also derive simpler sufficient condition for \(D_{i+1/2}\).We can,~e.g., bound the average flux \(\phi_{i-1}^{n+1} + D_{i-1/2}\) as in earlier examples, the bound takes a simpler form
+\begin{equation}
+    \begin{split}
+        0
+        \leq
+        \frac{\phi_{i-1}^{n+1} + D_{i-1/2} - \phi_{i-1}^{n+1}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        1,
+        \\
+        0
+        \leq
+        \frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        &\leq
+        1\
+        \text{for all faces},
+    \end{split}
+\end{equation}
+then
+\begin{equation}
+    \begin{split}
+        -1
+        &\leq
+        \frac{D_{i+1/2} - D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c},
+        \\
+        -1
+        &\leq
+        \frac{D_{i+1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -\frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c},
+        \\
+        \frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}-1
+        &\leq
+        \frac{D_{i+1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c}
+        +\frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+        \\
+        \frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}-1
+        \leq
+        0
+        &\leq
+        \frac{D_{i+1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c}
+        \leq
+        \frac{1}{c}
+        +\frac{D_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}.
+    \end{split}
+\end{equation}
+Thus, for \(\phi_{i}^{n} - \phi_{i-1}^{n+1} > 0\)
+\begin{equation}
+    0
+    \leq
+    D_{i+1/2}
+    \leq
+    \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
+\end{equation}
+and for \(\phi_{i}^{n} - \phi_{i-1}^{n+1} < 0\)
+\begin{equation}
+    0
+    \geq
+    D_{i+1/2}
+    \geq
+    \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
+\end{equation}
+The choice
+\begin{equation}
+    D_{i+1/2} = \mbox{minmod}\left(
+        D_{i+1/2}^{HO},
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}
+    \right)
+\end{equation}
+gives a sufficient condition for the high-order correction term.
+\end{document}

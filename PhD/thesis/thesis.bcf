@@ -2349,23 +2349,27 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">thesis.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">1998_Laney_BOOK</bcf:citekey>
-    <bcf:citekey order="2" intorder="1">2009_Toro_BOOK</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">1977_VanLeer</bcf:citekey>
-    <bcf:citekey order="3" intorder="2">1983_Harten</bcf:citekey>
-    <bcf:citekey order="3" intorder="3">1984_Sweby</bcf:citekey>
-    <bcf:citekey order="3" intorder="4">1985_Yee</bcf:citekey>
-    <bcf:citekey order="3" intorder="5">1990_Hirsch_BOOK</bcf:citekey>
-    <bcf:citekey order="3" intorder="6">1992_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="3" intorder="7">1996_Jasak</bcf:citekey>
-    <bcf:citekey order="3" intorder="8">1998_Laney_BOOK</bcf:citekey>
-    <bcf:citekey order="3" intorder="9">2000_Hoffmann</bcf:citekey>
-    <bcf:citekey order="3" intorder="10">2002_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="3" intorder="11">2007_Hirsch_BOOK</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">2023_Frolkovic</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">1992_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="5" intorder="2">2002_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="5" intorder="3">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="1" intorder="2">2002_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="2" intorder="1">2023_Barsukow</bcf:citekey>
+    <bcf:citekey order="2" intorder="2">2022_Eimer</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">2018_Frolkovic</bcf:citekey>
+    <bcf:citekey order="3" intorder="2">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="3" intorder="3">2014_Mikula</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">2014_Mikula</bcf:citekey>
+    <bcf:citekey order="4" intorder="2">2018_Frolkovic</bcf:citekey>
+    <bcf:citekey order="4" intorder="3">2020_Ibolya_CONF</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">1998_Laney_BOOK</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">2009_Toro_BOOK</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">2002_LeVeque_BOOK</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">1989_Huynh_CONF</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

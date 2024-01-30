@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  12 JAN 2024 15:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  30 JAN 2024 12:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex
-(/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-rea.tex
+**/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex
+(/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-07> (/usr/local/texlive/2022/texmf-dist/tex/latex/subfiles/subfiles.cls
 Document Class: subfiles 2020/11/14 v2.2 Multi-file projects (class)
@@ -611,8 +611,8 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
- (1d/implicit-rea.aux)
-\openout1 = `implicit-rea.aux'.
+ (1d/implicit-high-order.aux)
+\openout1 = `implicit-high-order.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
@@ -700,59 +700,102 @@ File: slovak.lbx 2022/07/12 v3.18b biblatex localization (PK/MW)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout3 = `implicit-rea.bcf'.
+\openout3 = `implicit-high-order.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'implicit-rea.bbl' found.
- (1d/implicit-rea.bbl)
+Package biblatex Info: ... file 'implicit-high-order.bbl' found.
+ (1d/implicit-high-order.bbl)
 Package biblatex Info: Reference section=0 on input line 2.
 Package biblatex Info: Reference segment=0 on input line 2.
 Package hyperref Info: Link coloring OFF on input line 2.
- (1d/implicit-rea.out) (1d/implicit-rea.out)
+ (1d/implicit-high-order.out) (1d/implicit-high-order.out)
 \@outlinefile=\write4
-\openout4 = `implicit-rea.out'.
+\openout4 = `implicit-high-order.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
+<./img//Characteristics-crop.pdf, id=21, 593.21625pt x 489.83pt>
+File: ./img//Characteristics-crop.pdf Graphic file (type pdf)
+<use ./img//Characteristics-crop.pdf>
+Package pdftex.def Info: ./img//Characteristics-crop.pdf  used on input line 9.
+(pdftex.def)             Requested size: 441.01773pt x 364.17264pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+<./img//2nd-order-crop.pdf, id=26, 593.21625pt x 477.785pt>
+File: ./img//2nd-order-crop.pdf Graphic file (type pdf)
+<use ./img//2nd-order-crop.pdf>
+Package pdftex.def Info: ./img//2nd-order-crop.pdf  used on input line 21.
+(pdftex.def)             Requested size: 441.01773pt x 355.21758pt.
+ [1
 Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] (1d/implicit-rea.aux)
-Package rerunfilecheck Info: File `implicit-rea.out' has not changed.
-(rerunfilecheck)             Checksum: 8905F9EE0FB0EF73ED652FE4BA8AAEB8;90.
-Package logreq Info: Writing requests to 'implicit-rea.run.xml'.
-\openout1 = `implicit-rea.run.xml'.
+ <1d/./img//Characteristics-crop.pdf>]
+Overfull \hbox (3.68044pt too wide) in paragraph at lines 25--27
+[]\OT1/cmr/m/n/12 Let us be-gin with a lin-ear re-con-struc-tion yield-ing second-order fi-nite vol-ume schemes,
+ []
+
+[2 <1d/./img//2nd-order-crop.pdf>] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] (1d/implicit-high-order.aux)
+Package rerunfilecheck Info: File `implicit-high-order.out' has not changed.
+(rerunfilecheck)             Checksum: 8C30085FD5AA858B8440D56FAF6B89DF;347.
+Package logreq Info: Writing requests to 'implicit-high-order.run.xml'.
+\openout1 = `implicit-high-order.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21895 strings out of 476029
- 381455 string characters out of 5790172
- 1867346 words of memory out of 5000000
- 42037 multiletter control sequences out of 15000+600000
- 521103 words of font info for 66 fonts, out of 8000000 for 9000
+ 22006 strings out of 476029
+ 384134 string characters out of 5790172
+ 1883346 words of memory out of 5000000
+ 42084 multiletter control sequences out of 15000+600000
+ 520792 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,17n,97p,727b,1763s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,18n,97p,734b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{cite.0@1977_VanLeer} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{cite.0@2007_Duraisamy} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@1989_Huynh_CONF} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2009_Toro_BOOK} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@1998_Laney_BOOK} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2020_Ibolya_CONF} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2014_Mikula} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2023_Frolkovic} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2018_Frolkovic} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2022_Eimer} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.0@2023_Barsukow} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{cite.0@2002_LeVeque_BOOK} has been referenced but does not exist, replaced by a fixed one
 
 
-pdfTeX warning (dest): name{cite.0@1992_LeVeque_BOOK} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{cite.0@1977_VanLeer} has been referenced but does not exist, replaced by a fixed one
 
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on 1d/implicit-rea.pdf (4 pages, 121892 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on 1d/implicit-high-order.pdf (12 pages, 236539 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 318 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

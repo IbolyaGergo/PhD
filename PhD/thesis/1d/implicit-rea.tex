@@ -9,10 +9,6 @@ algorithm \cite{1992_LeVeque_BOOK,2002_LeVeque_BOOK,1977_VanLeer}:
     \item Evolve the function to obtain \(\tilde{\phi}_{i}^{n}(x,t_{n+1})\)
     \item Compute the average of this evolved function over each cell to obtain the new cell averages\[\phi_{i}^{n+1} =\frac{1}{\Delta x}\int_{\mathcal{C}_{i}}\tilde{\phi}_{i}^{n}(x,t_{n+1}) \dd{x}.\]
 \end{enumerate}
-% Meaning, we reconstruct the values in a given cell using the cell averages.
-% For example, the explicit upwind scheme can be interpreted as a piecewise constant reconstruction in the current time step. Then, we evolve this reconstruction and compute
-% the cell averages in the new time step. We repeat this process until we reach the
-% desired time.
 
 This interpretation can help us to construct high-order schemes.
 Many flux and slope limiters can be designed using the fact that if the reconstruction process does not generate new extrema, then evolving and averaging operations will neither, meaning that our numerical solution will be oscillation free.
