@@ -1,7 +1,7 @@
 \documentclass[../thesis.tex]{subfiles}
 \begin{document}
 \graphicspath{ {./img/} }
-\subsection[]{High-order implicit schemes based polynomial reconstruction}
+\section[]{High-order implicit schemes based polynomial reconstruction}
 We are interested in constructing implicit finite-volume schemes that can be solved efficiently. Thus, e.g., yields a similar system of equations with a bidiagonal matrix as in the case of implicit-upwind scheme, where we can simply compute the solution one by one, starting at the inflow boundary.
 As a guidance, let us use our knowledge of the solutions of the advection equation. In that case we know that the solution is the initial values translating along characteristics, see Figure~\ref{fig:characteristics-1d}.
 \begin{figure}[H]
@@ -125,7 +125,7 @@ Substituting \eqref{eqn:iioe-slope} to \eqref{eqn:second-order-implicit} yields 
     \end{split}
 \end{equation}
 which one can recognize is the IIOE scheme for linear advection with constant speed in 1D \cite{2014_Mikula,2018_Frolkovic,2020_Ibolya_CONF}.
-\subsection[]{Stabilization of implicit schemes}
+\section[]{Stabilization of implicit schemes}
 In this section we construct stabilized schemes by requiring the updated cell average to lie between values \(\phi_{i-1}^{n+1},\phi_{i}^{n}\), thus
 \begin{equation}\label{eqn:implicit-upwind-range-condition}
     \min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right)
@@ -212,7 +212,14 @@ between the values \(\phi_{i-1}^{n+1}, \phi_{i}^{n}\), then it can be written as
     k_{i}\phi_{i}^{n} + (1-k_{i})\phi_{i-1}^{n+1},
 \end{equation}
 for some \(0 \leq k_{i} \leq 1\).
-For \(k_{i} > 0\), we can recast the above to a conservation form as
+
+If \(k_{i} = 0\), then
+\[
+    \phi_{i}^{n+1} = \phi_{i-1}^{n+1},
+\]
+thus, if \(\phi_{i-1}^{n+1}\), the update certainly not changes the total variation.
+
+For \(k_{i} > 0\), we can recast the above convex combination to a conservation form
 \begin{equation}\label{eqn:convex-combination-conservative}
     \begin{split}
         \phi_{i}^{n+1}
@@ -236,9 +243,21 @@ For \(k_{i} > 0\), we can recast the above to a conservation form as
         \phi_{i}^{n} - \frac{1-k_{i}}{k_{i}}\left( \phi_{i}^{n+1} - \phi_{i-1}^{n+1} \right).
     \end{split}
 \end{equation}
-Notice that if \(0 \leq k_{i} \leq 1\), then \( \frac{1-k_{i}}{k_{i}} > 0\), which is sufficient for a scheme to be TVD, see, e.g.,~\cite{2007_Duraisamy,2023_Frolkovic}.
-We can solve \eqref{eqn:second-order-implicit} for the
-new cell average
+Notice that if \(0 < k_{i} \leq 1\), then \( \frac{1-k_{i}}{k_{i}} > 0\), which is sufficient for a scheme to be TVD, see, e.g.,~\cite{2007_Duraisamy,2023_Frolkovic}.
+\subsection[]{Second-order implicit TVD schemes}
+Now we describe how we can construct schemes satisfying the upwind-range condition by choosing the slope properly.
+We can solve
+\begin{equation}
+    \phi_{i}^{n+1}
+    = \phi_{i}^{n} - c\left(
+        \phi_{i}^{n+1}
+        - \phi_{i-1}^{n+1}
+        \right)
+        -c\left(
+        \sigma_{i} - \sigma_{i-1}
+        \right)\Delta x\frac{1+c}{2},
+\end{equation}
+for the new cell average to obtain
 \begin{equation}\label{eqn: second order implicit - solution}
     \phi_{i}^{n+1} =
     \frac{\phi_{i}^{n} +
@@ -247,17 +266,20 @@ new cell average
         \sigma_{i} - \sigma_{i-1}
         \right)\Delta x.
 \end{equation}
-Substituting to the upwind range condition
-\[
-    0
-    \leq
-    \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
-    {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-    \leq
-    1
-\]we get
+\begin{remark}
+    Notice, that in the schemes we describe, the slope \(\sigma_{i}\) can also contain terms involving \(\phi_{i}^{n+1}\), which we ignore in the first analysis.
+    We will deal with that case later.
+\end{remark}
+Substituting to the upwind-range condition \eqref{eqn:upwind-range-simpler} we get
 \begin{equation}
     \begin{split}\label{eqn: urc-all c-necessary}
+        0
+        &\leq
+        \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        1,
+        \\
         0
         &\leq
         \frac{
@@ -292,8 +314,38 @@ Substituting to the upwind range condition
         1.
     \end{split}
 \end{equation}
-We require that the outflow be at most the downwind outflow, by considering
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Slope-bounds-crop.pdf}
+	\caption{Bounds for the slope}
+	\label{fig:slope-bounds-implicit-1d}
+\end{figure}
+We require that the outflow be at most the downwind outflow, and at least the implicit-upwind value, see, Figure \ref{fig:slope-bounds-implicit-1d}. Thus, we write
 \begin{equation}\label{eqn: urc-all c-bounded slope}
+    \begin{split}
+        v\Delta t\min(\phi_{i-1}^{n+1},\phi_{i}^{n})
+        \leq
+        v\Delta t
+        \left[
+            \phi_{i-+}^{n+1}
+            +\sigma_{i-+}\left(
+                \frac{\Delta x}{2} + \frac{v\Delta t}{2}
+                \right)
+        \right]
+        &\leq
+        v\Delta t\max(\phi_{i-1}^{n+1},\phi_{i}^{n}),
+        \\
+        \min(\phi_{i-1}^{n+1},\phi_{i}^{n})
+        \leq
+        \phi_{i-1}^{n+1}
+        +\sigma_{i-1} \Delta x \frac{1+c}{2}
+        &\leq
+        \max(\phi_{i-1}^{n+1},\phi_{i}^{n}).
+    \end{split}
+\end{equation}
+Notice, that this is the same upwind-range condition, as for the cell average \eqref{eqn:upwind-range-simpler}. Thus, we can write
+\begin{equation}
+    \label{eqn:slope-bounds}
     \begin{split}
         0
         \leq
@@ -319,15 +371,18 @@ We require that the outflow be at most the downwind outflow, by considering
         &\leq
         \frac{c}{1+c},
         \\
-        |\sigma_{i-1}|
+        0
+        \leq
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         &\leq
-        2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        {(1+c)\Delta x}.
+        \frac{2}{1+c}.
     \end{split}
 \end{equation}
 If the slope \(\sigma_{i-1}\) is available, then
 \(\sigma_{i}\) has to satisfy
 \begin{equation}
+    \label{eqn:slope-necessary}
     \begin{split}
         0
         &\leq
@@ -392,42 +447,80 @@ If the slope \(\sigma_{i-1}\) is available, then
         \leq
         \frac{2}{c(1+c)}
         + \frac{\sigma_{i-1}\Delta x}
-        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
-        \\
-        \left|\sigma_{i-1}
-        -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        {(1+c)\Delta x}\right|
-        &\leq
-        |\sigma_{i}|
-        \leq
-        \left|\frac{2}{c}
-        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        {(1+c)\Delta x}
-        + \sigma_{i-1}\right|.
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}.
     \end{split}
 \end{equation}
-From \eqref{eqn: urc-all c-bounded slope} we have
+Also, from \eqref{eqn: urc-all c-bounded slope}, we have
 \begin{equation}
-    \begin{split}
-        |\sigma_{i}|
-        &\leq
-        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
-        {(1+c)\Delta x},
-        \\
-        \left|\sigma_{i-1}
+    0
+    \leq
+    \frac{c}{2}
+    \frac{\sigma_{i}\Delta x}
+    {\phi_{i+1}^{n} - \phi_{i}^{n+1}}
+    \leq
+    \frac{c}{1+c}.
+\end{equation}
+Let
+\begin{equation}
+    I_{1}=I\left[
+        \sigma_{i-1}
         -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        {(1+c)\Delta x}\right|
-        \leq
-        |\sigma_{i}|
-        &\leq
-        \min\left( \left|\frac{2}{c}
+        {(1+c)\Delta x},
+        ~\sigma_{i-1}
+        +\frac{2}{c}
         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         {(1+c)\Delta x}
-        + \sigma_{i-1}\right|,
-        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
-        {(1+c)\Delta x}\right).
-    \end{split}
+    \right],
+    I_{2} = I\left[
+        0,
+        ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+    \right]
 \end{equation}
+then
+\begin{equation}
+    \sigma_{i}
+    \in
+    I_{1}
+    \cap
+    I_{2}
+\end{equation}
+% \begin{equation}
+%     \begin{split}
+%         |\sigma_{i}|
+%         &\leq
+%         2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+%         {(1+c)\Delta x},
+%         \\
+%         \left|\sigma_{i-1}
+%         -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         {(1+c)\Delta x}\right|
+%         \leq
+%         |\sigma_{i}|
+%         &\leq
+%         \min\left( \left|\frac{2}{c}
+%         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+%         {(1+c)\Delta x}
+%         + \sigma_{i-1}\right|,
+%         2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+%         {(1+c)\Delta x}\right).
+%     \end{split}
+% \end{equation}
+Using \eqref{eqn:slope-bounds} and \eqref{eqn:slope-necessary},
+\begin{equation}
+        \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -\frac{2}{1+c}
+        \leq
+        0
+        \leq
+        \frac{\sigma_{i}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{2}{c(1+c)}
+        + \frac{\sigma_{i-1}\Delta x}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
+\end{equation}
+we can see that \(I_{1} \cap I_{2} \neq \emptyset\).
 Using \eqref{eqn: urc-all c-necessary} and \eqref{eqn: urc-all c-bounded slope}, we can derive sufficient condition for the slope \(\sigma_{i}\)
 \begin{equation}\label{eqn: urc-all c- sufficient}
     \begin{split}
@@ -456,25 +549,40 @@ Using \eqref{eqn: urc-all c-necessary} and \eqref{eqn: urc-all c-bounded slope},
         &\leq
         \frac{2}{c}
         \frac{1}{1+c},
-        \\
-        |\sigma_{i}|
-        &\leq
-        \frac{2}{c}
-        \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
-        {(1+c)\Delta x}.
+        % \\
+        % |\sigma_{i}|
+        % &\leq
+        % \frac{2}{c}
+        % \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
+        % {(1+c)\Delta x}.
     \end{split}
 \end{equation}
+so the slope must lie in
 \begin{equation}
-    |\sigma_{i}|
-    \leq
-    \min \left(
+    \sigma_{i}
+    \in
+    I\left[
+        0,
         \frac{2}{c}
-        \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
-        {(1+c)\Delta x},
-        2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
-        {(1+c)\Delta x}
-    \right).
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{1+c}
+    \right]
+    \cap
+    I\left[
+        0,
+        ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+    \right]
 \end{equation}
+% \begin{equation}
+%     |\sigma_{i}|
+%     \leq
+%     \min \left(
+%         \frac{2}{c}
+%         \frac{|\phi_{i}^{n} - \phi_{i-1}^{n+1}|}
+%         {(1+c)\Delta x},
+%         2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
+%         {(1+c)\Delta x}
+%     \right).
+% \end{equation}
 \begin{remark}
     We can derive similar schemes appearing in \cite{2023_Frolkovic} by writing the slope as a convex combination
     \begin{equation}

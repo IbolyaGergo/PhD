@@ -906,7 +906,7 @@ OUTPUT 1d/implicit-high-order.pdf
 INPUT 1d/implicit-high-order.out
 INPUT 1d/implicit-high-order.out
 OUTPUT 1d/implicit-high-order.out
-INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT 1d/./img//Characteristics-crop.pdf
 INPUT 1d/./img//Characteristics-crop.pdf
@@ -949,8 +949,14 @@ INPUT 1d/./img//2nd-order-crop.pdf
 INPUT 1d/./img//2nd-order-crop.pdf
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
 INPUT /usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT 1d/./img//Slope-bounds-crop.pdf
+INPUT 1d/./img//Slope-bounds-crop.pdf
+INPUT 1d/./img//Slope-bounds-crop.pdf
+INPUT 1d/./img//Slope-bounds-crop.pdf
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmti8.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT 1d/implicit-high-order.aux

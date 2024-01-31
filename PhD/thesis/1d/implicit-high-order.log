@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  30 JAN 2024 12:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  31 JAN 2024 20:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -712,7 +712,7 @@ Package hyperref Info: Link coloring OFF on input line 2.
 \@outlinefile=\write4
 \openout4 = `implicit-high-order.out'.
 
-<./img//Characteristics-crop.pdf, id=21, 593.21625pt x 489.83pt>
+<./img//Characteristics-crop.pdf, id=25, 593.21625pt x 489.83pt>
 File: ./img//Characteristics-crop.pdf Graphic file (type pdf)
 <use ./img//Characteristics-crop.pdf>
 Package pdftex.def Info: ./img//Characteristics-crop.pdf  used on input line 9.
@@ -725,11 +725,11 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<./img//2nd-order-crop.pdf, id=26, 593.21625pt x 477.785pt>
+<./img//2nd-order-crop.pdf, id=30, 701.62125pt x 579.16376pt>
 File: ./img//2nd-order-crop.pdf Graphic file (type pdf)
 <use ./img//2nd-order-crop.pdf>
 Package pdftex.def Info: ./img//2nd-order-crop.pdf  used on input line 21.
-(pdftex.def)             Requested size: 441.01773pt x 355.21758pt.
+(pdftex.def)             Requested size: 441.01773pt x 364.05322pt.
  [1
 Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
@@ -740,21 +740,27 @@ Overfull \hbox (3.68044pt too wide) in paragraph at lines 25--27
 []\OT1/cmr/m/n/12 Let us be-gin with a lin-ear re-con-struc-tion yield-ing second-order fi-nite vol-ume schemes,
  []
 
-[2 <1d/./img//2nd-order-crop.pdf>] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] (1d/implicit-high-order.aux)
+[2 <1d/./img//2nd-order-crop.pdf>] [3] [4] [5]
+<./img//Slope-bounds-crop.pdf, id=163, 701.62125pt x 579.16376pt>
+File: ./img//Slope-bounds-crop.pdf Graphic file (type pdf)
+<use ./img//Slope-bounds-crop.pdf>
+Package pdftex.def Info: ./img//Slope-bounds-crop.pdf  used on input line 319.
+(pdftex.def)             Requested size: 441.01773pt x 364.05322pt.
+ [6 <1d/./img//Slope-bounds-crop.pdf>] [7] [8] [9] [10] [11] [12] [13] (1d/implicit-high-order.aux)
 Package rerunfilecheck Info: File `implicit-high-order.out' has not changed.
-(rerunfilecheck)             Checksum: 8C30085FD5AA858B8440D56FAF6B89DF;347.
+(rerunfilecheck)             Checksum: 639E3F8A1D563DCCA4C020C95C8FABDF;412.
 Package logreq Info: Writing requests to 'implicit-high-order.run.xml'.
 \openout1 = `implicit-high-order.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22006 strings out of 476029
- 384134 string characters out of 5790172
- 1883346 words of memory out of 5000000
- 42084 multiletter control sequences out of 15000+600000
- 520792 words of font info for 63 fonts, out of 8000000 for 9000
+ 22030 strings out of 476029
+ 384653 string characters out of 5790172
+ 1879346 words of memory out of 5000000
+ 42098 multiletter control sequences out of 15000+600000
+ 521398 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 97i,18n,97p,734b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 97i,17n,97p,734b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 pdfTeX warning (dest): name{cite.0@2007_Duraisamy} has been referenced but does not exist, replaced by a fixed one
 
@@ -792,10 +798,10 @@ pdfTeX warning (dest): name{cite.0@2002_LeVeque_BOOK} has been referenced but do
 pdfTeX warning (dest): name{cite.0@1977_VanLeer} has been referenced but does not exist, replaced by a fixed one
 
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on 1d/implicit-high-order.pdf (12 pages, 236539 bytes).
+Output written on 1d/implicit-high-order.pdf (13 pages, 270581 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 253 compressed objects within 3 object streams
- 84 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 368 PDF objects out of 1000 (max. 8388607)
+ 290 compressed objects within 3 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
