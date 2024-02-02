@@ -220,6 +220,43 @@
       \verb https://www.researchgate.net/profile/Peter-Frolkovic/publication/365886997_High_resolution_compact_implicit_numerical_scheme_for_conservation_laws/links/63888ddf2c563722f2297b03/High-resolution-compact-implicit-numerical-scheme-for-conservation-laws.pdf
       \endverb
     \endentry
+    \entry{1993_Huynh}{article}{}
+      \name{author}{1}{}{%
+        {{hash=10d8e08b50adfcc300a1767b05bbced1}{%
+           family={Huynh},
+           familyi={H\bibinitperiod},
+           given={Hung\bibnamedelima T},
+           giveni={H\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{fullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{bibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authorbibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authornamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authorfullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \field{extraname}{1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{1}
+      \field{title}{Accurate monotone cubic interpolation}
+      \field{volume}{30}
+      \field{year}{1993}
+      \field{dateera}{ce}
+      \field{pages}{57\bibrangedash 100}
+      \range{pages}{44}
+      \verb{urlraw}
+      \verb https://ntrs.nasa.gov/api/citations/19910011517/downloads/19910011517.pdf
+      \endverb
+      \verb{url}
+      \verb https://ntrs.nasa.gov/api/citations/19910011517/downloads/19910011517.pdf
+      \endverb
+    \endentry
     \entry{1989_Huynh_CONF}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=10d8e08b50adfcc300a1767b05bbced1}{%
@@ -234,6 +271,7 @@
       \strng{authorbibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
       \strng{authornamehash}{10d8e08b50adfcc300a1767b05bbced1}
       \strng{authorfullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \field{extraname}{2}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
@@ -346,6 +384,34 @@
       \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Finite%20Volume%20Methods%20for%20Hyperbolic%20Equations.pdf
       \endverb
     \endentry
+    \entry{1985_LeVeque_CONF}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=41dbef88ca1a3fe34401df4a0a34c418}{%
+           family={Goodman},
+           familyi={G\bibinitperiod},
+           given={Jonathan\bibnamedelima B},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{fullhash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{bibnamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authorbibnamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authornamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authorfullhash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Large-scale computations in fluid mechanics; Proceedings of the Fifteenth Summer Seminar on Applied Mathematics, University of California, La Jolla, CA, June 27-July 8, 1983. Parts 1 and 2}
+      \field{title}{TVD schemes in one and two space dimensions}
+      \field{year}{1985}
+      \field{dateera}{ce}
+    \endentry
     \entry{2014_Mikula}{article}{}
       \name{author}{3}{}{%
         {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%
@@ -392,6 +458,72 @@
       \verb https://www.math.sk/mikula/mou_apnum.pdf
       \endverb
       \keyw{65M08}
+    \endentry
+    \entry{1982_Roe}{article}{}
+      \name{author}{2}{}{%
+        {{hash=20f1943f36d55f41e8f6a88fb5da270a}{%
+           family={Roe},
+           familyi={R\bibinitperiod},
+           given={PL},
+           giveni={P\bibinitperiod}}}%
+        {{hash=05d9faa71a36b56498c9a6f80630fb06}{%
+           family={Baines},
+           familyi={B\bibinitperiod},
+           given={MJ},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{fullhash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{bibnamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authorbibnamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authornamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authorfullhash}{33577d1e409fe2e588e77cce1e9698cc}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numerical Methods in Fluid Mechanics}
+      \field{title}{Algorithms for advection and shock problems}
+      \field{year}{1982}
+      \field{dateera}{ce}
+      \field{pages}{281\bibrangedash 290}
+      \range{pages}{10}
+    \endentry
+    \entry{1997_Thuburn}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4ce2f99b1cd72688882ffdca224375aa}{%
+           family={Thuburn},
+           familyi={T\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Meteorological Society}%
+      }
+      \strng{namehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{fullhash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{bibnamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authorbibnamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authornamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authorfullhash}{4ce2f99b1cd72688882ffdca224375aa}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Monthly weather review}
+      \field{number}{8}
+      \field{title}{TVD schemes, positive schemes, and the universal limiter}
+      \field{volume}{125}
+      \field{year}{1997}
+      \field{dateera}{ce}
+      \field{pages}{1990\bibrangedash 1993}
+      \range{pages}{4}
+      \verb{urlraw}
+      \verb https://journals.ametsoc.org/view/journals/mwre/125/8/1520-0493_1997_125_1990_tspsat_2.0.co_2.xml?tab_body=abstract-display
+      \endverb
+      \verb{url}
+      \verb https://journals.ametsoc.org/view/journals/mwre/125/8/1520-0493_1997_125_1990_tspsat_2.0.co_2.xml?tab_body=abstract-display
+      \endverb
     \endentry
     \entry{2009_Toro_BOOK}{book}{}
       \name{author}{1}{}{%

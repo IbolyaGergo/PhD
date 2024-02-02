@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber 1d/implicit-high-order"] 1706727753 "1d/implicit-high-order.bcf" "1d/implicit-high-order.bbl" "1d/implicit-high-order" 1706729025 0
-  "./thesis.bib" 1706615022 14456 b6e51d64ca038d55dbd1d25bb5516f4e ""
-  "1d/implicit-high-order.bcf" 1706729025 108361 a50fb086a0eb0984997f37ed51d356d5 "pdflatex"
+["biber 1d/implicit-high-order"] 1706896892 "1d/implicit-high-order.bcf" "1d/implicit-high-order.bbl" "1d/implicit-high-order" 1706897839 0
+  "./thesis.bib" 1706896791 15948 8edc56121564ae2ce712da34284f07b7 ""
+  "1d/implicit-high-order.bcf" 1706897838 108827 dc97c5e1c372226df1e5850b9b3125fe "pdflatex"
   (generated)
   "1d/implicit-high-order.bbl"
   "1d/implicit-high-order.blg"
   (rewritten before read)
-["pdflatex"] 1706729023 "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex" "1d/implicit-high-order.pdf" "implicit-high-order" 1706729025 0
-  "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex" 1706729023 44890 45626302c214e16fc9b5aa47d3b8c15d ""
+["pdflatex"] 1706897837 "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex" "1d/implicit-high-order.pdf" "implicit-high-order" 1706897839 0
+  "/home/gibolya/IGergo/school/PhD/thesis/1d/implicit-high-order.tex" 1706897836 48743 8e5f5b8135eaa4bd01af8e3e4b64b36b ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -153,11 +153,11 @@
   "1d/./img//2nd-order-crop.pdf" 1706647174 27470 75dab1a65701e61e9d5b23790326940a ""
   "1d/./img//Characteristics-crop.pdf" 1706437667 24472 fe923596aaaecf8306f8a287a787f437 ""
   "1d/./img//Slope-bounds-crop.pdf" 1706646744 32308 b8e471cbe89fc57cff9528639b387e7d ""
-  "1d/implicit-high-order.aux" 1706729024 4875 28d8f3a465607893a338fcd0e64d6dd3 "pdflatex"
-  "1d/implicit-high-order.bbl" 1706727754 19284 aaa937e01af7fc8f4dc3125a8bbbb2d5 "biber 1d/implicit-high-order"
-  "1d/implicit-high-order.out" 1706729025 412 639e3f8a1d563dcca4c020c95c8fabdf "pdflatex"
-  "1d/implicit-high-order.run.xml" 1706729025 2436 581c9038e5a6433be0bdac2a3b1a8957 "pdflatex"
-  "1d/implicit-high-order.tex" 1706729023 44890 45626302c214e16fc9b5aa47d3b8c15d ""
+  "1d/implicit-high-order.aux" 1706897838 5569 38c59df8f283b2e017f080c6709deaf2 "pdflatex"
+  "1d/implicit-high-order.bbl" 1706896893 24892 fc78d9b4bf5e04eb8d4feb71a92b5165 "biber 1d/implicit-high-order"
+  "1d/implicit-high-order.out" 1706897838 412 639e3f8a1d563dcca4c020c95c8fabdf "pdflatex"
+  "1d/implicit-high-order.run.xml" 1706897838 2436 581c9038e5a6433be0bdac2a3b1a8957 "pdflatex"
+  "1d/implicit-high-order.tex" 1706897836 48743 8e5f5b8135eaa4bd01af8e3e4b64b36b ""
   "preamble.tex" 1704902355 1419 4638a9e5c856ba2edd284f0cc42cdec8 ""
   (generated)
   "1d/implicit-high-order.aux"

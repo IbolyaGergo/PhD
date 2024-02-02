@@ -2362,15 +2362,22 @@
     <bcf:citekey order="5" intorder="1">1998_Laney_BOOK</bcf:citekey>
     <bcf:citekey order="6" intorder="1">2009_Toro_BOOK</bcf:citekey>
     <bcf:citekey order="7" intorder="1">1989_Huynh_CONF</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">2007_Duraisamy</bcf:citekey>
-    <bcf:citekey order="8" intorder="2">2023_Frolkovic</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">2023_Frolkovic</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">2023_Frolkovic</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">1977_VanLeer</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">1989_Huynh_CONF</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">2002_LeVeque_BOOK</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">1982_Roe</bcf:citekey>
+    <bcf:citekey order="8" intorder="2">1997_Thuburn</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">1997_Thuburn</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">1997_Thuburn</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">1985_LeVeque_CONF</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">2007_Duraisamy</bcf:citekey>
+    <bcf:citekey order="12" intorder="2">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="13" intorder="2">1993_Huynh</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">1993_Huynh</bcf:citekey>
     <bcf:citekey order="15" intorder="1">1989_Huynh_CONF</bcf:citekey>
+    <bcf:citekey order="15" intorder="2">1993_Huynh</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">2023_Frolkovic</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">1977_VanLeer</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">1989_Huynh_CONF</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

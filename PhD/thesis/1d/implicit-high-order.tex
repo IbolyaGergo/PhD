@@ -197,14 +197,15 @@ Notice, that for the first two cases, where \(\phi_{i}^{n} \neq \phi_{i-1}^{n+1}
     1
 \end{equation}
 instead of \eqref{eqn:implicit-upwind-range-condition} to simplify the analysis.
-The condition above can be interpreted as the upwind range condition\cite{1998_Laney_BOOK}
-or data compatibility condition \cite{2009_Toro_BOOK}, or upwind monotonic property \cite{1989_Huynh_CONF} for implicit schemes.
-The idea is that the solution travels along characteristics and this value is always bounded by its neighbors in space-time.
+The condition above can be interpreted as the upwind range condition\cite{1998_Laney_BOOK},
+data compatibility condition \cite{2009_Toro_BOOK}, upwind monotonic property \cite{1989_Huynh_CONF}, local boundedness property \cite{1982_Roe,1997_Thuburn} for implicit schemes.
+The idea is that the solution travels along characteristics and this value is always bounded by its neighbors in space-time. In the case of well established explicit schemes, requiring a scheme to satisfy the upwind-range property is equivalent to requiring a scheme to be TVD \cite{1997_Thuburn}. However, as it was also pointed out in \cite{1997_Thuburn}, this condition is a more straightforward local condition, which makes it also more straightforward to extend to more complicated equation also in higher dimensions, than the TVD condition. Not to mention the results of LeVeque and Goodman, \cite{1985_LeVeque_CONF}, where they prove, that a two-dimensional TVD scheme can be at most first-order accurate.
+
 Notice that min and max is a combination of values from both time steps \(n, n+1\).
-This distinguishes the implicit upwind range property from the explicit one.
+This distinguishes the implicit upwind-range property from the explicit one.
 In the explicit case, the min and max are chosen only from the values at the current time step \(n\).
 
-First, we show that if a scheme satisfies the upwind-range-condition, then it is also total variation non-increasing, or TVD.
+First, we show that if a scheme satisfies the upwind-range-condition, then it is also total variation non-increasing, which property is often referred to as TVD.
 In order to show this, first notice that if the new cell average \(\phi_{i}^{n+1}\) lies
 between the values \(\phi_{i-1}^{n+1}, \phi_{i}^{n}\), then it can be written as a convex combination of the two
 \begin{equation}\label{eqn:convex-combination}
@@ -217,7 +218,7 @@ If \(k_{i} = 0\), then
 \[
     \phi_{i}^{n+1} = \phi_{i-1}^{n+1},
 \]
-thus, if \(\phi_{i-1}^{n+1}\), the update certainly not changes the total variation.
+thus, if \(\phi_{i-1}^{n+1}\), the update does certainly not create new extrema.
 
 For \(k_{i} > 0\), we can recast the above convex combination to a conservation form
 \begin{equation}\label{eqn:convex-combination-conservative}
@@ -244,6 +245,56 @@ For \(k_{i} > 0\), we can recast the above convex combination to a conservation 
     \end{split}
 \end{equation}
 Notice that if \(0 < k_{i} \leq 1\), then \( \frac{1-k_{i}}{k_{i}} > 0\), which is sufficient for a scheme to be TVD, see, e.g.,~\cite{2007_Duraisamy,2023_Frolkovic}.
+
+Let us use some definition, that will make some of our formulations simpler, where we want to enforce bounds, see, e.g., \cite{1989_Huynh_CONF,1993_Huynh}.
+
+Let \(I(z_{1}, \dots, z_{k})\) be the smallest closed interval containing \(z_{1}, \dots, z_{k}\),
+thus,
+\begin{equation}
+    I(z_{1}, \dots, z_{k})
+    = \left[\min(z_{1}, \dots, z_{k}),
+    \max(z_{1}, \dots, z_{k})\right].
+\end{equation}
+Let the \(\mbox{median}\) of three numbers be the one, which lies between the other two.
+In order to define the median function, first we need a definition of the minmod function of two variables(see, e.g., \cite{1993_Huynh}):
+% \begin{equation}
+%     \mbox{minmod}(a,b) =
+%     \begin{cases}
+%         a & \text{if}\ |a| < |b|\ \text{and}\ ab > 0, \\
+%         b & \text{if}\ |b| < |a|\ \text{and}\ ab > 0, \\
+%         0 & \text{if}\ ab < 0.
+%     \end{cases}
+% \end{equation}
+\begin{equation}
+    \mbox{minmod}(a,b) =
+    \begin{cases}
+        \mbox{sgn}(a) \min(|a|,|b|) & \text{if}\ ab > 0, \\
+        0 & \text{otherwise}.
+    \end{cases}
+\end{equation}
+Then, the median function of 3 variables, as in \cite{1989_Huynh_CONF,1993_Huynh}, can be defined
+\begin{equation}
+    \begin{split}
+        \mbox{median}(a,b,c)
+        &= a + \mbox{minmod}\left( b - a, c - a \right)
+        \\
+        &= b + \mbox{minmod}\left( a - b, c - b \right).
+    \end{split}
+\end{equation}
+
+It is important to observe that the \(\mbox{median}(x,y,z)\) lies in the interval defined by any other two of the three arguments, e.g.,
+\begin{equation}
+    \mbox{median}(x,y,z) \in I(y,z),\ \text{or}\
+    \mbox{median}(x,y,z) \in I(x,z).
+\end{equation}
+Also, \(\mbox{median}(z_{1}, z_{2},z_{3}, z_{4},z_{5})\) lies in the interval defined by any three of the five arguments, e.g.,
+\begin{equation}
+    \mbox{median}(z_{1},\dots,z_{5}) \in I(z_{1},z_{4}, z_{3}).
+\end{equation}
+Using the definitions above, the upwind-range condition \eqref{eqn:upwind-range-simpler} can be written in a convenient way by requiring
+\begin{equation}
+    \phi_{i}^{n+1}\in I(\phi_{i-1}^{n+1}, \phi_{i}^{n}).
+\end{equation}
 \subsection[]{Second-order implicit TVD schemes}
 Now we describe how we can construct schemes satisfying the upwind-range condition by choosing the slope properly.
 We can solve
@@ -327,8 +378,8 @@ We require that the outflow be at most the downwind outflow, and at least the im
         \leq
         v\Delta t
         \left[
-            \phi_{i-+}^{n+1}
-            +\sigma_{i-+}\left(
+            \phi_{i-1}^{n+1}
+            +\sigma_{i-1}\left(
                 \frac{\Delta x}{2} + \frac{v\Delta t}{2}
                 \right)
         \right]
@@ -343,7 +394,7 @@ We require that the outflow be at most the downwind outflow, and at least the im
         \max(\phi_{i-1}^{n+1},\phi_{i}^{n}).
     \end{split}
 \end{equation}
-Notice, that this is the same upwind-range condition, as for the cell average \eqref{eqn:upwind-range-simpler}. Thus, we can write
+Notice, that this is the same upwind-range condition, as for the new cell average \eqref{eqn:upwind-range-simpler}. Thus, we can simply  write
 \begin{equation}
     \label{eqn:slope-bounds}
     \begin{split}
@@ -460,9 +511,9 @@ Also, from \eqref{eqn: urc-all c-bounded slope}, we have
     \leq
     \frac{c}{1+c}.
 \end{equation}
-Let
+Let us define the intervals
 \begin{equation}
-    I_{1}=I\left[
+    I_{1}=I\left(
         \sigma_{i-1}
         -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         {(1+c)\Delta x},
@@ -470,42 +521,17 @@ Let
         +\frac{2}{c}
         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         {(1+c)\Delta x}
-    \right],
-    I_{2} = I\left[
+    \right),\
+    I_{2} = I\left(
         0,
         ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
-    \right]
+    \right),
 \end{equation}
-then
+then the slope must lie in the intersection
 \begin{equation}
-    \sigma_{i}
-    \in
-    I_{1}
-    \cap
-    I_{2}
+    \sigma_{i} \in I_{1} \cap I_{2}.
 \end{equation}
-% \begin{equation}
-%     \begin{split}
-%         |\sigma_{i}|
-%         &\leq
-%         2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
-%         {(1+c)\Delta x},
-%         \\
-%         \left|\sigma_{i-1}
-%         -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-%         {(1+c)\Delta x}\right|
-%         \leq
-%         |\sigma_{i}|
-%         &\leq
-%         \min\left( \left|\frac{2}{c}
-%         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-%         {(1+c)\Delta x}
-%         + \sigma_{i-1}\right|,
-%         2\frac{|\phi_{i+1}^{n} - \phi_{i}^{n+1}|}
-%         {(1+c)\Delta x}\right).
-%     \end{split}
-% \end{equation}
-Using \eqref{eqn:slope-bounds} and \eqref{eqn:slope-necessary},
+Using \eqref{eqn:slope-bounds} and \eqref{eqn:slope-necessary}, we can see that
 \begin{equation}
         \frac{\sigma_{i-1}\Delta x}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
@@ -513,15 +539,83 @@ Using \eqref{eqn:slope-bounds} and \eqref{eqn:slope-necessary},
         \leq
         0
         \leq
-        \frac{\sigma_{i}\Delta x}
-        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        \leq
         \frac{2}{c(1+c)}
         + \frac{\sigma_{i-1}\Delta x}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
 \end{equation}
-we can see that \(I_{1} \cap I_{2} \neq \emptyset\).
-Using \eqref{eqn: urc-all c-necessary} and \eqref{eqn: urc-all c-bounded slope}, we can derive sufficient condition for the slope \(\sigma_{i}\)
+which implies that \(0 \in I_{1}\).
+
+Now we discuss how to compute a particular slope. Let us have a slope from a high-order reconstruction of our choice denoted as \(\sigma_{i}^{HO}\). We want to use this slope as much as possible. So, for example, if
+\begin{equation}
+    \sigma_{i}^{HO} \in I_{1} \cap I_{2}
+    \Rightarrow
+    \sigma_{i} = \sigma_{i}^{HO},
+\end{equation}
+otherwise the slope takes one of the bounds of the interval \(I_{1} \cap I_{2}\).
+Let
+\begin{equation}
+    \sigma^{(1)}
+    = \mbox{median}\left(
+        \sigma_{i-1}
+        -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x},
+        ~\sigma_{i-1}
+        +\frac{2}{c}
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x},
+        ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+    \right),
+\end{equation}
+then, in order to satisfy the stability condition \eqref{eqn:upwind-range-simpler}, the slope of our reconstruction has to be
+\begin{equation}
+    \label{eqn:monotone-slope}
+    \sigma_{i} = \mbox{minmod}\left(
+        \sigma_{i}^{HO},\sigma^{(1)}
+    \right).
+\end{equation}
+\begin{proof}
+    (NOT COMPLETE!!!)
+    The above equation \eqref{eqn:monotone-slope} can be equivalently written as
+    \[
+        \sigma_{i} = \mbox{median}\left(
+            0,\sigma_{i}^{HO},\sigma^{(1)}
+        \right),
+    \]
+    which implies, using a property of the median function, that
+    \[\sigma_{i} \in I(0,\sigma^{(1)}).\]
+    We can see, that both
+    \[
+        \sigma^{(1)} \in I_{1} \quad \text{and}\quad
+        0 \in I_{1},
+    \]
+    thus, we conclude that \(\sigma_{i} \in I_{1}\).
+    \((\textcolor{red}{\sigma_{i} \in I_{1}!!!})\)
+    Again, using a property of the median function,
+    we have
+    \[
+        \sigma^{(1)}
+        \in
+        I\left(
+        \sigma_{i-1}
+        -2\frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x},
+        ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+        \right)
+    \]
+    or
+    \[
+        \sigma^{(1)}
+        \in
+        I\left(
+        \sigma_{i-1}
+        +\frac{2}{c}
+        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        {(1+c)\Delta x},
+        ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
+        \right)
+    \]
+\end{proof}
+Using \eqref{eqn: urc-all c-necessary} and \eqref{eqn: urc-all c-bounded slope}, we can also derive sufficient condition for the slope \(\sigma_{i}\)
 \begin{equation}\label{eqn: urc-all c- sufficient}
     \begin{split}
         0
@@ -561,16 +655,16 @@ so the slope must lie in
 \begin{equation}
     \sigma_{i}
     \in
-    I\left[
+    I\left(
         0,
         \frac{2}{c}
         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{1+c}
-    \right]
+    \right)
     \cap
-    I\left[
+    I\left(
         0,
         ~2\frac{\phi_{i+1}^{n} - \phi_{i}^{n+1}}{(1+c)\Delta x}
-    \right]
+    \right)
 \end{equation}
 % \begin{equation}
 %     |\sigma_{i}|
@@ -659,7 +753,7 @@ Substituting the new form of the slopes we get
         1.
     \end{split}
 \end{equation}
-Also, we consider
+Also, we consider similar bounds as before \eqref{eqn:slope-bounds}
 \begin{equation}
     \begin{split}\label{eqn: Frolkovic - psi bounds}
         0
@@ -724,33 +818,19 @@ If \(\Psi_{i-1}\) is available, then
         &\leq
         \frac{\Psi_{i}}{r_{i}}
         \leq
-        \frac{2}{c} + \Psi_{i-1},
-        \\
-        0
-        &\leq
-        \frac{\Psi_{i}}{r_{i}}
-        \leq
-        \frac{2}{c} + \Psi_{i-1},
+        \frac{2}{c} + \Psi_{i-1}.
     \end{split}
 \end{equation}
-since \(\Psi_{i-1} - 2 \leq 0\) from \eqref{eqn: Frolkovic - psi bounds}.
 Thus,
 \begin{equation}
-    0
-    \leq
     \Psi_{i}
-    \leq
-    \min
-    \left( 2,
-    r_{i}\left( \frac{2}{c} + \Psi_{i-1} \right)
-    \right)\ \text{for}\ r_{i} > 0,
+    \in
+    I
+    \left( r_{i}\left(\Psi_{i-1} - 2\right),
+    ~r_{i}\left( \frac{2}{c} + \Psi_{i-1} \right)
+    \right)\ \text{for}\ r_{i} \neq 0.
 \end{equation}
-and
-\begin{equation}
-    \Psi_{i} = 0\ \text{for}\ r_{i} = 0.
-\end{equation}
-This condition, however, differs a little from the one appearing in \cite{2023_Frolkovic}. Based on an
-ENO reconstruction, the condition \eqref{eqn: Frolkovic - psi bounds} changes to
+This condition, however, differs a little from the one appearing in \cite{2023_Frolkovic}, where they require
 \begin{equation}
     -1
     \leq
@@ -759,7 +839,7 @@ ENO reconstruction, the condition \eqref{eqn: Frolkovic - psi bounds} changes to
     2.
 \end{equation}
 
-It is also possible to derive a sufficient condition for \(\Psi_{i}\). Using \eqref{eqn: Frolkovic - necessary condition} and \eqref{eqn: Frolkovic - psi bounds}, it is sufficient to satisfy
+It is also possible to derive a sufficient condition for \(\Psi_{i}\). Using \eqref{eqn: Frolkovic - necessary condition} and \eqref{eqn: Frolkovic - psi bounds}, it is sufficient for the limiter to satisfy
 \begin{equation}
     \begin{split}
         0
@@ -1068,9 +1148,9 @@ It is also possible to derive a sufficient condition for \(\Psi_{i}\). Using \eq
 Following a philosophy as in \cite{1977_VanLeer},
 we can compute the average-flux at the face \(i+1/2\) using a piecewise-parabolic reconstruction from the cell averages \(\phi_{i+1}^{n}, \phi_{i}^{n}, \phi_{i}^{n+1}\). A second order polynomial can be written in the form
 \begin{equation}
-    \phi(x) = c_0 + c_1 x + c_2 x^2.
+    p(x) = c_0 + c_1 x + c_2 x^2.
 \end{equation}
-Thus, we need to compute the three unknown coefficients. In order to do this, we require the reconstruction to satisfy the average equations in the appropriate intervals:
+In order to compute the three unknown coefficients do this, we require the reconstruction to satisfy the average equations in the appropriate intervals:
 \begin{equation}
     \begin{split}
         \int_{x_{i+1/2}}^{x_{i+3/2}} p(x) \dd{x}
@@ -1083,13 +1163,13 @@ Thus, we need to compute the three unknown coefficients. In order to do this, we
         &= \phi_{i}^{n+1}.
     \end{split}
 \end{equation}
-For convenience, we can make the change of variables
+For convenience, we can make a change of variables
 \begin{equation}
     \xi = \frac{x-x_{i-1/2}}{\Delta x},
 \end{equation}
-which yields
+and write the polynomial in a different form
 \begin{equation}\label{eqn: parabola-xi}
-    \phi(\xi) = c_0 + c_1\xi + c_2\xi^2.
+    p(\xi) = c_0 + c_1\xi + c_2\xi^2.
 \end{equation}
 The integral equations become
 \begin{equation}\label{eqn: parabola-integral-xi}
@@ -1211,26 +1291,35 @@ is the slope for a piecewise-parabolic reconstruction, thus, resulting in a thir
 \end{equation}
 \subsection{High-order correction formulation}
 Any high-order method discussed earlier can be written in the form
-\begin{equation}
+\begin{equation}\label{eqn:HO-correction-1d}
     \begin{split}
         \phi_{i}^{n+1}
         &= \phi_{i}^{n} - c\left(
             \phi_{i}^{n+1}
-            + D_{i+1/2} - \phi_{i-1}^{n+1}
-            - D_{i-1/2} \right),
+            + \delta \phi_{i+1/2} - \phi_{i-1}^{n+1}
+            - \delta \phi_{i-1/2} \right),
     \end{split}
 \end{equation}
-where \(D_{i+1/2}\) is a high-order correction term for the unconditionally stable first-order implicit upwind flux.
-For stability, we want to ensure the upwind-range-condition is satisfied.
-Since
+where \(\delta \phi_{i+1/2}\) is a high-order correction term for the unconditionally stable first-order implicit upwind flux.
+For stability, we want to ensure the upwind-range-condition \eqref{eqn:upwind-range-simpler}
+\[
+    0
+    \leq
+    \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
+    {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    \leq
+    1
+\]
+is satisfied.
+First we can make some simplifications by substituting \eqref{eqn:HO-correction-1d} for the new cell average \(\phi_{i}^{n+1}\)
 \begin{equation}
     \begin{split}
         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
             {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         &=
         \frac{\phi_{i}^{n} - c\left(
-                \phi_{i}^{n+1} + D_{i+1/2}
-                - \phi_{i-1}^{n+1} - D_{i-1/2}
+                \phi_{i}^{n+1} + \delta \phi_{i+1/2}
+                - \phi_{i-1}^{n+1} - \delta \phi_{i-1/2}
                 \right) - \phi_{i-1}^{n+1}}
             {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
         \\
@@ -1239,193 +1328,173 @@ Since
         &=
         1 - c\frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        -c\frac{D_{i+1/2} - D_{i-1/2}}
+        -c\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \\
         \frac{\phi_{i}^{n+1} - \phi_{i-1}^{n+1}}
             {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         &=
         \frac{1}{1+c}
-        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        -\frac{c}{1+c}\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
     \end{split}
 \end{equation}
-Substituting to the URC we get
+Substituting to the URC \eqref{eqn:upwind-range-simpler} we get
 \begin{equation}
     \begin{split}
         0
         &\leq
         \frac{1}{1+c}
-        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        -\frac{c}{1+c}\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         1,
         \\
         -\frac{1}{1+c}
         &\leq
-        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        -\frac{c}{1+c}\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         1-\frac{1}{1+c},
         \\
         -\frac{1}{1+c}
         &\leq
-        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
-        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        \leq
-        1-\frac{1}{1+c},
-        \\
-        -\frac{1}{1+c}
-        &\leq
-        -\frac{c}{1+c}\frac{D_{i+1/2} - D_{i-1/2}}
+        -\frac{c}{1+c}\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{c}{1+c},
         \\
         -1
         &\leq
-        -c\frac{D_{i+1/2} - D_{i-1/2}}
+        -c\frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         c,
         \\
         \frac{1}{c}
         &\geq
-        \frac{D_{i+1/2} - D_{i-1/2}}
+        \frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \geq
         -1,
         \\
         -1
         &\leq
-        \frac{D_{i+1/2} - D_{i-1/2}}
+        \frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{1}{c}.
     \end{split}
 \end{equation}
-If \(\phi_{i}^{n} - \phi_{i-1}^{n+1} > 0\), then
+Similarly, as in the previous section, we bound the flux
 \begin{equation}
-    \begin{split}
-        -(\phi_{i}^{n} - \phi_{i-1}^{n+1})
-        &\leq
-        D_{i+1/2} - D_{i-1/2}
-        \leq
-        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
-        \\
-        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
-        &\leq
-        D_{i+1/2}
-        \leq
-        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
-    \end{split}
-\end{equation}
-If \(\phi_{i}^{n} - \phi_{i-1}^{n+1} < 0\), then
-\begin{equation}
-    \begin{split}
-        -(\phi_{i}^{n} - \phi_{i-1}^{n+1})
-        &\geq
-        D_{i+1/2} - D_{i-1/2}
-        \geq
-        \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
-        \\
-        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
-        &\geq
-        D_{i+1/2}
-        \geq
-        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
-    \end{split}
-\end{equation}
-Let \(D_{i+1/2}^{HO}\) be a high-order correction term of our choice. We want to use it whenever possible.
-We can write the boundedness of the correction term elegantly using the median function \cite{1989_Huynh_CONF}.
-In order to define the median function, first we need a definition of the minmod function of 2 variables \cite{2002_LeVeque_BOOK}:
-\begin{equation}
-    \mbox{minmod}(a,b) =
-    \begin{cases}
-        a & \text{if}\ |a| < |b|\ \text{and}\ ab > 0, \\
-        b & \text{if}\ |b| < |a|\ \text{and}\ ab > 0, \\
-        0 & \text{if}\ ab < 0.
-    \end{cases}
-\end{equation}
-Then, the median function of 3 variables can be defined as \cite{1989_Huynh_CONF}
-\begin{equation}
-    \begin{split}
-        \mbox{median}(a,b,c)
-        &= a + \mbox{minmod}\left( b - a, c - a \right)
-        \\
-        &= b + \mbox{minmod}\left( a - b, c - b \right).
-    \end{split}
-\end{equation}
-The median of three numbers is the one of the three which lies between the other two. Also, it is important to notice that the median lies in the interval defined by any two of the three arguments \cite{1989_Huynh_CONF}. Thus, it is a convenient way to define the correction term as
-\begin{equation}
-    D_{i+1/2} = \mbox{median}\left(
-        D_{i+1/2}^{HO},
-        D_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
-        D_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
-    \right).
-\end{equation}
-This choice ensures the required boundedness for stability while choosing the high-order correction whenever it yields a stable flux.
-Notice, however, that to compute a correction term \(D_{i+1/2}\), we also need \(D_{i-1/2}\), which might not be available to us.
-If we bound the correction term \(D_{i-1/2}\), we can also derive simpler sufficient condition for \(D_{i+1/2}\).We can,~e.g., bound the average flux \(\phi_{i-1}^{n+1} + D_{i-1/2}\) as in earlier examples, the bound takes a simpler form
-\begin{equation}
+    \label{eqn:HO-correction-bounds}
     \begin{split}
         0
         \leq
-        \frac{\phi_{i-1}^{n+1} + D_{i-1/2} - \phi_{i-1}^{n+1}}
+        \frac{\phi_{i-1}^{n+1} + \delta \phi_{i-1/2} - \phi_{i-1}^{n+1}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         &\leq
         1,
         \\
         0
         \leq
-        \frac{D_{i-1/2}}
+        \frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         &\leq
-        1\
-        \text{for all faces},
+        1,
     \end{split}
 \end{equation}
+for all faces.
+Thus, if \(\delta \phi_{i-1/2}\) is available,
+\begin{equation}
+    \begin{split}
+        -1
+        &\leq
+        \frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{1}{c},
+        \\
+        \frac{\delta \phi_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        -1
+        &\leq
+        \frac{\delta \phi_{i+1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        \leq
+        \frac{\delta \phi_{i-1/2}}
+        {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+        +\frac{1}{c},
+    \end{split}
+\end{equation}
+Also notice, that
+\begin{equation}
+    \frac{\delta \phi_{i-1/2}}
+    {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    -1
+    \leq
+    0
+    \leq
+    \frac{\delta \phi_{i-1/2}}
+    {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
+    +\frac{1}{c}.
+\end{equation}
+Let \(\delta \phi_{i+1/2}^{HO}\) be a high-order correction term of our choice. We want to use it whenever possible.
+We can write the boundedness of the correction term elegantly using the median function \cite{1989_Huynh_CONF}.
+Thus, if \(\delta \phi_{i-1/2}\) is available, we define the correction term as
+\begin{equation}
+    \delta \phi_{i+1/2} = \mbox{median}\left(
+        \delta \phi_{i+1/2}^{HO},
+        \delta \phi_{i-1/2} + \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
+        \delta \phi_{i-1/2} - (\phi_{i}^{n} - \phi_{i-1}^{n+1})
+    \right).
+\end{equation}
+This choice ensures the required boundedness for stability while choosing the high-order correction whenever it yields a stable reconstruction.
+Notice, however, that to compute a correction term \(\delta \phi_{i+1/2}\), we also need \(\delta \phi_{i-1/2}\), which might not be available to us.
+If we bound the correction term \(\delta \phi_{i-1/2}\), we can also derive simpler sufficient condition for \(\delta \phi_{i+1/2}\).We can,~e.g., bound the average flux \(\phi_{i-1}^{n+1} + \delta \phi_{i-1/2}\) as in earlier examples, the bound takes a simpler form
+
 then
 \begin{equation}
     \begin{split}
         -1
         &\leq
-        \frac{D_{i+1/2} - D_{i-1/2}}
+        \frac{\delta \phi_{i+1/2} - \delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{1}{c},
         \\
         -1
         &\leq
-        \frac{D_{i+1/2}}
+        \frac{\delta \phi_{i+1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
-        -\frac{D_{i-1/2}}
+        -\frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{1}{c},
         \\
-        \frac{D_{i-1/2}}
+        \frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}-1
         &\leq
-        \frac{D_{i+1/2}}
+        \frac{\delta \phi_{i+1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{1}{c}
-        +\frac{D_{i-1/2}}
+        +\frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}},
         \\
-        \frac{D_{i-1/2}}
+        \frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}-1
         \leq
         0
         &\leq
-        \frac{D_{i+1/2}}
+        \frac{\delta \phi_{i+1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}
         \leq
         \frac{1}{c}
         \leq
         \frac{1}{c}
-        +\frac{D_{i-1/2}}
+        +\frac{\delta \phi_{i-1/2}}
         {\phi_{i}^{n} - \phi_{i-1}^{n+1}}.
     \end{split}
 \end{equation}
@@ -1433,7 +1502,7 @@ Thus, for \(\phi_{i}^{n} - \phi_{i-1}^{n+1} > 0\)
 \begin{equation}
     0
     \leq
-    D_{i+1/2}
+    \delta \phi_{i+1/2}
     \leq
     \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c},
 \end{equation}
@@ -1441,14 +1510,14 @@ and for \(\phi_{i}^{n} - \phi_{i-1}^{n+1} < 0\)
 \begin{equation}
     0
     \geq
-    D_{i+1/2}
+    \delta \phi_{i+1/2}
     \geq
     \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}.
 \end{equation}
 The choice
 \begin{equation}
-    D_{i+1/2} = \mbox{minmod}\left(
-        D_{i+1/2}^{HO},
+    \delta \phi_{i+1/2} = \mbox{minmod}\left(
+        \delta \phi_{i+1/2}^{HO},
         \frac{\phi_{i}^{n} - \phi_{i-1}^{n+1}}{c}
     \right)
 \end{equation}

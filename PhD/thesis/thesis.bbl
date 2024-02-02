@@ -53,6 +53,47 @@
       \verb https://arxiv.org/pdf/2303.13318v2.pdf
       \endverb
     \endentry
+    \entry{2007_Duraisamy}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ba3afe8567d75a1c78b57b2c3462c81e}{%
+           family={Duraisamy},
+           familyi={D\bibinitperiod},
+           given={Karthikeyan},
+           giveni={K\bibinitperiod}}}%
+        {{hash=02965ebb9e90ef624a9fae1175b17218}{%
+           family={Baeder},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima D},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{3b8eccc871a877f3b7422092522131f0}
+      \strng{fullhash}{3b8eccc871a877f3b7422092522131f0}
+      \strng{bibnamehash}{3b8eccc871a877f3b7422092522131f0}
+      \strng{authorbibnamehash}{3b8eccc871a877f3b7422092522131f0}
+      \strng{authornamehash}{3b8eccc871a877f3b7422092522131f0}
+      \strng{authorfullhash}{3b8eccc871a877f3b7422092522131f0}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Scientific Computing}
+      \field{number}{6}
+      \field{title}{Implicit scheme for hyperbolic conservation laws using nonoscillatory reconstruction in space and time}
+      \field{volume}{29}
+      \field{year}{2007}
+      \field{dateera}{ce}
+      \field{pages}{2607\bibrangedash 2620}
+      \range{pages}{14}
+      \verb{urlraw}
+      \verb https://www.academia.edu/download/43476488/Space_time.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.academia.edu/download/43476488/Space_time.pdf
+      \endverb
+    \endentry
     \entry{2022_Eimer}{article}{}
       \name{author}{3}{}{%
         {{hash=a701d956f7187b8eab0568632eac4fa3}{%
@@ -179,6 +220,43 @@
       \verb https://www.researchgate.net/profile/Peter-Frolkovic/publication/365886997_High_resolution_compact_implicit_numerical_scheme_for_conservation_laws/links/63888ddf2c563722f2297b03/High-resolution-compact-implicit-numerical-scheme-for-conservation-laws.pdf
       \endverb
     \endentry
+    \entry{1993_Huynh}{article}{}
+      \name{author}{1}{}{%
+        {{hash=10d8e08b50adfcc300a1767b05bbced1}{%
+           family={Huynh},
+           familyi={H\bibinitperiod},
+           given={Hung\bibnamedelima T},
+           giveni={H\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{fullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{bibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authorbibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authornamehash}{10d8e08b50adfcc300a1767b05bbced1}
+      \strng{authorfullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \field{extraname}{1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Numerical Analysis}
+      \field{number}{1}
+      \field{title}{Accurate monotone cubic interpolation}
+      \field{volume}{30}
+      \field{year}{1993}
+      \field{dateera}{ce}
+      \field{pages}{57\bibrangedash 100}
+      \range{pages}{44}
+      \verb{urlraw}
+      \verb https://ntrs.nasa.gov/api/citations/19910011517/downloads/19910011517.pdf
+      \endverb
+      \verb{url}
+      \verb https://ntrs.nasa.gov/api/citations/19910011517/downloads/19910011517.pdf
+      \endverb
+    \endentry
     \entry{1989_Huynh_CONF}{inproceedings}{}
       \name{author}{1}{}{%
         {{hash=10d8e08b50adfcc300a1767b05bbced1}{%
@@ -193,6 +271,7 @@
       \strng{authorbibnamehash}{10d8e08b50adfcc300a1767b05bbced1}
       \strng{authornamehash}{10d8e08b50adfcc300a1767b05bbced1}
       \strng{authorfullhash}{10d8e08b50adfcc300a1767b05bbced1}
+      \field{extraname}{2}
       \field{sortinit}{H}
       \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{labelnamesource}{author}
@@ -351,6 +430,72 @@
       \verb https://www.math.sk/mikula/mou_apnum.pdf
       \endverb
       \keyw{65M08}
+    \endentry
+    \entry{1982_Roe}{article}{}
+      \name{author}{2}{}{%
+        {{hash=20f1943f36d55f41e8f6a88fb5da270a}{%
+           family={Roe},
+           familyi={R\bibinitperiod},
+           given={PL},
+           giveni={P\bibinitperiod}}}%
+        {{hash=05d9faa71a36b56498c9a6f80630fb06}{%
+           family={Baines},
+           familyi={B\bibinitperiod},
+           given={MJ},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{fullhash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{bibnamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authorbibnamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authornamehash}{33577d1e409fe2e588e77cce1e9698cc}
+      \strng{authorfullhash}{33577d1e409fe2e588e77cce1e9698cc}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numerical Methods in Fluid Mechanics}
+      \field{title}{Algorithms for advection and shock problems}
+      \field{year}{1982}
+      \field{dateera}{ce}
+      \field{pages}{281\bibrangedash 290}
+      \range{pages}{10}
+    \endentry
+    \entry{1997_Thuburn}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4ce2f99b1cd72688882ffdca224375aa}{%
+           family={Thuburn},
+           familyi={T\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Meteorological Society}%
+      }
+      \strng{namehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{fullhash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{bibnamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authorbibnamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authornamehash}{4ce2f99b1cd72688882ffdca224375aa}
+      \strng{authorfullhash}{4ce2f99b1cd72688882ffdca224375aa}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Monthly weather review}
+      \field{number}{8}
+      \field{title}{TVD schemes, positive schemes, and the universal limiter}
+      \field{volume}{125}
+      \field{year}{1997}
+      \field{dateera}{ce}
+      \field{pages}{1990\bibrangedash 1993}
+      \range{pages}{4}
+      \verb{urlraw}
+      \verb https://journals.ametsoc.org/view/journals/mwre/125/8/1520-0493_1997_125_1990_tspsat_2.0.co_2.xml?tab_body=abstract-display
+      \endverb
+      \verb{url}
+      \verb https://journals.ametsoc.org/view/journals/mwre/125/8/1520-0493_1997_125_1990_tspsat_2.0.co_2.xml?tab_body=abstract-display
+      \endverb
     \endentry
     \entry{2009_Toro_BOOK}{book}{}
       \name{author}{1}{}{%

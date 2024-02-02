@@ -16,3 +16,4 @@ minmod
 ENO
 piecewise-parabolic
 bidiagonal
+LeVeque
