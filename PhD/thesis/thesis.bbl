@@ -384,6 +384,34 @@
       \verb http://www.tevza.org/home/course/modelling-II_2016/books/Leveque%20-%20Finite%20Volume%20Methods%20for%20Hyperbolic%20Equations.pdf
       \endverb
     \endentry
+    \entry{1985_LeVeque_CONF}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=c5fc096f540a44e56f892cc83176f0fb}{%
+           family={LeVeque},
+           familyi={L\bibinitperiod},
+           given={Randall\bibnamedelima J},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=41dbef88ca1a3fe34401df4a0a34c418}{%
+           family={Goodman},
+           familyi={G\bibinitperiod},
+           given={Jonathan\bibnamedelima B},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{fullhash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{bibnamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authorbibnamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authornamehash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \strng{authorfullhash}{4f5d0c5e1dac2c29734a0defda50b779}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Large-scale computations in fluid mechanics; Proceedings of the Fifteenth Summer Seminar on Applied Mathematics, University of California, La Jolla, CA, June 27-July 8, 1983. Parts 1 and 2}
+      \field{title}{TVD schemes in one and two space dimensions}
+      \field{year}{1985}
+      \field{dateera}{ce}
+    \endentry
     \entry{2014_Mikula}{article}{}
       \name{author}{3}{}{%
         {{hash=1d3fb71697e7ef51c9fb6df3cc2abdd1}{%

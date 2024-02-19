@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  2 FEB 2024 19:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.18)  19 FEB 2024 10:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -710,7 +710,7 @@ Package hyperref Info: Link coloring OFF on input line 3.
 \openout4 = `thesis.out'.
 
  (./1d/implicit-high-order.tex
-<1d/./img//Characteristics-crop.pdf, id=25, 593.21625pt x 489.83pt>
+<1d/./img//Characteristics-crop.pdf, id=33, 593.21625pt x 489.83pt>
 File: 1d/./img//Characteristics-crop.pdf Graphic file (type pdf)
 <use 1d/./img//Characteristics-crop.pdf>
 Package pdftex.def Info: 1d/./img//Characteristics-crop.pdf  used on input line 9.
@@ -723,7 +723,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 10.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<1d/./img//2nd-order-crop.pdf, id=30, 701.62125pt x 579.16376pt>
+<1d/./img//2nd-order-crop.pdf, id=38, 701.62125pt x 579.16376pt>
 File: 1d/./img//2nd-order-crop.pdf Graphic file (type pdf)
 <use 1d/./img//2nd-order-crop.pdf>
 Package pdftex.def Info: 1d/./img//2nd-order-crop.pdf  used on input line 21.
@@ -733,18 +733,277 @@ Non-PDF special ignored!
 <special> papersize=597.50787pt,845.04684pt
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
- <./1d/./img//Characteristics-crop.pdf>]
-Overfull \hbox (3.68044pt too wide) in paragraph at lines 25--27
-[]\OT1/cmr/m/n/12 Let us be-gin with a lin-ear re-con-struc-tion yield-ing second-order fi-nite vol-ume schemes,
- []
-
-[2 <./1d/./img//2nd-order-crop.pdf>] [3] [4] [5]
-<1d/./img//Slope-bounds-crop.pdf, id=176, 701.62125pt x 579.16376pt>
+ <./1d/./img//Characteristics-crop.pdf>] [2 <./1d/./img//2nd-order-crop.pdf>] [3] [4] [5] [6] [7] [8]
+<1d/./img//Slope-bounds-crop.pdf, id=225, 701.62125pt x 579.16376pt>
 File: 1d/./img//Slope-bounds-crop.pdf Graphic file (type pdf)
 <use 1d/./img//Slope-bounds-crop.pdf>
-Package pdftex.def Info: 1d/./img//Slope-bounds-crop.pdf  used on input line 369.
+Package pdftex.def Info: 1d/./img//Slope-bounds-crop.pdf  used on input line 562.
 (pdftex.def)             Requested size: 441.01773pt x 364.05322pt.
- [6] [7 <./1d/./img//Slope-bounds-crop.pdf>] [8] [9] [10] [11] [12] [13]) [14]
+ [9 <./1d/./img//Slope-bounds-crop.pdf>] [10] [11] [12] [13] [14]
+<1d/./img//fig-1point-c0p8-T8-limit0-smooth.pdf, id=325, 636.3775pt x 292.09125pt>
+File: 1d/./img//fig-1point-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c0p8-T8-limit0-smooth.pdf  used on input line 1598.
+(pdftex.def)             Requested size: 441.01773pt x 202.42117pt.
+<1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf, id=326, 636.3775pt x 290.08376pt>
+File: 1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf  used on input line 1599.
+(pdftex.def)             Requested size: 441.01773pt x 201.02998pt.
+<1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf, id=327, 659.46375pt x 294.09875pt>
+File: 1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf  used on input line 1600.
+(pdftex.def)             Requested size: 441.01773pt x 196.68613pt.
+<1d/./img//../tab/tab-1point-c0p8-T8-limit0-smooth.pdf, id=328, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-1point-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-1point-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-1point-c0p8-T8-limit0-smooth.pdf  used on input line 1607.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf, id=329, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf  used on input line 1609.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf, id=330, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf  used on input line 1611.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+ [15] [16]
+Overfull \vbox (53.53754pt too high) has occurred while \output is active []
+
+ [17 <./1d/./img//fig-1point-c0p8-T8-limit0-smooth.pdf> <./1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c0p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//fig-1point-c1p8-T8-limit0-smooth.pdf, id=385, 636.3775pt x 292.09125pt>
+File: 1d/./img//fig-1point-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c1p8-T8-limit0-smooth.pdf  used on input line 1617.
+(pdftex.def)             Requested size: 441.01773pt x 202.42117pt.
+<1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf, id=386, 636.3775pt x 290.08376pt>
+File: 1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf  used on input line 1618.
+(pdftex.def)             Requested size: 441.01773pt x 201.02998pt.
+<1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf, id=387, 659.46375pt x 283.0575pt>
+File: 1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf  used on input line 1619.
+(pdftex.def)             Requested size: 441.01773pt x 189.302pt.
+<1d/./tab//tab-1point-c1p8-T8-limit0-smooth.pdf, id=388, 368.37625pt x 112.42pt>
+File: 1d/./tab//tab-1point-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./tab//tab-1point-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./tab//tab-1point-c1p8-T8-limit0-smooth.pdf  used on input line 1626.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf, id=389, 396.48125pt x 112.42pt>
+File: 1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf  used on input line 1628.
+(pdftex.def)             Requested size: 441.01773pt x 125.05013pt.
+<1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf, id=390, 491.8375pt x 112.42pt>
+File: 1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf Graphic file (type pdf)
+<use 1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf>
+Package pdftex.def Info: 1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf  used on input line 1630.
+(pdftex.def)             Requested size: 441.01773pt x 100.80824pt.
+ [18 <./1d/./img//../tab/tab-1point-c0p8-T8-limit0-smooth.pdf> <./1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] [19 <./1d/./img//fig-1point-c1p8-T8-limit0-smooth.pdf> <./1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c1p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//fig-1point-c0p8-T8-limit1-smooth.pdf, id=498, 675.52374pt x 294.09875pt>
+File: 1d/./img//fig-1point-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c0p8-T8-limit1-smooth.pdf  used on input line 1637.
+(pdftex.def)             Requested size: 441.01773pt x 192.00557pt.
+<1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf, id=499, 664.4825pt x 294.09875pt>
+File: 1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf  used on input line 1638.
+(pdftex.def)             Requested size: 441.01773pt x 195.19624pt.
+<1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf, id=500, 702.625pt x 294.09875pt>
+File: 1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf  used on input line 1639.
+(pdftex.def)             Requested size: 441.01773pt x 184.60107pt.
+<1d/./img//../tab/tab-1point-c0p8-T8-limit1-smooth.pdf, id=501, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-1point-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-1point-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-1point-c0p8-T8-limit1-smooth.pdf  used on input line 1646.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf, id=502, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf  used on input line 1648.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf, id=503, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf  used on input line 1650.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+ [20 <./1d/./tab//tab-1point-c1p8-T8-limit0-smooth.pdf> <./1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./tab//tab-iioe-c1p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./tab//tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//fig-1point-c1p8-T8-limit1-smooth.pdf, id=570, 675.52374pt x 294.09875pt>
+File: 1d/./img//fig-1point-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c1p8-T8-limit1-smooth.pdf  used on input line 1656.
+(pdftex.def)             Requested size: 441.01773pt x 192.00557pt.
+<1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf, id=571, 664.4825pt x 294.09875pt>
+File: 1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf  used on input line 1657.
+(pdftex.def)             Requested size: 441.01773pt x 195.19624pt.
+<1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf, id=572, 702.625pt x 294.09875pt>
+File: 1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf  used on input line 1658.
+(pdftex.def)             Requested size: 441.01773pt x 184.60107pt.
+ [21 <./1d/./img//fig-1point-c0p8-T8-limit1-smooth.pdf> <./1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c0p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//../tab/tab-1point-c1p8-T8-limit1-smooth.pdf, id=620, 396.48125pt x 112.42pt>
+File: 1d/./img//../tab/tab-1point-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-1point-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-1point-c1p8-T8-limit1-smooth.pdf  used on input line 1665.
+(pdftex.def)             Requested size: 441.01773pt x 125.05013pt.
+<1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf, id=621, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf  used on input line 1667.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf, id=622, 452.69125pt x 112.42pt>
+File: 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf  used on input line 1669.
+(pdftex.def)             Requested size: 441.01773pt x 109.5207pt.
+ [22 <./1d/./img//../tab/tab-1point-c0p8-T8-limit1-smooth.pdf> <./1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//fig-1point-c0p8-T8-limit2-smooth.pdf, id=689, 675.52374pt x 294.09875pt>
+File: 1d/./img//fig-1point-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c0p8-T8-limit2-smooth.pdf  used on input line 1675.
+(pdftex.def)             Requested size: 441.01773pt x 192.00557pt.
+<1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf, id=690, 664.4825pt x 294.09875pt>
+File: 1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf  used on input line 1676.
+(pdftex.def)             Requested size: 441.01773pt x 195.19624pt.
+<1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf, id=691, 702.625pt x 294.09875pt>
+File: 1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf  used on input line 1677.
+(pdftex.def)             Requested size: 441.01773pt x 184.60107pt.
+ [23 <./1d/./img//fig-1point-c1p8-T8-limit1-smooth.pdf> <./1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c1p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//../tab/tab-1point-c0p8-T8-limit2-smooth.pdf, id=738, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-1point-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-1point-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-1point-c0p8-T8-limit2-smooth.pdf  used on input line 1684.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf, id=739, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf  used on input line 1686.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf, id=740, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf  used on input line 1688.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+ [24 <./1d/./img//../tab/tab-1point-c1p8-T8-limit1-smooth.pdf> <./1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//fig-1point-c1p8-T8-limit2-smooth.pdf, id=807, 675.52374pt x 294.09875pt>
+File: 1d/./img//fig-1point-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-1point-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-1point-c1p8-T8-limit2-smooth.pdf  used on input line 1694.
+(pdftex.def)             Requested size: 441.01773pt x 192.00557pt.
+<1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf, id=808, 664.4825pt x 294.09875pt>
+File: 1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf  used on input line 1695.
+(pdftex.def)             Requested size: 441.01773pt x 195.19624pt.
+<1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf, id=809, 702.625pt x 294.09875pt>
+File: 1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf  used on input line 1696.
+(pdftex.def)             Requested size: 441.01773pt x 184.60107pt.
+ [25 <./1d/./img//fig-1point-c0p8-T8-limit2-smooth.pdf> <./1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c0p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<1d/./img//../tab/tab-1point-c1p8-T8-limit2-smooth.pdf, id=856, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-1point-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-1point-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-1point-c1p8-T8-limit2-smooth.pdf  used on input line 1703.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf, id=857, 368.37625pt x 112.42pt>
+File: 1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf  used on input line 1705.
+(pdftex.def)             Requested size: 441.01773pt x 134.58769pt.
+<1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf, id=858, 452.69125pt x 112.42pt>
+File: 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf Graphic file (type pdf)
+<use 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf>
+Package pdftex.def Info: 1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf  used on input line 1707.
+(pdftex.def)             Requested size: 441.01773pt x 109.5207pt.
+ [26 <./1d/./img//../tab/tab-1point-c0p8-T8-limit2-smooth.pdf> <./1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]) [27 <./1d/./img//fig-1point-c1p8-T8-limit2-smooth.pdf> <./1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-iioe-c1p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] [28 <./1d/./img//../tab/tab-1point-c1p8-T8-limit2-smooth.pdf> <./1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf
+
+pdfTeX warning: pdflatex (file ./1d/./img//../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
 Overfull \hbox (21.25995pt too wide) in paragraph at lines 11--11
 \OT1/cmtt/m/n/12 numerical _ scheme _ for _ conservation _ laws / links / 63888ddf2c563722f2297b03 /
  []
@@ -754,33 +1013,33 @@ Overfull \hbox (6.73494pt too wide) in paragraph at lines 11--11
 \OT1/cmtt/m/n/12 High -[] resolution -[] compact -[] implicit -[] numerical -[] scheme -[] for -[] conservation -[]
  []
 
-[15
+[29
 
 ]
 Overfull \hbox (5.63353pt too wide) in paragraph at lines 11--11
 []\OT1/cmr/m/n/12 Karol Mikula, Mario Ohlberger, and Jozef Urb^^San. \  Inflow-implicit/outflow-explicit
  []
 
-[16] [17] (./thesis.aux)
+[30] [31] (./thesis.aux)
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 639E3F8A1D563DCCA4C020C95C8FABDF;412.
+(rerunfilecheck)             Checksum: 4294ED28FEDA9B61D97D56550B336765;518.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 22074 strings out of 476029
- 385670 string characters out of 5790172
- 1875346 words of memory out of 5000000
- 42129 multiletter control sequences out of 15000+600000
+ 22471 strings out of 476029
+ 404547 string characters out of 5790172
+ 1877346 words of memory out of 5000000
+ 42441 multiletter control sequences out of 15000+600000
  522474 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 77i,17n,80p,718b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 77i,17n,80p,856b,1765s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (17 pages, 321522 bytes).
+Output written on thesis.pdf (31 pages, 1192583 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 367 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1194 PDF objects out of 1200 (max. 8388607)
+ 874 compressed objects within 9 object streams
+ 144 named destinations out of 1000 (max. 500000)
+ 252 words of extra memory for PDF output out of 10000 (max. 10000000)
 
