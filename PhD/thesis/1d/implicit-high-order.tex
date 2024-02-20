@@ -2,15 +2,15 @@
 \begin{document}
 \graphicspath{ {./img/}{./tab/} }
 \section[]{High-order implicit schemes in 1D}
-We are interested in constructing implicit finite-volume schemes that can be solved efficiently. Thus, e.g., yields a similar system of equations with a bidiagonal matrix as in the case of implicit-upwind scheme, where we can simply compute the solution one by one, starting at the inflow boundary.
-As a guidance, let us use our knowledge of the solutions of the advection equation. In that case we know that the solution is the initial values translating along characteristics, see Figure~\ref{fig:characteristics-1d}.
+We are interested in constructing implicit finite volume schemes that can be solved efficiently. Thus, e.g., yields a similar system of equations as in the case of implicit-upwind scheme.
+As a guidance, let us use our knowledge of the solutions of the advection equation. In that case we know that the solution at a later time is the translated initial condition, see Figure~\ref{fig:characteristics-1d}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{Characteristics-crop.pdf}
 	\caption{Averages in \(x-t\) coordinates}
 	\label{fig:characteristics-1d}
 \end{figure}
-The finite-volume schemes differ only in their definition of the numerical fluxes, thus, how can it predict the flow of a quantity through a cell face in a given time interval.
+A particular finite volume scheme is defined by the definition of the numerical flux through the cell interface, thus, how it approximates the flow of a quantity through a surface in a given time interval.
 Our goal is to compute the flux through the face at \(x_{i+1/2}\) using the known cell averages.
 For convenience, we shift to space coordinates.
 This way we can see the connection directly between well established explicit schemes based on polynomial reconstruction \cite{1977_VanLeer,2002_LeVeque_BOOK} and our implicit schemes.
@@ -30,9 +30,8 @@ with slope \(\sigma_{i}\) yielding second-order finite volume schemes, see Figur
 For \(v>0\), the quantity that flows through the face at \(x_{i+1/2}\) is simply the shaded area
 \[ v\Delta t\left[
     \phi_{i}^{n+1} + \sigma_{i}\left( \frac{\Delta x}{2} + \frac{v\Delta t}{2} \right)
-\right], \]
-where \(\sigma_{i}\) is the slope.
-Thus, the full update of the cell average is
+\right]. \]
+Thus, the full update of the cell average
 \begin{equation}
     \begin{split}
         \phi_{i}^{n+1}\Delta x
@@ -47,7 +46,7 @@ Thus, the full update of the cell average is
         \right].
     \end{split}
 \end{equation}
-Dividing by the cell width \(\Delta x\) and further simplifying we can write a general second order scheme as
+Dividing by the cell width \(\Delta x\) and further simplifying we can write a general second-order implicit scheme
 \begin{equation}\label{eqn:second-order-implicit}
     \begin{split}
         \phi_{i}^{n+1}
@@ -148,7 +147,7 @@ yielding the system
     \end{split}
 \end{equation}
 Notice that the above scheme is exact for Courant number \(c = 1\).
-Another choice, in particular, if our linear reconstruction satisfies the integral equation
+Another choice, e.g., is if our linear reconstruction satisfies the integral equation
 \begin{equation}
     \frac{1}{\Delta x}
     \int_{x_{i+1/2}}^{x_{i+3/2}}
@@ -233,13 +232,13 @@ In order to compute the three unknown coefficients, we require the reconstructio
 \begin{equation}
     \begin{split}
         \int_{x_{i+1/2}}^{x_{i+3/2}} p(x) \dd{x}
-        &= \phi_{i+1}^{n},
+        &= \phi_{i+1}^{n}\Delta x,
         \\
         \int_{x_{i-1/2}}^{x_{i+1/2}} p(x) \dd{x}
-        &= \phi_{i}^{n},
+        &= \phi_{i}^{n}\Delta x,
         \\
         \int_{x_{i-1/2} - c\Delta x}^{x_{i+1/2} - c\Delta x} p(x) \dd{x}
-        &= \phi_{i}^{n+1}.
+        &= \phi_{i}^{n+1}\Delta x.
     \end{split}
 \end{equation}
 For convenience, we can make a change of variables
@@ -341,7 +340,7 @@ In this section we construct stabilized schemes by requiring the updated cell av
     \leq
     \max\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right),
 \end{equation}
-for \(c > 0\). We can distinguish three cases:
+for \(c > 0\), see Figure \ref{fig:implicit-urc}. We can distinguish three cases:
 \begin{enumerate}
     \item \(\phi_{i}^{n} > \phi_{i-1}^{n+1}:\)
         \[\min\left( \phi_{i-1}^{n+1},\phi_{i}^{n} \right) = \phi_{i-1}^{n+1},\quad
@@ -503,7 +502,7 @@ Using the definitions above, the upwind-range condition \eqref{eqn:upwind-range-
     \phi_{i}^{n+1}\in I(\phi_{i-1}^{n+1}, \phi_{i}^{n}).
 \end{equation}
 \subsection[]{Second-order implicit TVD schemes}
-Now we describe how we can construct schemes satisfying the upwind-range condition by choosing the slope properly.
+Now we describe how we can construct schemes satisfying the upwind-range condition by choosing the slope appropriately.
 We can solve
 \begin{equation}
     \phi_{i}^{n+1}
@@ -987,14 +986,8 @@ Also, we consider similar bounds as before \eqref{eqn:slope-bounds}
         2.
     \end{split}
 \end{equation}
-This condition, however, differs a little from the one appearing in \cite{2023_Frolkovic}, where they require
-\begin{equation}
-    -1
-    \leq
-    \Psi_{i-1}
-    \leq
-    2.
-\end{equation}
+(This condition, however, differs a little from the one appearing in \cite{2023_Frolkovic}, where they require \(-1 \leq \Psi_{i-1} \leq 2\)).
+
 If \(\Psi_{i-1}\) is available, then
 \begin{equation}
     \begin{split}
@@ -1586,19 +1579,32 @@ The choice
 gives a sufficient condition for the high-order correction term.
 \subsection[]{Numerical experiments}
 In this section, we compare numerical solutions of the linear advection equation using the 1 point scheme, the  IIOE scheme and the implicit piecewise-parabolic scheme with slopes \eqref{eqn:1point-slope}, \eqref{eqn:iioe-slope} and \eqref{eqn:implicit-ppm-slope} respectively.
-In the first part we test for convergence using a smooth initial condition. After that we test the schemes with more demanding initial profiles with discontinuities and large second-derivatives.
-
+In the first part we test for convergence using a smooth initial condition. Next we test the schemes with more demanding initial profiles with discontinuities and large second-derivatives.
+We test for Courant numbers \(c = 0.8, 1.8\).
 In both cases we use periodic boundary conditions.
 
-We tested different limiting strategies. The cases with \(limiter0\) we solve the systems \eqref{eqn:1point-system}, \eqref{eqn:iioe-system}, \eqref{eqn:implicit-ppm-system} directly without any stabilization.
+We tested different limiting strategies. In the unlimited cases we solve the systems \eqref{eqn:1point-system}, \eqref{eqn:iioe-system}, \eqref{eqn:implicit-ppm-system} directly without any stabilization.
 
 For \(limiter1\), we bound the slope \(\sigma_{i}\) using the necessary condition for stability \eqref{eqn:monotone-slope}, assuming the slope \(\sigma_{i-1}\) is known.
 
 For \(limiter2\) we compute the slope using the sufficient condition \eqref{eqn:slope-sufficient}.
 
-In the unlimited case \(limiter0\) we solve the systems directly.
-
-For \(limiter1\) and \(limiter2\) we solve the system iteratively. The first iteration \(\phi_{i}^{n+1,1}\) is the solution without limiting. Then, we iterate until the condition
+In the cases of \(limiter1\) and \(limiter2\) we solve the system iteratively
+\begin{equation}
+    \phi_{i}^{n+1,k+1}
+    = \phi_{i}^{n} - c\left(
+        \phi_{i}^{n+1,k+1}
+        - \phi_{i-1}^{n+1}
+        \right)
+        -c\left(
+        \sigma_{i}^{k} - \sigma_{i-1}
+        \right)\Delta x\frac{1+c}{2},
+\end{equation}
+where
+\[
+    \sigma_{i}^{k} = \sigma_{i}^{k}(\phi_{i}^{n},\phi_{i+1}^{n},\phi_{i}^{n+1,k}).
+\]
+The first iteration \(\phi_{i}^{n+1,1}\) is the solution without limiting. Then, we iterate until the condition
 \[
     ||\phi_{i}^{n+1,k+1} - \phi_{i}^{n+1,k}|| < \epsilon
 \]
@@ -1609,18 +1615,18 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c0p8-T8-limit0-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T8-limit0-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T8-limit0-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{fig:c0p8-T8-limit0-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T8-limit0-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T8-limit0-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T8-limit0-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{tab:c0p8-T8-limit0-smooth}
 \end{figure}
 \begin{figure}[H]
@@ -1628,18 +1634,18 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c1p8-T8-limit0-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T8-limit0-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T8-limit0-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{fig:c1p8-T8-limit0-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope}}
 	\includegraphics[width=\textwidth]{tab-1point-c1p8-T8-limit0-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope}}
 	\includegraphics[width=\textwidth]{tab-iioe-c1p8-T8-limit0-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope}}
 	\includegraphics[width=\textwidth]{tab-implicit-ppm-c1p8-T8-limit0-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{tab:c1p8-T8-limit0-smooth}
 \end{figure}
 \subsubsection{Linear advection - smooth profile - limited}
@@ -1648,18 +1654,18 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c0p8-T8-limit1-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T8-limit1-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T8-limit1-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{fig:c0p8-T8-limit1-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme - limiter 1}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T8-limit1-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme - limiter 1}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T8-limit1-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme - limiter 1}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T8-limit1-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{tab:c0p8-T8-limit1-smooth}
 \end{figure}
 \begin{figure}[H]
@@ -1667,18 +1673,18 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c1p8-T8-limit1-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T8-limit1-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T8-limit1-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{fig:c1p8-T8-limit1-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme - limiter 1}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-1point-c1p8-T8-limit1-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme - limiter 1}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-iioe-c1p8-T8-limit1-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme - limiter 1}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 1 \eqref{eqn:monotone-slope}}
 	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c1p8-T8-limit1-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{tab:c1p8-T8-limit1-smooth}
 \end{figure}
 \begin{figure}[H]
@@ -1686,18 +1692,18 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c0p8-T8-limit2-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T8-limit2-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T8-limit2-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{fig:c0p8-T8-limit2-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme - limiter 2}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T8-limit2-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme - limiter 2}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T8-limit2-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme - limiter 2}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T8-limit2-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 500.}
 	\label{tab:c0p8-T8-limit2-smooth}
 \end{figure}
 \begin{figure}[H]
@@ -1705,18 +1711,134 @@ is satisfied.
 	\includegraphics[width=\textwidth]{fig-1point-c1p8-T8-limit2-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T8-limit2-smooth.pdf}
 	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T8-limit2-smooth.pdf}
-	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{fig:c1p8-T8-limit2-smooth}
 \end{figure}
 \begin{figure}[H]
 	\centering
-    \caption*{Second-order, implicit-upwind 1 point-scheme - limiter 2}
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-1point-c1p8-T8-limit2-smooth.pdf}
-    \caption*{second-order, implicit, centered (IIOE) scheme - limiter 2}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-iioe-c1p8-T8-limit2-smooth.pdf}
-    \caption*{third-order, implicit, piecewise parabolic scheme - limiter 2}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
 	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c1p8-T8-limit2-smooth.pdf}
-	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme (up), second-order, implicit, centered (IIOE) scheme (center), third-order, implicit, piecewise parabolic scheme (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
+	\caption{Errors and experimental order of convergence of the numerical solution after 4 cycles: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 8\), number of time steps 223.}
 	\label{tab:c1p8-T8-limit2-smooth}
+\end{figure}
+\subsubsection{Linear advection - discontinuities - unlimited}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c0p8-T2-limit0-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T2-limit0-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T2-limit0-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{fig:c0p8-T2-limit0-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T2-limit0-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T2-limit0-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T2-limit0-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{tab:c0p8-T2-limit0-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c1p8-T2-limit0-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T2-limit0-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T2-limit0-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{fig:c1p8-T2-limit0-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c1p8-T2-limit0-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c1p8-T2-limit0-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c1p8-T2-limit0-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{tab:c1p8-T2-limit0-shu}
+\end{figure}
+\subsubsection{Linear advection - discontinuities - limited}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c0p8-T2-limit1-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T2-limit1-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T2-limit1-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{fig:c0p8-T2-limit1-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T2-limit1-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T2-limit1-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T2-limit1-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{tab:c0p8-T2-limit1-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c1p8-T2-limit1-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T2-limit1-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T2-limit1-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{fig:c1p8-T2-limit1-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c1p8-T2-limit1-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c1p8-T2-limit1-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 1 \eqref{eqn:monotone-slope}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c1p8-T2-limit1-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{tab:c1p8-T2-limit1-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c0p8-T2-limit2-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c0p8-T2-limit2-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c0p8-T2-limit2-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{fig:c0p8-T2-limit2-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c0p8-T2-limit2-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c0p8-T2-limit2-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c0p8-T2-limit2-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 0.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 125.}
+	\label{tab:c0p8-T2-limit2-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{fig-1point-c1p8-T2-limit2-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-iioe-c1p8-T2-limit2-shu.pdf}
+	\includegraphics[width=\textwidth]{fig-implicit-ppm-c1p8-T2-limit2-shu.pdf}
+	\caption{Numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{fig:c1p8-T2-limit2-shu}
+\end{figure}
+\begin{figure}[H]
+	\centering
+    \caption*{Second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-1point-c1p8-T2-limit2-shu.pdf}
+    \caption*{second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-iioe-c1p8-T2-limit2-shu.pdf}
+    \caption*{third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} - limiter 2 \eqref{eqn:slope-sufficient}}
+	\includegraphics[width=\textwidth]{../tab/tab-implicit-ppm-c1p8-T2-limit2-shu.pdf}
+	\caption{Errors and experimental order of convergence of the numerical solution after 1 cycle: second-order, implicit-upwind 1 point-scheme \eqref{eqn:1point-slope} (up), second-order, implicit, centered (IIOE) scheme \eqref{eqn:iioe-slope} (center), third-order, implicit, piecewise parabolic scheme \eqref{eqn:implicit-ppm-slope} (down). The Courant number is \(c = 1.8\), on a coarse grid with \(N = 100\) grid points, at time \(T = 2\), number of time steps 56.}
+	\label{tab:c1p8-T2-limit2-shu}
 \end{figure}
 \end{document}
